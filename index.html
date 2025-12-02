@@ -123,6 +123,7 @@
 <div id="main-content" class="min-h-screen flex flex-col hidden">
 
    <!-- ... in <header> ... -->
+    <header></header>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
         <!-- Titel: text-xl auf Mobile statt text-2xl -->
         <button onclick="navigate('bonus-page')" class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity">Idiotenbonnus</button>
@@ -136,9 +137,8 @@
             <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
         </nav>
     </div>
-<!-- ... -->
+    </header>
 
-Diese Anpassungen (`text-xl`, `space-x-2`, `text-sm`) sorgen dafür, dass der Header auf kleineren Bildschirmen deutlich kompakter ist und alle Elemente gut sichtbar bleiben.
     <!-- Seiteninhalt (Wird per JS gesteuert) -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
 
