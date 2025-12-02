@@ -122,22 +122,27 @@
 <!-- Haupt-Container (Wird erst nach Altersbestätigung sichtbar) -->
 <div id="main-content" class="min-h-screen flex flex-col hidden">
 
-   <!-- ... in <header> ... -->
-    <header></header>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-        <!-- Titel: text-xl auf Mobile statt text-2xl -->
-        <button onclick="navigate('bonus-page')" class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity">Idiotenbonnus</button>
-        
-        <!-- Navigation: space-x-2 auf Mobile statt space-x-3 -->
-        <nav class="space-x-2 sm:space-x-4 md:space-x-6 flex items-center">
-            <!-- Buttons: text-sm auf Mobile statt text-base -->
-            <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
-            <!-- Leaderboard zu Board verkürzt, um Platz zu sparen -->
-            <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Board</button>
-            <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
-        </nav>
-    </div>
+<!-- Header (Sticky & Glass) - Mobile Optimiert - FIX FÜR HANDY-ANSICHT -->
+    <header class="sticky-header glass-card !rounded-none">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            
+            <!-- Logo/Titel: FIX: mr-2 sorgt für minimalen Abstand zur Navigation auf Mobile -->
+            <button onclick="navigate('bonus-page')" 
+                    class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity flex-shrink-0 mr-2">
+                Idiotenbonnus
+            </button>
+            
+            <!-- Navigation: FIX: space-x-3 auf Mobile statt space-x-2 für bessere Trennung -->
+            <nav class="space-x-3 sm:space-x-4 md:space-x-6 flex items-center flex-shrink-0">
+                <!-- Buttons: text-sm auf Mobile, um Platz zu sparen -->
+                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
+                <!-- Name von Leaderboard auf Board verkürzt, um Platz auf Mobile zu sparen -->
+                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Board</button> 
+                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
+            </nav>
+        </div>
     </header>
+
 
     <!-- Seiteninhalt (Wird per JS gesteuert) -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
