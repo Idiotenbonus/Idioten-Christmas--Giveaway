@@ -408,15 +408,15 @@
 <script>
     // Casino Daten - MIT Platzhaltern für Logos und Razed-Spezialdaten
     const casinos = [
-        { name: "Pistolo", logo: "Pistoloneu.jpg", percent: 100, maxBonus: "500€", maxStake: "5€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 1 },
-        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", maxStake: "5€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2 },
-        { name: "Neon54", logo: "NEONneu54.jpg", percent: 100, maxBonus: "500€", maxStake: "5€", wager: "40x", type: "Non-Sticky", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 3 },
-        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", maxStake: "5€", wager: "30x", type: "Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4 },
-        { name: "Legiano", logo: "Legiano.jpg", percent: 350, maxBonus: "500€", maxStake: "5€", wager: "45x", type: "Non-Sticky", tags: ["Hoher % Bonus", "200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/LegianoMerkur", code: null, order: 5 },
-        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", maxStake: "5€", wager: "30x", type: "Sticky", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 6 },
-        { name: "SGCasino", logo: "SGCasino.jpg", percent: 100, maxBonus: "500€", maxStake: "5€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7 },
-        { name: "SlotsPalace", logo: "SlotsPalace.jpg", percent: 100, maxBonus: "1000€", maxStake: "5€", wager: "30x", type: "Sticky", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8 },
-        { name: "Spinbara", logo: "SpinBARA-2.jpg", percent: 200, maxBonus: "3000$", maxStake: "5€", wager: "35x", type: "Non-Sticky", tags: ["Mega Bonus", "Sofort-Auszahlung"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9 },
+        { name: "Pistolo", logo: "Pistoloneu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 1 },
+        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2 },
+        { name: "Neon54", logo: "NEONneu54.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "40x", type: "Non-Sticky", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 3 },
+        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4 },
+        { name: "Legiano", logo: "Legiano.jpg", percent: 350, maxBonus: "500€", type: "Non-Sticky", wager: "45x", type: "Non-Sticky", tags: ["Hoher % Bonus", "200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/LegianoMerkur", code: null, order: 5 },
+        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 6 },
+        { name: "SGCasino", logo: "SGCasino.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7 },
+        { name: "SlotsPalace", logo: "SlotsPalace.jpg", percent: 100, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8 },
+        { name: "Spinbara", logo: "SpinBARA-2.jpg", percent: 200, maxBonus: "3000$", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["Mega Bonus", "Sofort-Auszahlung"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9 },
         { 
             name: "Razed", logo: "razed.jpg", 
             percent: 0, maxBonus: "N/A", maxStake: "N/A", wager: "N/A", 
@@ -503,29 +503,34 @@
                         </div>
                     </div>
 
-                    <!-- 2. Haupt-Infos (Grid/Flex) - Mobile: 2 Spalten, Desktop: 4 Spalten -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
-                        <!-- Prozent -->
-                        <div class="text-center p-2 rounded-lg bg-white/5">
-                            <p class="text-xs font-semibold text-white/70">Bonus %</p>
-                            <p class="text-base sm:text-lg font-bold text-accent">${c.percent}%</p>
-                        </div>
-                        <!-- Max Bonus -->
-                        <div class="text-center p-2 rounded-lg bg-white/5">
-                            <p class="text-xs font-semibold text-white/70">Max Bonus</p>
-                            <p class="text-base sm:text-lg font-bold">${c.maxBonus}</p>
-                        </div>
-                        <!-- Max Einsatz (Nur auf MD+ sichtbar) -->
-                        <div class="text-center p-2 rounded-lg bg-white/5 hidden md:block">
-                            <p class="text-xs font-semibold text-white/70">Max Einsatz</p>
-                            <p class="text-base sm:text-lg font-bold">${c.maxStake}</p>
-                        </div>
-                        <!-- Wager -->
-                        <div class="text-center p-2 rounded-lg bg-white/5">
-                            <p class="text-xs font-semibold text-white/70">Wager</p>
-                            <p class="text-base sm:text-lg font-bold">${c.wager}</p>
-                        </div>
-                    </div>
+                   <!-- 2. Haupt-Infos (Grid/Flex) - Mobile: 2 Spalten, Desktop: 4 Spalten -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
+    <!-- Prozent -->
+    <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs font-semibold text-white/70">Bonus %</p>
+        <p class="text-base sm:text-lg font-bold text-accent">${c.percent}%</p>
+    </div>
+    <!-- Max Bonus -->
+    <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs font-semibold text-white/70">Max Bonus</p>
+        <p class="text-base sm:text-lg font-bold">${c.maxBonus}</p>
+    </div>
+    <!-- *** ANGEPASSTE ANZEIGE: BONUS-TYP (Sticky/Non-Sticky) *** -->
+    <div class="text-center p-2 rounded-lg bg-white/5 hidden md:block">
+        <!-- Text von "Max Einsatz" zu "Bonus-Typ" geändert -->
+        <p class="text-xs font-semibold text-white/70">Bonus-Typ</p>
+        <!-- Variable von ${c.maxStake} zu ${c.type} geändert, um die vorhandenen Daten zu nutzen! -->
+        <p class="text-base sm:text-lg font-bold">${c.type}</p> 
+        <!--
+          HINWEIS: Wir nutzen c.type, da dies die korrekte Variable im Datensatz ist.
+        -->
+    </div>
+    <!-- Wager -->
+    <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs font-semibold text-white/70">Wager</p>
+        <p class="text-base sm:text-lg font-bold">${c.wager}</p>
+    </div>
+</div>
                     
                     <!-- 3. Tags & Button -->
                     <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end space-y-3 mt-4 lg:mt-0">
