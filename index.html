@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idiotenbonnus - Deine Exklusiven Promos von uns!</title>
-    <!-- Tailwind CSS laden -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font (Inter) für moderne Typografie -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* NEUES DESIGN: Modern Liquid Glass (Blue/Cyan) */
         :root {
@@ -34,6 +32,18 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1rem;
             box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        /* NEU: KLEINE GLASS BOX FÜR BONUS-INFOS */
+        .mini-glass-box {
+            background: rgba(255, 255, 255, 0.08); /* Wie Glass Card, aber leichter */
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+        }
+        .mini-glass-box:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
 
         /* Sticky Header */
@@ -87,14 +97,121 @@
         .back-button:hover {
             transform: translateX(-5px);
         }
+        
+        /* Korrektur für Body-Hide, bis das Age-Gate bestätigt ist */
+        .hidden-until-verified {
+            overflow: hidden; /* Verhindert Scrollen */
+        }
+        .hidden-until-verified #main-content, 
+        .hidden-until-verified #admin-panel,
+        .hidden-until-verified #login-modal {
+            display: none !important;
+        }
     </style>
+
+    <style>
+        /* Responsive Anpassungen */
+        @media (max-width: 768px) {
+            .glass-card {
+                border-radius: 0.75rem;
+            }
+            .casino-logo {
+                width: 4rem;
+                height: 4rem;
+            }
+            .casino-grid-area {
+                grid-template-columns: 1fr;
+            }
+            .admin-tab {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+            .admin-tab-container {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+        }
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Stil für den Backoffice-Button */
+        #admin-toggle {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        #admin-toggle:hover {
+            color: #f9fafb;
+        }
+        
+        /* NEU: AKTIVER HEADER-LINK */
+        .nav-btn.active-page {
+            color: var(--primary-blue);
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 4px; /* Abstand zum Rand des Headers */
+        }
+        .nav-btn:not(.active-page) {
+            color: #EAEAEA; /* Standardfarbe */
+        }
+
+
+        /* WICHTIG: ADMIN PANEL FIX: Überdeckt die gesamte Seite, inklusive Header */
+        #admin-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 60; /* Höher als der Haupt-Header (z-50) und Login Modal (z-50) */
+            overflow-y: auto;
+            /* Der 'hidden' Status wird weiterhin durch die JS-Logik gesteuert */
+        }
+
+        /* Stil für das Admin-Login-Modal */
+        #login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 70; /* Über dem Admin-Panel */
+        }
+        /* ADMIN PANEL LAYOUT FIX */
+        .admin-input {
+            background: #2D3748; /* Dunkleres Feld für besseren Kontrast */
+            border: 1px solid #4A5568;
+            color: #EAEAEA;
+        }
+        .admin-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
+        }
+        .admin-tab.active {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+        
+        /* NEU: Drag and Drop Area */
+        .drag-drop-area {
+            border: 2px dashed #4A5568;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .drag-drop-area:hover, .drag-drop-area.dragover {
+            border-color: var(--primary-blue);
+            background-color: rgba(56, 189, 248, 0.1);
+        }
+    </style>
+
+
 </head>
 <body class="hidden-until-verified">
 
-<!-- ---------------------------------------------------------------------- -->
-<!-- AGE GATE MODAL (Altersabfrage - Du-Form)                               -->
-<!-- ---------------------------------------------------------------------- -->
-<div id="age-gate-modal" class="flex items-center justify-center p-4">
+<div id="age-gate-modal" class="hidden flex items-center justify-center p-4">
     <div class="glass-card p-8 sm:p-12 max-w-lg w-full text-center border-christmas-red border-l-4">
         <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 text-christmas-red">⚠️ Altersüberprüfung (18+)</h2>
         <p class="text-lg mb-6 text-white/90">
@@ -116,48 +233,34 @@
         </p>
     </div>
 </div>
-<!-- ---------------------------------------------------------------------- -->
-
-
-<!-- Haupt-Container (Wird erst nach Altersbestätigung sichtbar) -->
 <div id="main-content" class="min-h-screen flex flex-col hidden">
 
-<!-- Header (Sticky & Glass) - Mobile Optimiert - FIX FÜR HANDY-ANSICHT -->
     <header class="sticky-header glass-card !rounded-none">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             
-            <!-- Logo/Titel: FIX: mr-2 sorgt für minimalen Abstand zur Navigation auf Mobile -->
             <button onclick="navigate('bonus-page')" 
-                    class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity flex-shrink-0 mr-2">
+                    class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity flex-shrink-0 mr-4">
                 Idiotenbonnus
             </button>
             
-            <!-- Navigation: FIX: space-x-3 auf Mobile statt space-x-2 für bessere Trennung -->
             <nav class="space-x-3 sm:space-x-4 md:space-x-6 flex items-center flex-shrink-0">
-                <!-- Buttons: text-sm auf Mobile, um Platz zu sparen -->
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
-                <!-- Name von Leaderboard auf Board verkürzt, um Platz auf Mobile zu sparen -->
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Leaderboard</button> 
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
+                <button onclick="navigate('bonus-page')" class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
+                <button onclick="navigate('leaderboard-page')" class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Leaderboard</button> 
+                <button onclick="navigate('support-page')" class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
             </nav>
         </div>
     </header>
 
 
-    <!-- Seiteninhalt (Wird per JS gesteuert) -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
 
-        <!-- BONUS / HAUPTSEITE -->
         <section id="bonus-page" class="page-section">
             
-            <!-- Hero Section (Responsive & Trio-Stil) -->
             <div class="glass-card p-5 md:p-10 mb-8 md:mb-12 flex flex-col md:flex-row-reverse items-center space-y-4 md:space-y-0 md:space-x-12 md:space-x-reverse text-center md:text-left">
                 
-                <!-- Logo Platzhalter -->
                 <img src="logo.jpg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/06B6D4/FFFFFF?text=TRIO';" alt="Idiotenbonnus Trio Logo" class="rounded-full w-24 h-24 md:w-40 md:h-40 border-4 border-accent shadow-xl flex-shrink-0">
                 
                 <div class="flex-grow">
-                    <!-- Textgrößen angepasst für Mobile -->
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2 leading-tight">
                         Willkommen im <span class="text-accent">Idiotenbonus</span>-Hub! Deine Promos, direkt von uns.
                     </h2>
@@ -167,72 +270,57 @@
                 </div>
             </div>
 
-            <!-- Gewinnspiel Banner (Responsive & Du-Form) -->
             <div id="contest-banner" class="glass-card p-4 sm:p-6 mb-8 md:mb-12 border-l-8 border-christmas-red flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 md:space-x-6 text-center md:text-left">
                 <div class="flex items-center space-x-3">
                     <span class="text-3xl sm:text-5xl animate-pulse text-christmas-red">🎁</span>
-                    <!-- Textgröße angepasst -->
                     <p class="text-lg sm:text-2xl font-bold text-white">
                         🚨 <span class="text-christmas-red">2000€ Weihnachtsgeschenk Gewinnspiel</span> läuft jetzt für Dich!
                     </p>
                 </div>
-                <!-- Button nimmt volle Breite auf Mobile, wenn nötig -->
                 <button onclick="navigate('contest-page')" class="btn-primary px-5 py-2 md:px-6 md:py-3 rounded-full font-bold shadow-xl whitespace-nowrap text-sm md:text-base w-full md:w-auto">
                     Alle Infos & Teilnahme
                 </button>
             </div>
 
-            <!-- Casino Liste & Filter (Trio-Stil) -->
             <h3 class="text-2xl sm:text-3xl font-bold mb-5 text-accent">🔥 Unsere Top Casino Empfehlungen für Dich</h3>
 
-            <!-- Filter-Sektion (Responsive & Sticky) -->
-            <div id="filter-container" class="sticky top-[64px] sm:top-[76px] z-40 mb-6 p-3 glass-card flex flex-wrap gap-2">
+            <div id="filter-container" class="sticky top-[60px] sm:top-[76px] z-40 mb-6 p-3 glass-card flex flex-wrap gap-2">
                 <label class="text-base font-semibold mr-1 flex-shrink-0">Filter für Dich:</label>
-                <!-- Kleinere Buttons auf Mobile -->
                 <button class="filter-btn bg-primary-blue text-black px-3 py-1.5 rounded-full font-medium transition-colors text-sm" data-filter="all">Alle</button>
                 <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Sticky">Sticky</button>
                 <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Non-Sticky">Non-Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">VIP / Ohne Bonus</button>
+                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">VIP</button>
             </div>
             
-            <!-- Casino Liste -->
             <div id="casino-list" class="grid gap-4 sm:gap-6">
-                <!-- Casino Cards werden per JS aus dem Array gerendert -->
-            </div>
+                </div>
 
         </section>
 
-        <!-- GEWINNSPIEL SEITE (Du-Form) -->
         <section id="contest-page" class="page-section hidden">
             <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span>Zurück zur Bonus-Übersicht</span>
             </button>
 
-            <!-- Titelgröße angepasst -->
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-christmas-red mb-6 sm:mb-8 text-center">🎁 Das Idiotenbonnus 2000€ Weihnachts-Gewinnspiel für Dich!</h2>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-christmas-red mb-6 sm:mb-8 text-center">🎁 Das Idiotenbonnus 2000€ Weihnachts-Gewinnspiel für Dich!</h2>
             <div class="glass-card p-5 md:p-10 space-y-6">
                 
-                <!-- Preise (Responsive Grid) -->
                 <div class="text-center mb-6">
-                    <h3 class="text-3xl sm:text-4xl font-extrabold text-christmas-red mb-4 tracking-wide">🏆 Hauptpreise des Gewinnspiels von uns 🏆</h3>
+                    <h3 class="text-2xl sm:text-4xl font-extrabold text-christmas-red mb-4 tracking-wide">🏆 Hauptpreise des Gewinnspiels von uns 🏆</h3>
                     
-                    <!-- Anpassung: flexibel auf Mobile, max-w-3xl auf Desktop -->
-                    <div class="grid grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto">
                         
-                        <!-- 2. Platz (Weiß, Responsive Text) -->
                         <div class="glass-card p-3 sm:p-6 border-2 border-white/30 hover:border-white transition-all transform hover:scale-[1.03]">
                             <p class="text-base sm:text-xl font-bold text-white/80 mb-1">🥈 2. Platz</p>
                             <p class="text-2xl sm:text-4xl font-extrabold text-white">500€</p>
                         </div>
                         
-                       <div class="glass-card p-4 sm:p-8 border-4 border-primary-blue shadow-2xl shadow-primary-blue/50 transform scale-105 hover:scale-110 transition-all z-10">
-    <p class="text-lg sm:text-2xl font-extrabold text-christmas-gold mb-1">🥇 1. Platz</p>
-    
-    <p class="text-2xl sm:text-5xl font-black text-accent drop-shadow-lg w-full **text-left**">1000€</p>
-</div>
+                        <div class="glass-card p-4 sm:p-8 border-4 border-primary-blue shadow-2xl shadow-primary-blue/50 transform scale-105 hover:scale-110 transition-all z-10">
+                            <p class="text-lg sm:text-2xl font-extrabold text-christmas-gold mb-1">🥇 1. Platz</p>
+                            <p class="text-3xl sm:text-5xl font-black text-accent drop-shadow-lg">1.000€</p>
+                        </div>
                         
-                        <!-- 3. - 7. Platz (Responsive Text) -->
                         <div class="glass-card p-3 sm:p-6 border-2 border-white/30 hover:border-white transition-all transform hover:scale-[1.03]">
                             <p class="text-base sm:text-xl font-bold text-white/80 mb-1">3. - 7. Platz</p>
                             <p class="text-2xl sm:text-4xl font-extrabold text-white/70">5 x 100€</p>
@@ -242,11 +330,9 @@
                     <p class="mt-6 text-lg sm:text-xl font-bold text-white/90">Gesamter Preispool: <span class="text-christmas-red text-xl sm:text-2xl font-extrabold">2.000€!</span></p>
                 </div>
 
-                <!-- Regeln (Responsive Text, Du-Form) -->
                 <h3 class="text-2xl sm:text-3xl font-bold text-accent border-b border-white/20 pb-2">So sicherst Du Dir Deine Tickets für das Weihnachts-Gewinnspiel:</h3>
                 
                 <div class="space-y-4 sm:space-y-6">
-                    <!-- 1. Bestandskunden -->
                     <div class="glass-card p-4 border-l-4 border-primary-blue">
                         <h4 class="text-xl font-bold text-primary-blue mb-1">1. Für unsere Stammkunden:</h4>
                         <p class="text-base sm:text-lg text-white/90">
@@ -255,7 +341,6 @@
                         <p class="text-sm text-white/60">(Beispiel: 100€ Einzahlung = 10 Tickets)</p>
                     </div>
 
-                    <!-- 2. Neukunden -->
                     <div class="glass-card p-4 border-l-4 border-primary-blue">
                         <h4 class="text-xl font-bold text-primary-blue mb-1">2. Für unsere Neuzugänge:</h4>
                         <p class="text-base sm:text-lg text-white/90">
@@ -264,7 +349,6 @@
                         <p class="text-sm text-white/60">(Beispiel: 100€ Einzahlung = 10 Tickets (Basis) + 50 Tickets (Neukunde-Bonus) = 60 Tickets)</p>
                     </div>
                     
-                    <!-- 3. Chancen verbessern -->
                     <div class="glass-card p-4 border-l-4 border-primary-blue">
                         <h4 class="text-xl font-bold text-primary-blue mb-1">3. Deine Chancen verbessern:</h4>
                         <p class="text-base sm:text-lg text-white/90">
@@ -273,13 +357,11 @@
                     </div>
                 </div>
 
-                <!-- Zeitraum & Auslosung -->
                 <div class="pt-4 text-center border-t border-white/20">
                     <p class="text-base sm:text-lg font-bold text-white mb-2">Gültigkeitszeitraum: <span class="text-christmas-red">01. – 24. Dezember (23:59 Uhr)</span></p>
                     <p class="text-base sm:text-lg font-bold text-white">Gewinner-Bekanntgabe: <span class="text-christmas-red">25. Dezember auf Instagram & Telegram!</span></p>
                 </div>
 
-                <!-- Button (Full-Width auf Mobile) -->
                 <div class="pt-4">
                     <button onclick="navigate('bonus-page')" class="btn-primary w-full px-6 py-3 rounded-lg font-bold shadow-xl text-center flex items-center justify-center space-x-2 text-lg">
                         <span>Jetzt Bonis checken & Tickets sammeln!</span>
@@ -289,79 +371,35 @@
             </div>
         </section>
 
-        <!-- LEADERBOARD SEITE (Du-Form) -->
         <section id="leaderboard-page" class="page-section hidden">
             <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span>Zurück zur Bonus-Übersicht</span>
             </button>
 
-            <!-- Titelgröße angepasst -->
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-accent mb-6 text-center">🏆 Unser Aktuelles Monats-Leaderboard für Dich</h2>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-accent mb-6 text-center">🏆 Unser Aktuelles Monats-Leaderboard für Dich</h2>
             <div class="glass-card p-5 md:p-10 space-y-6">
                 <p class="text-base sm:text-lg text-white/90 mb-6">
                     Schau, wer diesen Monat an der Spitze steht! Die Top 3 erhalten am Monatsende besondere Preise von uns, Deine Idioten.
                 </p>
                 <div class="overflow-x-auto rounded-lg">
-                    <!-- Responsive Tabelle -->
                     <table class="min-w-full text-left text-white/90">
                         <thead class="text-accent border-b-2 border-accent/50">
                             <tr>
                                 <th class="py-3 px-3 text-left">Rang</th>
                                 <th class="py-3 px-3 text-left">Spieler-ID</th>
                                 <th class="py-3 px-3 text-left">Wagered</th>
-                                <!-- Spalte auf Mobile ausgeblendet, um Platz zu sparen -->
                                 <th class="py-3 px-3 text-left hidden sm:table-cell">Meistgespielte Seite</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- 1. Platz (Prominent Blau) -->
-                            <tr class="border-b border-white/10 bg-primary-blue/20 font-bold text-accent">
-                                <td class="py-3 px-3">🥇 1</td>
-                                <td class="py-3 px-3">SackSocke</td>
-                                <td class="py-3 px-3">€ 15.000</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">Pistolo</td>
-                            </tr>
-                            <!-- 2. Platz (Weiß, etwas dezenter) -->
-                            <tr class="border-b border-white/10 bg-white/10 text-white font-semibold">
-                                <td class="py-3 px-3">🥈 2</td>
-                                <td class="py-3 px-3">Paradoxon</td>
-                                <td class="py-3 px-3">€ 12.000</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
-                            </tr>
-                            <!-- 3. Platz (Dezent) -->
-                            <tr class="border-b border-white/10 bg-white/5">
-                                <td class="py-3 px-3">🥉 3</td>
-                                <td class="py-3 px-3">BeautyWise</td>
-                                <td class="py-3 px-3">€ 9.800</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">SlotsPalace</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="py-3 px-3">4</td>
-                                <td class="py-3 px-3">PinkPug</td>
-                                <td class="py-3 px-3">€ 7.500</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">MyEmpire</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="py-3 px-3">5</td>
-                                <td class="py-3 px-3">Glueckskeks</td>
-                                <td class="py-3 px-3">€ 6.490</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
-                            </tr>
-                            <!-- Weitere 5 Platzhalter -->
-                            <tr><td class="py-3 px-3">6</td><td class="py-3 px-3">Bounz</td><td class="py-3 px-3">€ 5.108</td><td class="py-3 px-3 hidden sm:table-cell">SGCasino</td></tr>
-                            <tr><td class="py-3 px-3">7</td><td class="py-3 px-3">Bloodman123</td><td class="py-3 px-3">€ 4.480</td><td class="py-3 px-3 hidden sm:table-cell">AllySpin</td></tr>
-                            <tr><td class="py-3 px-3">8</td><td class="py-3 px-3">SZ777</td><td class="py-3 px-3">€ 3.900</td><td class="py-3 px-3 hidden sm:table-cell">MyEmpire</td></tr>
-                            <tr><td class="py-3 px-3">9</td><td class="py-3 px-3">DepoDust</td><td class="py-3 px-3">€ 3.550</td><td class="py-3 px-3 hidden sm:table-cell">Razed</td></tr>
-                            <tr><td class="py-3 px-3">10</td><td class="py-3 px-3">Apoo</td><td class="py-3 px-3">€ 3.200</td><td class="py-3 px-3 hidden sm:table-cell">SlotsPalace</td></tr>
-                        </tbody>
+                        <tbody id="leaderboard-body">
+                            </tbody>
                     </table>
                 </div>
                 <p class="text-xs text-center pt-4 text-white/60">Die Daten werden monatlich aktualisiert. Alle Angaben ohne Gewähr.</p>
             </div>
         </section>
 
-        <!-- SUPPORT SEITE (Du-Form) -->
         <section id="support-page" class="page-section hidden">
             <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -373,9 +411,8 @@
                 <p class="text-base sm:text-lg text-white/90">
                     Hast Du Fragen zu Boni, Casinos oder brauchst Du Hilfe beim Kopieren eines Codes? Unser Trio-Support steht Dir gerne zur Verfügung!
                 </p>
-                <!-- Buttons: Stacked auf Mobile, Row auf Desktop -->
                 <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 pt-4">
-                    <a href="https://t.me/idiotenbonus/5" class="btn-primary flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl hover:opacity-90 transition-all">
+                    <a href="https://t.me/idiotenbonus/5" target="_blank" class="btn-primary flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl hover:opacity-90 transition-all">
                         💬 Telegram
                     </a>
                     <a href="#" class="bg-gray-600 text-white/70 flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl cursor-not-allowed">
@@ -388,7 +425,6 @@
 
     </main>
 
-    <!-- Footer (Responsive) -->
     <footer class="mt-8 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-sm text-christmas-red font-bold mb-2">
@@ -401,36 +437,194 @@
             </div>
             <p class="mt-3 text-base font-extrabold text-christmas-red">Verantwortungsbewusst spielen (18+)</p>
             <p class="mt-1 text-xs text-white/50">&copy; 2025 Eure Idioten.</p>
+             <a href="#" id="admin-toggle" class="text-xs hover:underline" onclick="document.getElementById('login-modal').classList.remove('hidden'); return false;">
+                    Backoffice Login
+                </a>
         </div>
     </footer>
 </div>
 
+<div id="login-modal" class="hidden flex items-center justify-center p-4">
+    <div class="glass-card p-8 max-w-sm w-full text-center">
+        <h2 class="text-2xl font-bold mb-4 text-accent">🔐 Backoffice Login</h2>
+        <input type="password" id="admin-password" placeholder="Passwort" class="w-full p-3 mb-4 bg-white/10 rounded-lg border border-white/20 text-white focus:ring-primary-blue focus:border-primary-blue" onkeyup="if(event.key==='Enter') loginAdmin()">
+        <button onclick="loginAdmin()" class="btn-primary w-full px-6 py-3 rounded-lg font-bold">
+            Anmelden
+        </button>
+        <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="mt-3 text-sm text-white/70 hover:text-white transition-colors">
+            Abbrechen
+        </button>
+    </div>
+</div>
+
+<div id="admin-panel" class="hidden bg-background-dark/95 backdrop-blur-lg p-4 sm:p-6 md:p-10">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-white/20 pb-4">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-christmas-red mb-2 sm:mb-0">⚙️ Backoffice Management</h1>
+            <button onclick="logoutAdmin()" class="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold transition-colors text-sm sm:text-base">
+                Abmelden
+            </button>
+        </div>
+
+        <div class="flex admin-tab-container border-b border-accent/50 mb-8">
+            <button class="admin-tab text-base sm:text-lg font-semibold py-2 px-3 sm:px-4 mr-2 sm:mr-4 active" data-tab="leaderboard" onclick="showAdminTab('leaderboard')">🏆 Leaderboard</button>
+            <button class="admin-tab text-base sm:text-lg font-semibold py-2 px-3 sm:px-4 mr-2 sm:mr-4 text-white/70 hover:text-white transition-colors" data-tab="casinos" onclick="showAdminTab('casinos')">🎰 Casinos</button>
+        </div>
+
+
+        <div id="admin-leaderboard" class="admin-tab-content">
+            <h2 class="text-xl sm:text-2xl font-bold text-accent mb-4">Leaderboard-Daten anpassen</h2>
+            <p class="text-white/70 mb-6 text-sm sm:text-base">Bearbeiten Sie die Daten direkt in der Tabelle.</p>
+
+            <div class="glass-card p-4 mb-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-left text-white/90">
+                        <thead class="text-accent border-b-2 border-accent/50 text-sm sm:text-base">
+                            <tr>
+                                <th class="py-2 px-2 text-left w-16">Rang</th>
+                                <th class="py-2 px-2 text-left w-auto">Spieler ID</th>
+                                <th class="py-2 px-2 text-left w-auto">Wagered</th>
+                                <th class="py-2 px-2 text-left w-auto">Seite</th>
+                                <th class="py-2 px-2 text-left w-20">Aktion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-leaderboard-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-4">
+                <button onclick="saveLeaderboard()" class="btn-primary px-4 py-2 rounded-lg font-bold">
+                    ✅ Leaderboard speichern
+                </button>
+                <button onclick="addLeaderboardEntry()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold transition-colors">
+                    ➕ Eintrag hinzufügen
+                </button>
+            </div>
+        </div>
+
+        <div id="admin-casinos" class="admin-tab-content hidden">
+            <h2 class="text-xl sm:text-2xl font-bold text-accent mb-4">Casino-Liste verwalten (mit Bild-Upload)</h2>
+            <p class="text-white/70 mb-6 text-sm sm:text-base">Verwalten Sie die Casino-Einträge. Bilder werden Base64-kodiert im Browser gespeichert.</p>
+
+            <div id="admin-casino-list" class="space-y-6">
+                </div>
+
+            <div class="flex flex-wrap gap-4 mt-8">
+                <button onclick="addCasinoEntry()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold transition-colors">
+                    ➕ Neues Casino hinzufügen
+                </button>
+                <button onclick="saveCasinos()" class="btn-primary px-4 py-2 rounded-lg font-bold">
+                    💾 Alle Casinos speichern
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    // Casino Daten - MIT Platzhaltern für Logos und Razed-Spezialdaten
-    const casinos = [
-        { name: "Pistolo", logo: "Pistoloneu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 1 },
-        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2 },
-        { name: "Neon54", logo: "NEONneu54.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "40x", type: "Non-Sticky", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 3 },
-        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4 },
-        { name: "Legiano", logo: "Legiano.jpg", percent: 350, maxBonus: "500€", type: "Non-Sticky", wager: "45x", type: "Non-Sticky", tags: ["Hoher % Bonus", "200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/LegianoMerkur", code: null, order: 5 },
-        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 6 },
-        { name: "SGCasino", logo: "SGCasino.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7 },
-        { name: "SlotsPalace", logo: "SlotsPalace.jpg", percent: 100, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8 },
-        { name: "Spinbara", logo: "SpinBARA-2.jpg", percent: 200, maxBonus: "3000$", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["Mega Bonus", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9 },
+    // ----------------------------------------------------------------------
+    // GLOBALE DATENSTRUKTUREN (Standardwerte für den ersten Start)
+    // Logo sollte Base64-kodierte Bilder speichern. Hier sind Platzhalter.
+    // ----------------------------------------------------------------------
+    
+    // Platzhalter für Logos (ein kleiner Base64-String oder ein leerer String)
+    const PLACEHOLDER_LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij4KICAgIDxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjEwIiBmaWxsPSIjMjMzMzQxIi8+CiAgICA8dGV4dCB4PSIzMiIgeT0iMzgiIGZvbnQtZmFtaWx5PSJTYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjMzhCREY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MT0dPPyBUcmlvPC90ZXh0Pgo8L3N2Zy>";
+
+    const DEFAULT_CASINOS = [
+        { name: "Pistolo", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "500€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 1, specialFeatures: [] },
+        { name: "RTBET", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "500€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2, specialFeatures: [] },
+        { name: "Neon54", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "500€", wager: "40x", type: "Non-Sticky", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 3, specialFeatures: [] },
+        { name: "MyEmpire", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "500€", wager: "30x", type: "Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4, specialFeatures: [] },
+        { name: "Legiano", logo: PLACEHOLDER_LOGO, percent: 350, maxBonus: "500€", wager: "45x", type: "Non-Sticky", tags: ["Hoher % Bonus", "200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/LegianoMerkur", code: null, order: 5, specialFeatures: [] },
+        { name: "AllySpin", logo: PLACEHOLDER_LOGO, percent: 250, maxBonus: "1000€", wager: "30x", type: "Sticky", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 6, specialFeatures: [] },
+        { name: "SGCasino", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "500€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7, specialFeatures: [] },
+        { name: "SlotsPalace", logo: PLACEHOLDER_LOGO, percent: 100, maxBonus: "1000€", wager: "30x", type: "Sticky", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8, specialFeatures: [] },
+        { name: "Spinbara", logo: PLACEHOLDER_LOGO, percent: 200, maxBonus: "3000$", wager: "35x", type: "Non-Sticky", tags: ["Mega Bonus", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9, specialFeatures: [] },
         { 
-            name: "Razed", logo: "razed.jpg", 
-            percent: 0, maxBonus: "N/A", maxStake: "N/A", wager: "N/A", 
+            name: "Razed", logo: PLACEHOLDER_LOGO, 
+            percent: 0, maxBonus: "N/A", wager: "N/A", 
             type: "Special", tags: ["Instant-VIP", "Highroller", "250K Race"], 
             link: "https://www.razed.com/signup/?raf=Idioten", code: "idioten", order: 10,
             specialFeatures: ["Instant-VIP", "Weeklies & Monthlies", "250k Christmas Race Teilnahme", "100% Einzahlungsbonus", "Nicht in dem Christmas Giveaway inbegriffen"]
         }
     ];
 
+    const DEFAULT_LEADERBOARD = [
+        { rank: 1, id: "SackSocke", wagered: "€ 15.000", site: "Pistolo" },
+        { rank: 2, id: "Paradoxon", wagered: "€ 12.000", site: "RTBET" },
+        { rank: 3, id: "BeautyWise", wagered: "€ 9.800", site: "SlotsPalace" },
+        { rank: 4, id: "PinkPug", wagered: "€ 7.500", site: "MyEmpire" },
+        { rank: 5, id: "Glueckskeks", wagered: "€ 6.490", site: "RTBET" },
+        { rank: 6, id: "Bounz", wagered: "€ 5.108", site: "SGCasino" },
+        { rank: 7, id: "Bloodman123", wagered: "€ 4.480", site: "AllySpin" },
+        { rank: 8, id: "SZ777", wagered: "€ 3.900", site: "MyEmpire" },
+        { rank: 9, id: "DepoDust", wagered: "€ 3.550", site: "Razed" },
+        { rank: 10, id: "Apoo", wagered: "€ 3.200", site: "SlotsPalace" }
+    ];
+
+    // Daten, die geladen oder initialisiert werden
+    let casinos = [];
+    let leaderboardData = [];
     let currentFilter = 'all';
 
-    // Funktion zum Rendern der Casino-Karten (Optimiert für Mobile)
+
+    // ----------------------------------------------------------------------
+    // SPEICHERUNG / LADEN FUNKTIONALITÄT (LocalStorage)
+    // ----------------------------------------------------------------------
+
+    /**
+     * Lädt Daten aus dem LocalStorage oder verwendet Standardwerte.
+     */
+    function loadData() {
+        try {
+            const storedCasinos = localStorage.getItem('idiotenbonus_casinos');
+            const storedLeaderboard = localStorage.getItem('idiotenbonus_leaderboard');
+
+            casinos = storedCasinos ? JSON.parse(storedCasinos) : DEFAULT_CASINOS;
+            leaderboardData = storedLeaderboard ? JSON.parse(storedLeaderboard) : DEFAULT_LEADERBOARD;
+            
+            // Stelle sicher, dass Logos bei leeren Base64-Strings den Platzhalter verwenden
+            casinos.forEach(c => {
+                if (!c.logo || c.logo.startsWith('http') || c.logo.endsWith('.jpg')) {
+                     // Wenn es noch der alte Dateiname oder leer ist, setze den Base64-Platzhalter
+                    c.logo = PLACEHOLDER_LOGO;
+                }
+            });
+
+            console.log('Daten erfolgreich geladen. Casinos:', casinos.length, 'Leaderboard:', leaderboardData.length);
+        } catch (e) {
+            console.error('Fehler beim Laden der Daten aus LocalStorage. Verwende Standarddaten.', e);
+            casinos = DEFAULT_CASINOS;
+            leaderboardData = DEFAULT_LEADERBOARD;
+        }
+    }
+
+    /**
+     * Speichert die aktuellen Casino-Daten im LocalStorage.
+     */
+    function saveCasinosToStorage() {
+        localStorage.setItem('idiotenbonus_casinos', JSON.stringify(casinos));
+    }
+
+    /**
+     * Speichert die aktuellen Leaderboard-Daten im LocalStorage.
+     */
+    function saveLeaderboardToStorage() {
+        localStorage.setItem('idiotenbonus_leaderboard', JSON.stringify(leaderboardData));
+    }
+
+
+    // ----------------------------------------------------------------------
+    // FRONTEND RENDERING FUNKTIONEN (für die öffentliche Seite)
+    // ----------------------------------------------------------------------
+
+    /**
+     * Rendert die Casino-Karten basierend auf dem Filter.
+     */
     function renderCasinos(filter) {
         const container = document.getElementById('casino-list');
+        if (!container) return;
         container.innerHTML = '';
         
         const filteredCasinos = casinos.filter(c => 
@@ -439,106 +633,100 @@
             (filter === 'Special' && c.code) || 
             (filter === 'Non-Sticky' && c.type === 'Non-Sticky') ||
             (filter === 'Sticky' && c.type === 'Sticky')
-        );
+        ).sort((a, b) => a.order - b.order);
 
         filteredCasinos.forEach((c) => {
             const casinoCard = document.createElement('div');
-            // Mobile-First: Flex Col auf Mobile, dann Flex Row ab LG
-            casinoCard.className = 'glass-card p-4 sm:p-5 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 shadow-xl transition-all hover:scale-[1.01]';
+            // RESPONSIVE: flex-col auf kleinen Screens, flex-row auf großen
+            casinoCard.className = 'glass-card p-4 sm:p-5 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 shadow-xl transition-all'; 
             casinoCard.setAttribute('data-type', c.type);
 
-            const tagElements = c.tags.map(tag => `<span class="text-xs bg-primary-blue/30 text-primary-blue font-medium px-2 py-0.5 rounded-full whitespace-nowrap">${tag}</span>`).join('');
+            const tagElements = (c.tags || []).map(tag => 
+                `<span class="mini-glass-box text-xs font-medium px-2 py-0.5 whitespace-nowrap">${tag}</span>`
+            ).join('');
             
             let cardContent;
 
-            // --- SPEZIELLES RAZED DESIGN ---
+           // --- SPEZIELLES RAZED DESIGN (Code vorhanden) ---
             if (c.code) {
-                const featureList = c.specialFeatures.map(f => `<li class="flex items-center space-x-2"><span class="text-christmas-gold text-lg">★</span><span class="text-sm">${f}</span></li>`).join('');
+                const featureList = (c.specialFeatures || []).map(f => `<li class="flex items-start space-x-2"><span class="text-christmas-gold text-lg">★</span><span class="text-sm">${f}</span></li>`).join('');
 
                 cardContent = `
-                    <!-- 1. Casino Name & Logo -->
-                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4">
-                        <img src="${c.logo}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-christmas-red shadow-lg">
+                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4 pb-4 lg:pb-0 border-b lg:border-b-0 lg:pr-4">
+                        <img src="${c.logo || PLACEHOLDER_LOGO}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-christmas-red shadow-lg flex-shrink-0 casino-logo">
                         <div>
                             <p class="text-lg font-extrabold text-christmas-red mb-0">#${c.order}</p>
                             <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name} <span class="text-christmas-gold">(VIP)</span></h4>
                         </div>
                     </div>
 
-                    <!-- 2. VIP Vorteile -->
-                    <!-- Mobile: Volle Breite & vertikale Trennung -->
                     <div class="w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
                         <h5 class="text-base font-semibold text-accent mb-2">Exklusive Vorteile durch Code:</h5>
-                        <ul class="list-none space-y-1 text-white/90 text-sm">
+                        <ul class="space-y-1 text-left">
                             ${featureList}
                         </ul>
                     </div>
-                    
-                    <!-- 3. Button & Code (Trio-Code) -->
-                    <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end mt-4 lg:mt-0">
-                        <!-- Code Box -->
-                        <div class="p-2 sm:p-3 rounded-lg border-2 border-dashed border-accent/70 bg-white/5 text-center cursor-pointer transition-all hover:bg-accent/10 w-full mb-3" onclick="copyCode('${c.code}', this, '${c.name}')">
-                            <p class="text-xs font-semibold mb-1 text-white/70">Dein Trio-Code:</p>
-                            <div class="text-xl sm:text-2xl font-extrabold text-accent tracking-widest flex items-center justify-center">
-                                <span id="code-${c.name}" class="mr-2">${c.code}</span>
-                                <span class="text-xl sm:text-2xl">📋</span>
-                            </div>
-                            <p class="text-xs mt-1 text-white/50" id="copy-msg-${c.name}">Klicken, um Deinen Code zu kopieren!</p>
-                        </div>
+
+                    <div class="w-full lg:w-1/4 flex flex-col items-center justify-center lg:items-end space-y-3 mt-4 lg:mt-0 lg:pl-4">
                         
-                        <a href="${c.link}" target="_blank" class="btn-primary w-full px-5 py-2 rounded-full font-bold shadow-xl text-center text-sm sm:text-base">
-                            Jetzt zur Razed VIP-Seite
+                        <div class="flex items-center space-x-2"> 
+                            <div class="text-center lg:text-right">
+                                <p class="text-sm font-medium text-white/70 mb-0">Dein Bonus-Code:</p>
+                                <span id="bonus-code-${c.code}" class="text-xl font-extrabold text-christmas-gold tracking-wider">${c.code}</span>
+                            </div>
+                            
+                            <button onclick="copyCode('bonus-code-${c.code}')" class="bg-primary-blue text-white p-2 rounded-lg hover:bg-primary-blue/80 transition duration-150 shadow-md flex items-center justify-center h-full flex-shrink-0" title="Code kopieren">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v2"/></svg>
+                            </button>
+                        </div>
+                        <a href="${c.link}" target="_blank" class="btn-primary w-full lg:w-auto px-4 py-2 rounded-lg font-bold shadow-xl flex justify-center items-center space-x-2">
+                            <span>Jetzt spielen!</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </a>
                     </div>
+                    
                 `;
-            } else {
-                // --- STANDARD CASINO DESIGN ---
+            }
+            // --- STANDARD CASINO DESIGN MIT NEUEN MINI BOXEN ---
+            else {
                 cardContent = `
-                    <!-- 1. Casino Name & Logo -->
-                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4">
-                        <img src="${c.logo}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-primary-blue shadow-lg">
+                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4 pb-4 lg:pb-0 border-b lg:border-b-0 lg:pr-4">
+                        <img src="${c.logo || PLACEHOLDER_LOGO}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-primary-blue shadow-lg flex-shrink-0 casino-logo">
                         <div>
-                            <p class="text-lg font-extrabold text-accent mb-1">#${c.order}</p>
+                            <p class="text-lg font-extrabold text-accent mb-0">#${c.order}</p>
                             <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name}</h4>
                         </div>
                     </div>
 
-                   <!-- 2. Haupt-Infos (Grid/Flex) - Mobile: 2 Spalten, Desktop: 4 Spalten -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
-    <!-- Prozent -->
-    <div class="text-center p-2 rounded-lg bg-white/5">
-        <p class="text-xs font-semibold text-white/70">Bonus %</p>
-        <p class="text-base sm:text-lg font-bold text-accent">${c.percent}%</p>
-    </div>
-    <!-- Max Bonus -->
-    <div class="text-center p-2 rounded-lg bg-white/5">
-        <p class="text-xs font-semibold text-white/70">Max Bonus</p>
-        <p class="text-base sm:text-lg font-bold">${c.maxBonus}</p>
-    </div>
-    <!-- *** ANGEPASSTE ANZEIGE: BONUS-TYP (Sticky/Non-Sticky) *** -->
-    <div class="text-center p-2 rounded-lg bg-white/5 hidden md:block">
-        <!-- Text von "Max Einsatz" zu "Bonus-Typ" geändert -->
-        <p class="text-xs font-semibold text-white/70">Bonus-Typ</p>
-        <!-- Variable von ${c.maxStake} zu ${c.type} geändert, um die vorhandenen Daten zu nutzen! -->
-        <p class="text-base sm:text-lg font-bold">${c.type}</p> 
-        <!--
-          HINWEIS: Wir nutzen c.type, da dies die korrekte Variable im Datensatz ist.
-        -->
-    </div>
-    <!-- Wager -->
-    <div class="text-center p-2 rounded-lg bg-white/5">
-        <p class="text-xs font-semibold text-white/70">Wager</p>
-        <p class="text-base sm:text-lg font-bold">${c.wager}</p>
-    </div>
-</div>
-                    
-                    <!-- 3. Tags & Button -->
-                    <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end space-y-3 mt-4 lg:mt-0">
-                        <!-- Tags auf Mobile zentriert -->
-                        <div class="flex flex-wrap gap-2 justify-center lg:justify-end">${tagElements}</div>
-                        <!-- Button mit voller Breite auf Mobile, wenn nötig -->
-                        <a href="${c.link}" target="_blank" class="btn-primary w-full lg:w-auto px-5 py-2 rounded-full font-bold shadow-xl text-center text-sm sm:text-base">
-                            Deinen Bonus holen!
+                    <div class="w-full lg:w-2/4 grid grid-cols-3 gap-3 text-center mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
+                        
+                        <div class="mini-glass-box">
+                            <p class="text-sm font-medium text-white/70">Prozent</p>
+                            <p class="text-lg sm:text-xl font-bold text-accent">${c.percent}%</p>
+                        </div>
+                        
+                        <div class="mini-glass-box">
+                            <p class="text-sm font-medium text-white/70">Max. Bonus</p>
+                            <p class="text-lg sm:text-xl font-bold text-white">${c.maxBonus}</p>
+                        </div>
+                        
+                        <div class="mini-glass-box">
+                            <p class="text-sm font-medium text-white/70">Umsatz</p>
+                            <p class="text-lg sm:text-xl font-bold text-white">${c.wager}</p>
+                        </div>
+                        
+                        <div class="col-span-3 pt-2">
+                            <div class="flex flex-wrap justify-center gap-2">
+                                ${tagElements}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-1/4 flex flex-col items-center justify-center lg:items-end space-y-3 mt-4 lg:mt-0 lg:pl-4">
+                        <p class="text-sm font-bold text-white/80">${c.type}-Bonus</p>
+                        <a href="${c.link}" target="_blank" class="btn-primary w-full lg:w-auto px-4 py-2 rounded-lg font-bold shadow-xl flex justify-center items-center space-x-2">
+                            <span>Jetzt Bonus sichern!</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </a>
                     </div>
                 `;
@@ -548,152 +736,564 @@
             container.appendChild(casinoCard);
         });
         
-        updateFilterButtons(filter);
-    }
-
-    // Funktion zum Kopieren des Codes (Razed)
-    function copyCode(code, element, casinoName) {
-        // Fallback-Funktion für iFrames
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(code).then(() => {
-                showCopyMessage(casinoName, 'Code kopiert! ✅');
-            }).catch(err => {
-                console.error('Kopieren fehlgeschlagen mit Clipboard API:', err);
-                fallbackCopy(code, casinoName);
-            });
-        } else {
-            fallbackCopy(code, casinoName);
-        }
-
-        function fallbackCopy(code, name) {
-            const textarea = document.createElement('textarea');
-            textarea.value = code;
-            textarea.style.position = 'fixed'; // Verhindert Scrollen auf iOS
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showCopyMessage(name, 'Code kopiert! ✅ (Fallback)');
-            } catch (err) {
-                console.error('Kopieren fehlgeschlagen mit execCommand:', err);
-                showCopyMessage(name, 'Kopieren fehlgeschlagen.');
+        // Filter-Buttons aktualisieren
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-primary-blue', 'text-black', 'hover:bg-primary-blue/50', 'text-white');
+            btn.classList.add('bg-white/10', 'text-white', 'hover:bg-primary-blue/50');
+            if (btn.getAttribute('data-filter') === filter) {
+                btn.classList.add('bg-primary-blue', 'text-black');
+                btn.classList.remove('bg-white/10', 'text-white');
             }
-            document.body.removeChild(textarea);
-        }
+        });
     }
 
-    function showCopyMessage(casinoName, message) {
-        // Findet das Code-Element in der Razed Card
-        const msgElement = document.getElementById(`copy-msg-${casinoName}`);
-        
-        if (msgElement) {
-            const originalMsg = 'Klicken, um Deinen Code zu kopieren!';
-            msgElement.innerText = message;
+    /**
+     * Rendert die Leaderboard-Tabelle.
+     */
+    function renderLeaderboard() {
+        const container = document.getElementById('leaderboard-body');
+        if (!container) return;
+        container.innerHTML = '';
+
+        leaderboardData.sort((a, b) => a.rank - b.rank);
+
+        leaderboardData.forEach((entry, index) => {
+            const row = document.createElement('tr');
+            row.className = `border-b border-white/10 ${index % 2 === 0 ? 'bg-white/5' : ''}`;
             
-            // Finde die Glass Card für den Rahmen-Effekt (Nur für Razed relevant)
-            const codeBox = msgElement.closest('.border-dashed');
-            if (codeBox) {
-                codeBox.style.borderColor = 'var(--christmas-red)'; 
-            }
+            let rankClass = 'font-semibold';
+            if (entry.rank === 1) rankClass = 'font-extrabold text-christmas-gold text-lg';
+            else if (entry.rank === 2) rankClass = 'font-bold text-white text-lg';
+            else if (entry.rank === 3) rankClass = 'font-bold text-white/90 text-lg';
 
-            setTimeout(() => {
-                msgElement.innerText = originalMsg;
-                if (codeBox) {
-                    codeBox.style.borderColor = 'var(--primary-blue)';
-                }
-            }, 2000);
+            row.innerHTML = `
+                <td class="py-3 px-3 ${rankClass}">${entry.rank}.</td>
+                <td class="py-3 px-3 text-sm sm:text-base">${entry.id}</td>
+                <td class="py-3 px-3 font-mono text-accent text-sm sm:text-base">${entry.wagered}</td>
+                <td class="py-3 px-3 hidden sm:table-cell text-sm sm:text-base">${entry.site}</td>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    // ----------------------------------------------------------------------
+    // ADMIN PANEL RENDERING FUNKTIONEN
+    // ----------------------------------------------------------------------
+
+    /**
+     * Rendert die Casino-Einträge im Admin-Panel (mit neuem Logo-Upload).
+     */
+    function renderAdminCasinos() {
+        const container = document.getElementById('admin-casino-list');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        casinos.sort((a, b) => a.order - b.order).forEach((c, index) => {
+            const casinoBlock = document.createElement('div');
+            casinoBlock.className = 'glass-card p-4 border-l-4 border-primary-blue space-y-3';
+            
+            // Logik für den Image Upload-Bereich
+            const imageUploadHTML = `
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-white/70">Casino Logo (Base64-Bild)</label>
+                    <div class="drag-drop-area p-4 rounded-lg text-center cursor-pointer" id="drop-area-${index}">
+                        <input type="file" id="logo-file-input-${index}" accept="image/*" class="hidden" 
+                               onchange="handleLogoUpload(event, ${index})">
+                        <img id="logo-preview-${index}" src="${c.logo || PLACEHOLDER_LOGO}" alt="Logo Preview" 
+                             class="w-16 h-16 rounded-full mx-auto mb-2 object-cover border border-white/20">
+                        <p class="text-sm text-white/80">
+                            **${c.name}** | Klicken zum Hochladen oder Bild hierher ziehen.
+                        </p>
+                        <button type="button" onclick="document.getElementById('logo-file-input-${index}').click()" 
+                                class="mt-2 bg-gray-600 hover:bg-gray-500 text-white text-xs px-3 py-1 rounded-full">
+                            Bild wählen
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            casinoBlock.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <h4 class="text-xl font-bold text-accent">${c.name} (#${c.order})</h4>
+                    <button onclick="removeCasinoEntry(${index})" class="bg-red-500 hover:bg-red-400 text-white px-3 py-1 rounded-lg text-sm font-bold transition-colors">
+                        Löschen
+                    </button>
+                </div>
+                
+                ${imageUploadHTML}
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Name</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="name" value="${c.name}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Order</label>
+                        <input type="number" class="admin-input w-full p-2 rounded-lg" data-key="order" value="${c.order}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Prozent (%)</label>
+                        <input type="number" class="admin-input w-full p-2 rounded-lg" data-key="percent" value="${c.percent}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Max. Bonus</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="maxBonus" value="${c.maxBonus}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Wager (z.B. 35x)</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="wager" value="${c.wager}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Typ (Sticky/Non-Sticky/Special)</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="type" value="${c.type}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2 col-span-1 sm:col-span-2 md:col-span-2">
+                        <label class="block text-sm font-medium text-white/70">Link (URL)</label>
+                        <input type="url" class="admin-input w-full p-2 rounded-lg" data-key="link" value="${c.link}" data-index="${index}">
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-white/70">Tags (mit Komma trennen)</label>
+                    <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="tags" value="${(c.tags || []).join(', ')}" data-index="${index}">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Code (optional, nur für Special)</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="code" value="${c.code || ''}" data-index="${index}">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium text-white/70">Special Features (mit Komma trennen)</label>
+                        <input type="text" class="admin-input w-full p-2 rounded-lg" data-key="specialFeatures" value="${(c.specialFeatures || []).join(', ')}" data-index="${index}">
+                    </div>
+                </div>
+            `;
+            container.appendChild(casinoBlock);
+            
+            // Init Drag and Drop Listener
+            initDragAndDrop(index);
+        });
+    }
+
+    /**
+     * Fügt Drag-and-Drop-Listener für den Dateibereich hinzu.
+     */
+    function initDragAndDrop(index) {
+        const dropArea = document.getElementById(`drop-area-${index}`);
+        const fileInput = document.getElementById(`logo-file-input-${index}`);
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+        });
+
+        dropArea.addEventListener('drop', e => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                // Erstellt ein simuliertes Event-Objekt für handleLogoUpload
+                const syntheticEvent = { target: { files: files } };
+                handleLogoUpload(syntheticEvent, index);
+            }
+        }, false);
+        
+        dropArea.addEventListener('click', () => fileInput.click(), false);
+    }
+    
+    function preventDefaults (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+
+    /**
+     * Konvertiert die hochgeladene Datei in einen Base64-String und aktualisiert die Datenstruktur.
+     */
+    function handleLogoUpload(event, index) {
+        const file = event.target.files[0];
+        if (!file || !file.type.startsWith('image/')) {
+            alert("Bitte wählen Sie eine gültige Bilddatei aus.");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Image = e.target.result;
+            
+            // Speichere den Base64-String direkt in der Datenstruktur
+            casinos[index].logo = base64Image;
+            
+            // Aktualisiere die Vorschau
+            document.getElementById(`logo-preview-${index}`).src = base64Image;
+            
+            console.log(`Logo für Casino ${casinos[index].name} aktualisiert (Base64).`);
+            // KEIN sofortiges saveCasinosToStorage(), da dies erst beim Klick auf "Speichern" erfolgen soll
+            // Aber die Datenstruktur im RAM ist aktualisiert.
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    /**
+     * Rendert die Leaderboard-Einträge im Admin-Panel.
+     */
+    function renderAdminLeaderboard() {
+        const container = document.getElementById('admin-leaderboard-body');
+        if (!container) return;
+        container.innerHTML = '';
+
+        leaderboardData.sort((a, b) => a.rank - b.rank).forEach((entry, index) => {
+            const row = document.createElement('tr');
+            row.className = `border-b border-white/10 ${index % 2 === 0 ? 'bg-white/5' : ''}`;
+            
+            // RESPONSIVE: Kleinere Input-Felder für Mobilgeräte
+            row.innerHTML = `
+                <td class="py-2 px-2"><input type="number" class="admin-input w-full p-1 rounded text-xs sm:text-sm" data-key="rank" value="${entry.rank}" data-index="${index}"></td>
+                <td class="py-2 px-2"><input type="text" class="admin-input w-full p-1 rounded text-xs sm:text-sm" data-key="id" value="${entry.id}" data-index="${index}"></td>
+                <td class="py-2 px-2"><input type="text" class="admin-input w-full p-1 rounded text-xs sm:text-sm" data-key="wagered" value="${entry.wagered}" data-index="${index}"></td>
+                <td class="py-2 px-2"><input type="text" class="admin-input w-full p-1 rounded text-xs sm:text-sm" data-key="site" value="${entry.site}" data-index="${index}"></td>
+                <td class="py-2 px-2 text-center">
+                    <button onclick="removeLeaderboardEntry(${index})" class="text-red-400 hover:text-red-300 text-sm font-bold">🗑️</button>
+                </td>
+            `;
+            container.appendChild(row);
+        });
+        
+        if (leaderboardData.length === 0) {
+            addLeaderboardEntry();
         }
     }
 
-    // Funktion zum Navigieren zwischen den Seiten-Sektionen
+
+    // ----------------------------------------------------------------------
+    // ADMIN PANEL FUNKTIONALITÄT (Datenmanipulation mit Speicherung)
+    // ----------------------------------------------------------------------
+
+    // Casino Management
+    function addCasinoEntry() {
+        const newOrder = casinos.length > 0 ? Math.max(...casinos.map(c => c.order)) + 1 : 1;
+        casinos.push({ 
+            name: "Neues Casino", logo: PLACEHOLDER_LOGO, 
+            percent: 100, maxBonus: "500€", wager: "35x", 
+            type: "Non-Sticky", tags: ["Neu"], 
+            link: "https://neues-casino.com", code: null, order: newOrder,
+            specialFeatures: []
+        });
+        renderAdminCasinos();
+        saveCasinosToStorage(); 
+        alert('Neues Casino hinzugefügt. Bitte füllen Sie alle Felder aus und klicken Sie auf "Alle Casinos speichern".');
+    }
+
+    function removeCasinoEntry(index) {
+        if (confirm('Sind Sie sicher, dass Sie dieses Casino löschen möchten?')) {
+            casinos.splice(index, 1);
+            renderAdminCasinos();
+            saveCasinosToStorage(); 
+            renderCasinos(currentFilter); 
+            alert('Casino gelöscht und gespeichert!');
+        }
+    }
+
+    function saveCasinos() {
+        const inputs = document.querySelectorAll('#admin-casino-list input:not([type="file"])');
+        let newCasinos = [];
+        let tempCasino = {};
+
+        // Verarbeiten von Logo-Base64-Strings, die bereits in der 'casinos'-Datenstruktur gespeichert wurden
+        // und die restlichen Input-Felder
+        casinos.sort((a, b) => a.order - b.order).forEach((c, index) => {
+            const casinoElement = document.querySelector(`[data-index="${index}"]`);
+            if (casinoElement) { // Überprüfe, ob das Element noch existiert (wichtig nach Löschungen)
+                let tempCasino = { ...c }; 
+
+                // Durchlaufe alle Input-Felder für diesen Index
+                document.querySelectorAll(`.admin-input[data-index="${index}"]`).forEach(input => {
+                    const key = input.getAttribute('data-key');
+                    let value = input.value.trim();
+                    
+                    if (key === 'tags' || key === 'specialFeatures') {
+                        tempCasino[key] = value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+                    } else if (key === 'percent' || key === 'order') {
+                        tempCasino[key] = parseInt(value) || 0;
+                    } else {
+                        tempCasino[key] = value;
+                    }
+                });
+                
+                // Stelle sicher, dass das Base64-Logo, das durch handleLogoUpload gesetzt wurde, erhalten bleibt
+                newCasinos.push(finalizeCasinoEntry(tempCasino));
+            }
+        });
+
+        casinos = newCasinos;
+        saveCasinosToStorage(); // WICHTIG: Speichern im LocalStorage
+        renderAdminCasinos(); 
+        renderCasinos(currentFilter); 
+        alert('Casinos erfolgreich gespeichert und Frontend aktualisiert! (Bilder im Browser gespeichert)');
+    }
+
+    function finalizeCasinoEntry(tempCasino) {
+        return {
+            name: tempCasino.name || 'Unbenannt',
+            logo: tempCasino.logo || PLACEHOLDER_LOGO, // Base64
+            percent: tempCasino.percent || 0,
+            maxBonus: tempCasino.maxBonus || 'N/A',
+            wager: tempCasino.wager || 'N/A',
+            type: tempCasino.type || 'Non-Sticky',
+            tags: tempCasino.tags || [],
+            link: tempCasino.link || '#',
+            code: tempCasino.code || null,
+            order: tempCasino.order || 99,
+            specialFeatures: tempCasino.specialFeatures || []
+        };
+    }
+
+    // Leaderboard Management
+    function addLeaderboardEntry() {
+        const newRank = leaderboardData.length + 1;
+        leaderboardData.push({ 
+            rank: newRank, 
+            id: "NeuerSpieler" + newRank, 
+            wagered: "€ 100", 
+            site: "NeuesCasino" 
+        });
+        renderAdminLeaderboard();
+        saveLeaderboardToStorage(); 
+        alert('Neuer Leaderboard-Eintrag hinzugefügt. Bitte speichern Sie die Seite, um die Daten dauerhaft zu speichern!');
+    }
+
+    function removeLeaderboardEntry(index) {
+        if (confirm('Sind Sie sicher, dass Sie diesen Leaderboard-Eintrag löschen möchten?')) {
+            leaderboardData.splice(index, 1);
+            leaderboardData.forEach((entry, i) => entry.rank = i + 1);
+            renderAdminLeaderboard();
+            saveLeaderboardToStorage(); 
+            renderLeaderboard(); 
+            alert('Eintrag gelöscht und gespeichert!');
+        }
+    }
+
+    function saveLeaderboard() {
+        const inputs = document.querySelectorAll('#admin-leaderboard-body input');
+        let newLeaderboard = [];
+        let tempEntry = {};
+
+        inputs.forEach(input => {
+            const index = parseInt(input.getAttribute('data-index'));
+            const key = input.getAttribute('data-key');
+            const value = input.value.trim();
+
+            if (tempEntry.index !== index && Object.keys(tempEntry).length > 0) {
+                newLeaderboard.push(tempEntry);
+                tempEntry = {};
+            }
+
+            tempEntry.index = index;
+            tempEntry[key] = key === 'rank' ? parseInt(value) : value;
+        });
+
+        if (Object.keys(tempEntry).length > 0) {
+            newLeaderboard.push(tempEntry);
+        }
+
+        newLeaderboard.sort((a, b) => a.rank - b.rank);
+        newLeaderboard.forEach((entry, i) => {
+            entry.rank = i + 1; 
+            delete entry.index; 
+        });
+
+        leaderboardData = newLeaderboard;
+        saveLeaderboardToStorage(); 
+        renderAdminLeaderboard(); 
+        renderLeaderboard(); 
+        alert('Leaderboard erfolgreich gespeichert und Frontend aktualisiert!');
+    }
+
+
+    // ----------------------------------------------------------------------
+    // ALLGEMEINE SEITEN-FUNKTIONALITÄT
+    // ----------------------------------------------------------------------
+    
+    // NAVIGATION
     function navigate(pageId) {
         document.querySelectorAll('.page-section').forEach(section => {
             section.classList.add('hidden');
         });
-        document.getElementById(pageId).classList.remove('hidden');
-
-        // Nav Button Styling
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('text-accent', 'font-extrabold');
-            btn.classList.add('text-white/80', 'font-semibold');
-        });
-        const activeBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
-        if (activeBtn) {
-            activeBtn.classList.add('text-accent', 'font-extrabold');
-            activeBtn.classList.remove('text-white/80', 'font-semibold');
+        const page = document.getElementById(pageId);
+        if (page) {
+            page.classList.remove('hidden');
         }
         
-        // Scrollt zum Anfang der Seite bei Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active-page');
+            if (btn.getAttribute('data-page') === pageId) {
+                btn.classList.add('active-page');
+            }
+        });
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Filter-Buttons aktualisieren
-    function updateFilterButtons(activeFilter) {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            if (btn.getAttribute('data-filter') === activeFilter) {
-                btn.classList.add('bg-primary-blue', 'text-black', 'hover:bg-primary-blue');
-                btn.classList.remove('bg-white/10', 'text-white', 'hover:bg-primary-blue/50');
-            } else {
-                btn.classList.remove('bg-primary-blue', 'text-black', 'hover:bg-primary-blue');
-                btn.classList.add('bg-white/10', 'text-white', 'hover:bg-primary-blue/50');
-            }
-        });
+    // FILTER FUNKTIONALITÄT
+    function setFilter(filter) {
+        currentFilter = filter;
+        renderCasinos(currentFilter);
     }
 
-    // ----------------------------------------------------------------------
-    // AGE GATE LOGIC
-    // ----------------------------------------------------------------------
-    
-    document.getElementById('confirm-age-btn').addEventListener('click', () => {
-        // Zeigt Hauptinhalt an
-        document.getElementById('main-content').classList.remove('hidden');
-        // Versteckt das Age Gate
-        document.getElementById('age-gate-modal').classList.add('hidden');
-        // Startet die App
-        initializeApp(); 
-    });
 
-    function denyAccess() {
-        // Simuliert eine Blockierung, da die Seite nicht verlassen werden kann
-        const modal = document.getElementById('age-gate-modal').querySelector('.glass-card');
-        modal.innerHTML = `
-            <h2 class="text-4xl font-extrabold text-red-600 mb-4">🚫 Zugriff verweigert</h2>
-            <p class="text-lg mb-6 text-white/90">
-                Du musst mindestens 18 Jahre alt sein, um diese Seite zu sehen.
-            </p>
-            <p class="text-sm text-white/60">
-                Hilfe bei Spielsucht: <a href="https://www.bioeg.de/service/infotelefone/gluecksspielsucht/" target="_blank" class="text-accent hover:underline">Support-Link</a>
-            </p>
-        `;
-        // Deaktiviert den Confirm-Button für 3 Sekunden, um eine erneute sofortige Eingabe zu verhindern (simulierte Sperre)
-        const btn = document.getElementById('confirm-age-btn');
-        if (btn) {
-            btn.disabled = true;
-            setTimeout(() => { btn.disabled = false; }, 3000);
+    // ADMIN ZUGRIFF & TABS
+    function loginAdmin() {
+        const password = document.getElementById('admin-password').value;
+        // PASSWORT: 'IdiotenBonus123$!'
+        if (password === 'IdiotenBonus123$!') { 
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('admin-panel').classList.remove('hidden'); 
+            document.getElementById('admin-password').value = ''; 
+            showAdminTab('leaderboard'); 
+        } else {
+            alert('Falsches Passwort!');
+            document.getElementById('admin-password').value = '';
         }
     }
 
-    function initializeApp() {
-        // Navigations-Buttons
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                navigate(btn.getAttribute('data-page'));
-            });
-        });
+    function logoutAdmin() {
+        document.getElementById('admin-panel').classList.add('hidden');
+        document.getElementById('login-modal').classList.add('hidden');
+        // Nach dem Abmelden zur Hauptseite navigieren
+        navigate('bonus-page');
+    }
 
-        // Filter-Buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentFilter = btn.getAttribute('data-filter');
-                renderCasinos(currentFilter);
-            });
+    function showAdminTab(tabName) {
+        document.querySelectorAll('.admin-tab-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        document.getElementById('admin-' + tabName).classList.remove('hidden');
+        
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.classList.remove('active', 'text-white/70', 'hover:text-white');
+            tab.classList.add('text-white/70', 'hover:text-white');
+            if (tab.getAttribute('data-tab') === tabName) {
+                tab.classList.add('active');
+                tab.classList.remove('text-white/70');
+            }
         });
         
-        // Initiale Seitenanzeige und Rendern
-        navigate('bonus-page');
-        renderCasinos(currentFilter);
+        if (tabName === 'leaderboard') {
+            renderAdminLeaderboard();
+        } else if (tabName === 'casinos') {
+            renderAdminCasinos();
+        }
     }
+    
+   // AGE GATE FUNKTIONALITÄT
+    function checkAgeGate() {
+        // *** WICHTIGE ÄNDERUNG 1: Wir setzen ageVerified IMMER auf false. ***
+        // Dadurch wird die persistente Speicherung im localStorage ignoriert und das Modal immer angezeigt.
+        const ageVerified = false; 
+        
+        if (ageVerified) {
+            // Dieser Block wird NIE ausgeführt, da ageVerified immer false ist, 
+            // aber er bleibt hier für eine klare Struktur.
+            document.body.classList.remove('hidden-until-verified');
+            document.getElementById('age-gate-modal').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            
+            // Lade die Daten und rendere das Frontend
+            loadData();
+            navigate('bonus-page'); 
+            renderCasinos(currentFilter);
+            renderLeaderboard();
+
+        } else {
+            // Wenn NICHT bestätigt (was jetzt immer der Fall ist), zeige NUR das Age Gate
+            document.body.classList.add('hidden-until-verified'); 
+            document.getElementById('age-gate-modal').classList.remove('hidden');
+        }
+    }
+
+    function confirmAge() {
+        // *** WICHTIGE ÄNDERUNG 2: localStorage.setItem('ageVerified', 'true'); WURDE ENTFERNT! ***
+        // Der Status wird beim Schließen des Modals NICHT gespeichert.
+        
+        // Führt die Logik aus, um das Age Gate zu verstecken und den Hauptinhalt zu zeigen
+        document.body.classList.remove('hidden-until-verified');
+        document.getElementById('age-gate-modal').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        
+        // Lade die Daten und rendere das Frontend
+        loadData();
+        navigate('bonus-page'); 
+        renderCasinos(currentFilter);
+        renderLeaderboard();
+    }
+
+    function denyAccess() {
+        alert('Zugriff verweigert. Sie müssen mindestens 18 Jahre alt sein, um diese Seite zu nutzen.');
+        window.location.href = 'https://www.google.com'; 
+    }
+    
+    // EVENT LISTENER UND INITIALISIERUNG
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('confirm-age-btn').addEventListener('click', confirmAge);
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => setFilter(btn.getAttribute('data-filter')));
+        });
+
+        // Startet den gesamten Prozess (lässt jetzt immer das Age Gate erscheinen)
+        checkAgeGate();
+    });
+
+    // Globale Funktionen (zur Sicherheit für HTML onClick)
+    window.navigate = navigate;
+    window.setFilter = setFilter;
+    window.loginAdmin = loginAdmin;
+    window.logoutAdmin = logoutAdmin;
+    window.showAdminTab = showAdminTab;
+    window.addLeaderboardEntry = addLeaderboardEntry;
+    window.removeLeaderboardEntry = removeLeaderboardEntry;
+    window.saveLeaderboard = saveLeaderboard;
+    window.addCasinoEntry = addCasinoEntry;
+    window.removeCasinoEntry = removeCasinoEntry;
+    window.saveCasinos = saveCasinos;
+    window.denyAccess = denyAccess;
+    window.handleLogoUpload = handleLogoUpload;
+    window.finalizeCasinoEntry = finalizeCasinoEntry;
 </script>
+
+<script>
+            /**
+             * Kopiert den Text eines Elements anhand seiner ID in die Zwischenablage.
+             * @param {string} elementId Die ID des HTML-Elements, dessen Text kopiert werden soll.
+             */
+            function copyCode(elementId) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    const codeToCopy = element.textContent || element.innerText;
+                    
+                    // Verwenden der modernen Clipboard API
+                    navigator.clipboard.writeText(codeToCopy)
+                        .then(() => {
+                            // Optional: Kurzes Feedback an den Benutzer
+                            alert("Bonus-Code kopiert: " + codeToCopy); 
+                        })
+                        .catch(err => {
+                            console.error('Kopieren fehlgeschlagen: ', err);
+                        });
+                }
+            }
+        </script>
+        </body>
+</html>
 
 </body>
 </html>
