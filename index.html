@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idiotenbonus - Deine Exklusiven Promos von uns!</title>
-    <!-- Tailwind CSS laden -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font (Inter) für moderne Typografie -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* NEUES DESIGN: Modern Liquid Glass (Blue/Cyan) */
@@ -91,9 +89,6 @@
 </head>
 <body class="hidden-until-verified">
 
-<!-- ---------------------------------------------------------------------- -->
-<!-- AGE GATE MODAL (Altersabfrage - Du-Form)                               -->
-<!-- ---------------------------------------------------------------------- -->
 <div id="age-gate-modal" class="flex items-center justify-center p-4">
     <div class="glass-card p-8 sm:p-12 max-w-lg w-full text-center border-christmas-red border-l-4">
         <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 text-christmas-red">⚠️ Altersüberprüfung (18+)</h2>
@@ -116,27 +111,18 @@
         </p>
     </div>
 </div>
-<!-- ---------------------------------------------------------------------- -->
-
-
-<!-- Haupt-Container (Wird erst nach Altersbestätigung sichtbar) -->
 <div id="main-content" class="min-h-screen flex flex-col hidden">
 
-<!-- Header (Sticky & Glass) - Mobile Optimiert - FIX FÜR HANDY-ANSICHT -->
-    <header class="sticky-header glass-card !rounded-none">
+<header class="sticky-header glass-card !rounded-none">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             
-            <!-- Logo/Titel: FIX: mr-2 sorgt für minimalen Abstand zur Navigation auf Mobile -->
             <button onclick="navigate('bonus-page')" 
                     class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity flex-shrink-0 mr-2">
                 Idiotenbonus
             </button>
             
-            <!-- Navigation: FIX: space-x-3 auf Mobile statt space-x-2 für bessere Trennung -->
             <nav class="space-x-3 sm:space-x-4 md:space-x-6 flex items-center flex-shrink-0">
-                <!-- Buttons: text-sm auf Mobile, um Platz zu sparen -->
                 <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
-                <!-- Name von Leaderboard auf Board verkürzt, um Platz auf Mobile zu sparen -->
                 <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Leaderboard</button> 
                 <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
             </nav>
@@ -144,20 +130,15 @@
     </header>
 
 
-    <!-- Seiteninhalt (Wird per JS gesteuert) -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
 
-        <!-- BONUS / HAUPTSEITE -->
         <section id="bonus-page" class="page-section">
             
-            <!-- Hero Section (Responsive & Trio-Stil) -->
             <div class="glass-card p-5 md:p-10 mb-8 md:mb-12 flex flex-col md:flex-row-reverse items-center space-y-4 md:space-y-0 md:space-x-12 md:space-x-reverse text-center md:text-left">
                 
-                <!-- Logo Platzhalter -->
                 <img src="logo.jpg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/06B6D4/FFFFFF?text=TRIO';" alt="Idiotenbonnus Trio Logo" class="rounded-full w-24 h-24 md:w-40 md:h-40 border-4 border-accent shadow-xl flex-shrink-0">
                 
                 <div class="flex-grow">
-                    <!-- Textgrößen angepasst für Mobile -->
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2 leading-tight">
                         Willkommen im <span class="text-accent">Idiotenbonus</span>-Hub! Deine Promos, direkt von uns.
                     </h2>
@@ -168,68 +149,25 @@
             </div>
 
 
-            <!-- Casino Liste & Filter (Trio-Stil) -->
             <h3 class="text-2xl sm:text-3xl font-bold mb-5 text-accent">🔥 Unsere Top Casino Empfehlungen für Dich</h3>
 
-            <!-- Filter-Sektion (Responsive & Sticky) -->
             <div id="filter-container" class="sticky top-[64px] sm:top-[76px] z-40 mb-6 p-3 glass-card flex flex-wrap gap-2">
                 <label class="text-base font-semibold mr-1 flex-shrink-0">Filter für Dich:</label>
-                <!-- Kleinere Buttons auf Mobile -->
                 <button class="filter-btn bg-primary-blue text-black px-3 py-1.5 rounded-full font-medium transition-colors text-sm" data-filter="all">Alle</button>
                 <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Sticky">Sticky</button>
                 <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Non-Sticky">Non-Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">VIP / Ohne Bonus</button>
+                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">Ohne Bonus</button>
             </div>
             
-            <!-- Casino Liste -->
             <div id="casino-list" class="grid gap-4 sm:gap-6">
-                <!-- Casino Cards werden per JS aus dem Array gerendert -->
-            </div>
+                </div>
 
         </section>
 
-        <!-- GEWINNSPIEL SEITE (Du-Form) -->
-       <section id="bonus-page" class="page-section">
+        <section id="contest-banner-section" class="page-section">
             
-            <div class="glass-card p-5 md:p-10 mb-8 md:mb-12 flex flex-col md:flex-row-reverse items-center space-y-4 md:space-y-0 md:space-x-12 md:space-x-reverse text-center md:text-left">
-                
-                <img src="logo.jpg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/06B6D4/FFFFFF?text=TRIO';" alt="Idiotenbonnus Trio Logo" class="rounded-full w-24 h-24 md:w-40 md:h-40 border-4 border-accent shadow-xl flex-shrink-0">
-                
-                <div class="flex-grow">
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2 leading-tight">
-                        Willkommen im <span class="text-accent">Idiotenbonus</span>-Hub! Deine Promos, direkt von uns.
-                    </h2>
-                    <p class="text-lg sm:text-xl font-medium text-white/90">
-                        Wir haben die heißesten Promos & Codes exklusiv für Dich verhandelt. Bei uns bist Du richtig! 👇
-                    </p>
-                </div>
-            </div>
-
-            <div id="contest-banner" class="glass-card p-4 sm:p-6 mb-8 md:mb-12 border-l-8 border-christmas-red flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0 md:space-x-6 text-center md:text-left">
-                <div class="flex items-center space-x-3">
-                    <span class="text-3xl sm:text-5xl animate-pulse text-christmas-red">🎁</span>
-                    <p class="text-lg sm:text-2xl font-bold text-white">
-                        🚨 <span class="text-christmas-red">2000€ Weihnachtsgeschenk Gewinnspiel</span> läuft jetzt für Dich!
-                    </p>
-                </div>
-                <button onclick="navigate('contest-page')" class="btn-primary px-5 py-2 md:px-6 md:py-3 rounded-full font-bold shadow-xl whitespace-nowrap text-sm md:text-base w-full md:w-auto">
-                    Alle Infos & Teilnahme
-                </button>
-            </div>
-
-            <h3 class="text-2xl sm:text-3xl font-bold mb-5 text-accent">🔥 Unsere Top Casino Empfehlungen für Dich</h3>
-
-            <div id="filter-container" class="sticky top-[60px] sm:top-[76px] z-40 mb-6 p-3 glass-card flex flex-wrap gap-2">
-                <label class="text-base font-semibold mr-1 flex-shrink-0">Filter für Dich:</label>
-                <button class="filter-btn bg-primary-blue text-black px-3 py-1.5 rounded-full font-medium transition-colors text-sm" data-filter="all">Alle</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Sticky">Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Non-Sticky">Non-Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">VIP</button>
-            </div>
             
-            <div id="casino-list" class="grid gap-4 sm:gap-6">
-                </div>
-
+            
         </section>
 
         <section id="contest-page" class="page-section hidden">
@@ -297,7 +235,6 @@
                     <p class="text-base sm:text-lg font-bold text-white">Gewinner-Bekanntgabe: <span class="text-christmas-red">25. Dezember auf Instagram & Telegram!</span></p>
                 </div>
                 
-                <!-- Button (Full-Width auf Mobile) -->
                 <div class="pt-4">
                     <button onclick="navigate('bonus-page')" class="btn-primary w-full px-6 py-3 rounded-lg font-bold shadow-xl text-center flex items-center justify-center space-x-2 text-lg">
                         <span>Jetzt Bonis checken & Tickets sammeln!</span>
@@ -307,47 +244,40 @@
             </div>
         </section>
 
-        <!-- LEADERBOARD SEITE (Du-Form) -->
         <section id="leaderboard-page" class="page-section hidden">
             <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                 <span>Zurück zur Bonus-Übersicht</span>
             </button>
 
-            <!-- Titelgröße angepasst -->
             <h2 class="text-4xl sm:text-5xl font-extrabold text-accent mb-6 text-center">🏆 Unser Aktuelles Monats-Leaderboard für Dich</h2>
             <div class="glass-card p-5 md:p-10 space-y-6">
                 <p class="text-base sm:text-lg text-white/90 mb-6">
                     Schau, wer diesen Monat an der Spitze steht! Die Top 3 erhalten am Monatsende besondere Preise von uns, Deine Idioten.
                 </p>
                 <div class="overflow-x-auto rounded-lg">
-                    <!-- Responsive Tabelle -->
                     <table class="min-w-full text-left text-white/90">
                         <thead class="text-accent border-b-2 border-accent/50">
                             <tr>
                                 <th class="py-3 px-3 text-left">Rang</th>
                                 <th class="py-3 px-3 text-left">Spieler-ID</th>
                                 <th class="py-3 px-3 text-left">Wagered</th>
-                                <!-- Spalte auf Mobile ausgeblendet, um Platz zu sparen -->
                                 <th class="py-3 px-3 text-left hidden sm:table-cell">Meistgespielte Seite</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- 1. Platz (Prominent Blau) -->
                             <tr class="border-b border-white/10 bg-primary-blue/20 font-bold text-accent">
                                 <td class="py-3 px-3">🥇 1</td>
                                 <td class="py-3 px-3">SackSocke</td>
                                 <td class="py-3 px-3">€ 15.000</td>
                                 <td class="py-3 px-3 hidden sm:table-cell">Pistolo</td>
                             </tr>
-                            <!-- 2. Platz (Weiß, etwas dezenter) -->
                             <tr class="border-b border-white/10 bg-white/10 text-white font-semibold">
                                 <td class="py-3 px-3">🥈 2</td>
                                 <td class="py-3 px-3">Paradoxon</td>
                                 <td class="py-3 px-3">€ 12.000</td>
                                 <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
                             </tr>
-                            <!-- 3. Platz (Dezent) -->
                             <tr class="border-b border-white/10 bg-white/5">
                                 <td class="py-3 px-3">🥉 3</td>
                                 <td class="py-3 px-3">BeautyWise</td>
@@ -366,7 +296,6 @@
                                 <td class="py-3 px-3">€ 6.490</td>
                                 <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
                             </tr>
-                            <!-- Weitere 5 Platzhalter -->
                             <tr><td class="py-3 px-3">6</td><td class="py-3 px-3">Bounz</td><td class="py-3 px-3">€ 5.108</td><td class="py-3 px-3 hidden sm:table-cell">SGCasino</td></tr>
                             <tr><td class="py-3 px-3">7</td><td class="py-3 px-3">Bloodman123</td><td class="py-3 px-3">€ 4.480</td><td class="py-3 px-3 hidden sm:table-cell">AllySpin</td></tr>
                             <tr><td class="py-3 px-3">8</td><td class="py-3 px-3">SZ777</td><td class="py-3 px-3">€ 3.900</td><td class="py-3 px-3 hidden sm:table-cell">MyEmpire</td></tr>
@@ -379,7 +308,6 @@
             </div>
         </section>
 
-        <!-- SUPPORT SEITE (Du-Form) -->
         <section id="support-page" class="page-section hidden">
             <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -391,7 +319,6 @@
                 <p class="text-base sm:text-lg text-white/90">
                     Hast Du Fragen zu Boni, Casinos oder brauchst Du Hilfe beim Kopieren eines Codes? Unser Trio-Support steht Dir gerne zur Verfügung!
                 </p>
-                <!-- Buttons: Stacked auf Mobile, Row auf Desktop -->
                 <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 pt-4">
                     <a href="https://t.me/idiotenbonus/5" class="btn-primary flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl hover:opacity-90 transition-all">
                         💬 Telegram
@@ -406,7 +333,6 @@
 
     </main>
 
-    <!-- Footer (Responsive) -->
     <footer class="mt-8 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-sm text-christmas-red font-bold mb-2">
@@ -426,21 +352,28 @@
 <script>
     // Casino Daten - MIT Platzhaltern für Logos und Razed-Spezialdaten
     const casinos = [
-        { name: "NeedForSlots", logo: "NeedForSlots.png", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["50 Freegames ohne Einzahlung", "Sofort-Auszahlung", "Non-Sticky"], link: "https://track.padrinopartners.com/visit/?bta=35687&nci=5343&utm_campaign=Idiotenbonus", code: null, order: 1 },
-        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2 },
-        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 3 },
-        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4 },
-        { name: "Pistolo", logo: "Pistoloneu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky€", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 5 },
-        { name: "Neon54", logo: "NEONneu54.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "40x", type: "Non-Sticky", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 6 },
-        { name: "SGCasino", logo: "SGCasino.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7 },
-        { name: "SlotsPalace", logo: "SlotsPalace.jpg", percent: 100, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", type: "Sticky", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8 },
-        { name: "Spinbara", logo: "SpinBARA-2.jpg", percent: 200, maxBonus: "3000$", type: "Non-Sticky", wager: "35x", type: "Non-Sticky", tags: ["Mega Bonus", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9 },
+        { 
+            name: "NeedForSlots", logo: "NeedForSlots.png", 
+            percent: 100, maxBonus: "500€", wager: "35x",
+            type: "Special", tags: ["50 Freegames ohne Einzahlung", "Sofort-Auszahlung", "Non-Sticky"], 
+            link: "https://track.padrinopartners.com/visit/?bta=35687&nci=5343&utm_campaign=Idiotenbonus", 
+            code: "FREE50", order: 1,
+            specialFeatures: ["50 Freespins ohne Einzahlung", "Exklusiver Willkommensbonus", "Schnelle Auszahlungen",]
+        },
+        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/RTBetMerkur", code: null, order: 2 },
+        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", type: "Sticky", wager: "30x", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/AllyspinMerkur", code: null, order: 3 },
+        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", type: "Sticky", wager: "30x", tags: ["200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/MyEmpireMerkur", code: null, order: 4 },
+        { name: "Pistolo", logo: "Pistoloneu.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/PistoloMerkur", code: null, order: 5 },
+        { name: "Neon54", logo: "NEONneu54.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "40x", tags: ["200 Freegames", "Live Casino", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/Neon54Merkur", code: null, order: 6 },
+        { name: "SGCasino", logo: "SGCasino.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SGCasinoMerkur", code: null, order: 7 },
+        { name: "SlotsPalace", logo: "SlotsPalace.jpg", percent: 100, maxBonus: "1000€", type: "Sticky", wager: "30x", tags: ["1000€ Paket-Bonus", "Sofort-Auszahlung", "Sticky"], link: "https://tinyurl.com/SlotspalaceMerkur", code: null, order: 8 },
+        { name: "Spinbara", logo: "SpinBARA-2.jpg", percent: 200, maxBonus: "3000$", type: "Non-Sticky", wager: "35x", tags: ["Mega Bonus", "Sofort-Auszahlung", "Non-Sticky"], link: "https://tinyurl.com/SpinbaraMerkur", code: null, order: 9 },
         { 
             name: "Razed", logo: "razed.jpg", 
-            percent: 0, maxBonus: "N/A", maxStake: "N/A", wager: "N/A", 
+            percent: 0, maxBonus: "N/A", wager: "N/A", 
             type: "Special", tags: ["Instant-VIP", "Highroller", "250K Race"], 
             link: "https://www.razed.com/signup/?raf=Idioten", code: "idioten", order: 10,
-            specialFeatures: ["Instant-VIP", "Weeklies & Monthlies", "250k Christmas Race Teilnahme", "100% Einzahlungsbonus", "Nicht in dem Christmas Giveaway inbegriffen"]
+            specialFeatures: ["Instant-VIP", "Weeklies & Monthlies", "250k Christmas Race Teilnahme", "100% Einzahlungsbonus",]
         }
     ];
 
@@ -465,26 +398,21 @@
             casinoCard.className = 'glass-card p-4 sm:p-5 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 shadow-xl transition-all hover:scale-[1.01]';
             casinoCard.setAttribute('data-type', c.type);
 
-            const tagElements = c.tags.map(tag => `<span class="text-xs bg-primary-blue/30 text-primary-blue font-medium px-2 py-0.5 rounded-full whitespace-nowrap">${tag}</span>`).join('');
-            
             let cardContent;
 
-            // --- SPEZIELLES RAZED DESIGN ---
+            // --- SPEZIELLES DESIGN FÜR CODES (NeedForSlots & Razed) ---
             if (c.code) {
                 const featureList = c.specialFeatures.map(f => `<li class="flex items-center space-x-2"><span class="text-christmas-gold text-lg">★</span><span class="text-sm">${f}</span></li>`).join('');
 
                 cardContent = `
-                    <!-- 1. Casino Name & Logo -->
                     <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4">
                         <img src="${c.logo}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-christmas-red shadow-lg">
                         <div>
                             <p class="text-lg font-extrabold text-christmas-red mb-0">#${c.order}</p>
-                            <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name} <span class="text-christmas-gold">(VIP)</span></h4>
+                            <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name} <span class="text-christmas-gold"></span></h4>
                         </div>
                     </div>
 
-                    <!-- 2. VIP Vorteile -->
-                    <!-- Mobile: Volle Breite & vertikale Trennung -->
                     <div class="w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
                         <h5 class="text-base font-semibold text-accent mb-2">Exklusive Vorteile durch Code:</h5>
                         <ul class="list-none space-y-1 text-white/90 text-sm">
@@ -492,9 +420,7 @@
                         </ul>
                     </div>
                     
-                    <!-- 3. Button & Code (Trio-Code) -->
                     <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end mt-4 lg:mt-0">
-                        <!-- Code Box -->
                         <div class="p-2 sm:p-3 rounded-lg border-2 border-dashed border-accent/70 bg-white/5 text-center cursor-pointer transition-all hover:bg-accent/10 w-full mb-3" onclick="copyCode('${c.code}', this, '${c.name}')">
                             <p class="text-xs font-semibold mb-1 text-white/70">Dein Trio-Code:</p>
                             <div class="text-xl sm:text-2xl font-extrabold text-accent tracking-widest flex items-center justify-center">
@@ -505,7 +431,7 @@
                         </div>
                         
                         <a href="${c.link}" target="_blank" class="btn-primary w-full px-5 py-2 rounded-full font-bold shadow-xl text-center text-sm sm:text-base">
-                            Jetzt zur Razed VIP-Seite
+                            Jetzt zu ${c.name}
                         </a>
                     </div>
                 `;
@@ -566,14 +492,12 @@
         updateFilterButtons(filter);
     }
 
-    // Funktion zum Kopieren des Codes (Razed)
+    // Funktion zum Kopieren des Codes
     function copyCode(code, element, casinoName) {
-        // Fallback-Funktion für iFrames
         if (navigator.clipboard) {
             navigator.clipboard.writeText(code).then(() => {
                 showCopyMessage(casinoName, 'Code kopiert! ✅');
             }).catch(err => {
-                console.error('Kopieren fehlgeschlagen mit Clipboard API:', err);
                 fallbackCopy(code, casinoName);
             });
         } else {
@@ -583,51 +507,45 @@
         function fallbackCopy(code, name) {
             const textarea = document.createElement('textarea');
             textarea.value = code;
-            textarea.style.position = 'fixed'; // Verhindert Scrollen auf iOS
+            textarea.style.position = 'fixed';
             document.body.appendChild(textarea);
             textarea.select();
             try {
                 document.execCommand('copy');
-                showCopyMessage(name, 'Code kopiert! ✅ (Fallback)');
+                showCopyMessage(name, 'Code kopiert! ✅');
             } catch (err) {
-                console.error('Kopieren fehlgeschlagen mit execCommand:', err);
-                showCopyMessage(name, 'Kopieren fehlgeschlagen.');
+                showCopyMessage(name, 'Fehler beim Kopieren');
             }
             document.body.removeChild(textarea);
         }
     }
 
     function showCopyMessage(casinoName, message) {
-        // Findet das Code-Element in der Razed Card
         const msgElement = document.getElementById(`copy-msg-${casinoName}`);
-        
         if (msgElement) {
             const originalMsg = 'Klicken, um Deinen Code zu kopieren!';
             msgElement.innerText = message;
-            
-            // Finde die Glass Card für den Rahmen-Effekt (Nur für Razed relevant)
             const codeBox = msgElement.closest('.border-dashed');
-            if (codeBox) {
-                codeBox.style.borderColor = 'var(--christmas-red)'; 
-            }
-
+            if (codeBox) { codeBox.style.borderColor = 'var(--christmas-red)'; }
             setTimeout(() => {
                 msgElement.innerText = originalMsg;
-                if (codeBox) {
-                    codeBox.style.borderColor = 'var(--primary-blue)';
-                }
+                if (codeBox) { codeBox.style.borderColor = 'var(--primary-blue)'; }
             }, 2000);
         }
     }
 
-    // Funktion zum Navigieren zwischen den Seiten-Sektionen
+    // Navigation
     function navigate(pageId) {
         document.querySelectorAll('.page-section').forEach(section => {
             section.classList.add('hidden');
         });
         document.getElementById(pageId).classList.remove('hidden');
+        if(pageId === 'bonus-page') {
+            document.getElementById('contest-banner-section').classList.remove('hidden');
+        } else {
+            document.getElementById('contest-banner-section').classList.add('hidden');
+        }
 
-        // Nav Button Styling
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.classList.remove('text-accent', 'font-extrabold');
             btn.classList.add('text-white/80', 'font-semibold');
@@ -637,74 +555,42 @@
             activeBtn.classList.add('text-accent', 'font-extrabold');
             activeBtn.classList.remove('text-white/80', 'font-semibold');
         }
-        
-        // Scrollt zum Anfang der Seite bei Navigation
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Filter-Buttons aktualisieren
     function updateFilterButtons(activeFilter) {
         document.querySelectorAll('.filter-btn').forEach(btn => {
             if (btn.getAttribute('data-filter') === activeFilter) {
-                btn.classList.add('bg-primary-blue', 'text-black', 'hover:bg-primary-blue');
-                btn.classList.remove('bg-white/10', 'text-white', 'hover:bg-primary-blue/50');
+                btn.classList.add('bg-primary-blue', 'text-black');
+                btn.classList.remove('bg-white/10', 'text-white');
             } else {
-                btn.classList.remove('bg-primary-blue', 'text-black', 'hover:bg-primary-blue');
-                btn.classList.add('bg-white/10', 'text-white', 'hover:bg-primary-blue/50');
+                btn.classList.remove('bg-primary-blue', 'text-black');
+                btn.classList.add('bg-white/10', 'text-white');
             }
         });
     }
 
-    // ----------------------------------------------------------------------
-    // AGE GATE LOGIC
-    // ----------------------------------------------------------------------
-    
     document.getElementById('confirm-age-btn').addEventListener('click', () => {
-        // Zeigt Hauptinhalt an
         document.getElementById('main-content').classList.remove('hidden');
-        // Versteckt das Age Gate
         document.getElementById('age-gate-modal').classList.add('hidden');
-        // Startet die App
         initializeApp(); 
     });
 
     function denyAccess() {
-        // Simuliert eine Blockierung, da die Seite nicht verlassen werden kann
         const modal = document.getElementById('age-gate-modal').querySelector('.glass-card');
-        modal.innerHTML = `
-            <h2 class="text-4xl font-extrabold text-red-600 mb-4">🚫 Zugriff verweigert</h2>
-            <p class="text-lg mb-6 text-white/90">
-                Du musst mindestens 18 Jahre alt sein, um diese Seite zu sehen.
-            </p>
-            <p class="text-sm text-white/60">
-                Hilfe bei Spielsucht: <a href="https://www.bioeg.de/service/infotelefone/gluecksspielsucht/" target="_blank" class="text-accent hover:underline">Support-Link</a>
-            </p>
-        `;
-        // Deaktiviert den Confirm-Button für 3 Sekunden, um eine erneute sofortige Eingabe zu verhindern (simulierte Sperre)
-        const btn = document.getElementById('confirm-age-btn');
-        if (btn) {
-            btn.disabled = true;
-            setTimeout(() => { btn.disabled = false; }, 3000);
-        }
+        modal.innerHTML = `<h2 class="text-4xl font-extrabold text-red-600 mb-4">🚫 Zugriff verweigert</h2><p class="text-lg text-white">Du musst 18 sein.</p>`;
     }
 
     function initializeApp() {
-        // Navigations-Buttons
         document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                navigate(btn.getAttribute('data-page'));
-            });
+            btn.addEventListener('click', () => navigate(btn.getAttribute('data-page')));
         });
-
-        // Filter-Buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 currentFilter = btn.getAttribute('data-filter');
                 renderCasinos(currentFilter);
             });
         });
-        
-        // Initiale Seitenanzeige und Rendern
         navigate('bonus-page');
         renderCasinos(currentFilter);
     }
