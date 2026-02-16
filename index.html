@@ -3,600 +3,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idiotenbonus - Deine Exklusiven Promos von uns!</title>
+    <title>Idiotenbonus | Die #1 für Casino Deals</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* NEUES DESIGN: Modern Liquid Glass (Blue/Cyan) */
         :root {
-            --primary-blue: #38BDF8; /* Akzentfarbe: Cyan/Lichtblau */
-            --background-dark: #1A202C; /* Hintergrund: Dunkelgrau/Navy */
-            --glass-bg: rgba(255, 255, 255, 0.08); /* Sehr dezentes, helles Glas */
-            --christmas-red: #E74C3C; /* Subtiler Weihnachts-Akzent */
-            --christmas-gold: #F1C40F; /* Subtiler Gold-Akzent */
+            --accent: #a855f7;
+            --accent-hover: #9333ea;
+            --bg: #030303;
         }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
-            /* Hintergrund: Dunkler, tiefblauer Gradient */
-            background: linear-gradient(135deg, #1A202C 0%, #2C3E50 80%, #1A202C 100%);
-            min-height: 100vh;
-            color: #EAEAEA;
+            background-color: var(--bg);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Glassmorphismus / Liquid Glass Effekt */
+        /* Initialer Status: Content versteckt, Age-Gate sichtbar */
+        #main-wrapper {
+            display: none;
+        }
+
+        select option {
+            background-color: #1a1a1a !important;
+            color: white !important;
+        }
+
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px); /* Stärkere Unschärfe für mehr Effekt */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Sticky Header */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        /* Hover-Effekte für Buttons */
-        .btn-primary {
-            background-color: var(--primary-blue);
-            color: var(--background-dark);
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #06B6D4; /* Dunkleres Cyan */
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(168, 85, 247, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.1);
         }
-        
-        /* Akzente */
-        .text-accent {
-            color: var(--primary-blue);
-            text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
+
+        .purple-glow {
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.2);
         }
-        
-        /* Footer Styling */
-        footer {
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+        .liquid-badge {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #d8b4fe;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
         }
-        
-        /* Age Gate Modal Styling */
-        #age-gate-modal {
-            position: fixed;
+
+        .no-deposit-tag {
+            background: linear-gradient(90deg, #a855f7, #7c3aed);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 0 0 0 12px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            position: absolute;
             top: 0;
+            right: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        #age-gate {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #030303 100%);
+            z-index: 10000;
+            display: flex;
+        }
+
+        select, input {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+
+        .nav-btn {
+            position: relative;
+            padding-bottom: 4px;
+            color: #9ca3af;
+            transition: color 0.3s ease;
+        }
+
+        .nav-btn.active {
+            color: #ffffff;
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 100;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
         }
 
-        /* Page Back Button Styling */
-        .back-button {
-            transition: transform 0.2s;
+        #mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .back-button:hover {
-            transform: translateX(-5px);
+
+        #mobile-menu.open {
+            transform: translateY(0);
         }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #a855f7;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .burger-line {
+            transition: all 0.3s ease;
+        }
+
+        .burger-open .line-1 { transform: rotate(45deg) translate(5px, 5px); }
+        .burger-open .line-2 { opacity: 0; }
+        .burger-open .line-3 { transform: rotate(-45deg) translate(5px, -5px); }
     </style>
 </head>
-<body class="hidden-until-verified">
+<body>
 
-<div id="age-gate-modal" class="flex items-center justify-center p-4">
-    <div class="glass-card p-8 sm:p-12 max-w-lg w-full text-center border-christmas-red border-l-4">
-        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 text-christmas-red">⚠️ Altersüberprüfung (18+)</h2>
-        <p class="text-lg mb-6 text-white/90">
-            Diese Webseite enthält Infos über Glücksspiel. Bitte bestätige, dass <span class="font-bold">Du</span> mindestens 18 Jahre alt bist.
-        </p>
-        <p class="text-sm mb-8 text-white/60">
-            Glücksspiel kann süchtig machen. Spiele verantwortungsvoll.
-        </p>
-        <div class="space-y-4">
-            <button id="confirm-age-btn" class="btn-primary w-full px-6 py-3 rounded-lg font-bold shadow-xl text-lg">
-                ✅ Ich bin 18+ und stimme zu
-            </button>
-            <button onclick="denyAccess()" class="bg-red-700 hover:bg-red-800 text-white w-full px-6 py-3 rounded-lg font-bold transition-colors">
-                ❌ Ich bin jünger als 18
-            </button>
+    <!-- Age Gate -->
+    <div id="age-gate" class="fixed inset-0 items-center justify-center p-6">
+        <div class="glass-card max-w-sm w-full p-10 text-center border-purple-500/30">
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <div class="w-20 h-20 rounded-full border-2 border-red-500/50 flex items-center justify-center text-2xl font-black text-white">18+</div>
+                    <div class="absolute inset-0 rounded-full border-4 border-purple-500/20 blur-md animate-pulse"></div>
+                </div>
+            </div>
+            <h2 class="text-3xl font-black italic mb-3 uppercase tracking-tighter text-white">
+                Alters<span class="text-purple-500">prüfung</span>
+            </h2>
+            <p class="text-gray-400 text-sm mb-10 leading-relaxed">
+                Glücksspiel kann süchtig machen. Bitte bestätige, dass du mindestens 18 Jahre alt bist.
+            </p>
+            <div class="space-y-4">
+                <button onclick="acceptAge()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-black py-4 rounded-xl transition duration-300 shadow-lg shadow-purple-900/20 uppercase tracking-widest text-sm italic">Ich bin über 18</button>
+                <button onclick="leaveSite()" class="w-full bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-4 rounded-xl transition text-sm uppercase">Verlassen</button>
+            </div>
         </div>
-        <p class="mt-6 text-xs text-white/50">
-            Hilfe bei Spielsucht: <a href="https://www.bioeg.de/service/infotelefone/gluecksspielsucht/" target="_blank" class="text-accent hover:underline">https://www.bioeg.de/service/infotelefone/gluecksspielsucht/</a>
-        </p>
     </div>
-</div>
-<div id="main-content" class="min-h-screen flex flex-col hidden">
 
-<header class="sticky-header glass-card !rounded-none">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            
-            <button onclick="navigate('bonus-page')" 
-                    class="text-xl sm:text-2xl font-extrabold text-accent tracking-tighter hover:opacity-80 transition-opacity flex-shrink-0 mr-2">
-                Idiotenbonus
-            </button>
-            
-            <nav class="space-x-3 sm:space-x-4 md:space-x-6 flex items-center flex-shrink-0">
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="bonus-page">Bonis</button>
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="leaderboard-page">Leaderboard</button> 
-                <button class="nav-btn text-sm sm:text-lg font-semibold hover:text-accent transition-colors" data-page="support-page">Support</button>
-            </nav>
+    <!-- Main Wrapper (Nav + Main + Footer) -->
+    <div id="main-wrapper">
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-[90] bg-[#030303] pt-28 px-6 md:hidden">
+            <div class="flex flex-col gap-8">
+                <button onclick="switchTab('deals'); toggleMenu();" class="text-3xl font-black italic uppercase tracking-tighter text-left border-b border-white/5 pb-4">
+                    Bonis
+                </button>
+                <button onclick="switchTab('giveaway'); toggleMenu();" class="text-3xl font-black italic uppercase tracking-tighter text-left border-b border-white/5 pb-4">
+                    Gewinnspiel
+                </button>
+                <div class="mt-4 flex gap-4">
+                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="text-purple-500 font-bold">Instagram</a>
+                    <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="text-purple-500 font-bold">Discord</a>
+                </div>
+            </div>
         </div>
-    </header>
 
-
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
-
-        <section id="bonus-page" class="page-section">
-            
-            <div class="glass-card p-5 md:p-10 mb-8 md:mb-12 flex flex-col md:flex-row-reverse items-center space-y-4 md:space-y-0 md:space-x-12 md:space-x-reverse text-center md:text-left">
-                
-                <img src="logo.jpg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/06B6D4/FFFFFF?text=TRIO';" alt="Idiotenbonnus Trio Logo" class="rounded-full w-24 h-24 md:w-40 md:h-40 border-4 border-accent shadow-xl flex-shrink-0">
-                
-                <div class="flex-grow">
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-2 leading-tight">
-                        Willkommen im <span class="text-accent">Idiotenbonus</span>-Hub! Deine Promos, direkt von uns.
-                    </h2>
-                    <p class="text-lg sm:text-xl font-medium text-white/90">
-                        Wir haben die heißesten Promos & Codes exklusiv für Dich verhandelt. Bei uns bist Du richtig! 👇
-                    </p>
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-[100] bg-black/60 backdrop-blur-xl border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('deals')">
+                    <span class="text-2xl font-black italic tracking-tighter uppercase text-white">Idioten<span class="text-purple-500">bonus</span></span>
                 </div>
-            </div>
-
-
-            <h3 class="text-2xl sm:text-3xl font-bold mb-5 text-accent">🔥 Unsere Top Casino Empfehlungen für Dich</h3>
-
-            <div id="filter-container" class="sticky top-[64px] sm:top-[76px] z-40 mb-6 p-3 glass-card flex flex-wrap gap-2">
-                <label class="text-base font-semibold mr-1 flex-shrink-0">Filter für Dich:</label>
-                <button class="filter-btn bg-primary-blue text-black px-3 py-1.5 rounded-full font-medium transition-colors text-sm" data-filter="all">Alle</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Sticky">Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Non-Sticky">Non-Sticky</button>
-                <button class="filter-btn bg-white/10 px-3 py-1.5 rounded-full font-medium text-white hover:bg-primary-blue/50 transition-colors text-sm" data-filter="Special">Ohne Bonus</button>
-            </div>
-            
-            <div id="casino-list" class="grid gap-4 sm:gap-6">
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em]">
+                    <button id="nav-deals" onclick="switchTab('deals')" class="nav-btn active flex items-center gap-2">Bonis</button>
+                    <button id="nav-giveaway" onclick="switchTab('giveaway')" class="nav-btn flex items-center gap-2">Gewinnspiel</button>
                 </div>
 
-        </section>
-
-        <section id="contest-banner-section" class="page-section">
-            
-            
-            
-        </section>
-
-        <section id="contest-page" class="page-section hidden">
-            <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                <span>Zurück zur Bonus-Übersicht</span>
-            </button>
-
-            <h2 class="text-3xl sm:text-5xl font-extrabold text-christmas-red mb-6 sm:mb-8 text-center">🎁 Das Idiotenbonus 2000€ Weihnachts-Gewinnspiel für Dich!</h2>
-            <div class="glass-card p-5 md:p-10 space-y-6">
-                
-                <div class="text-center mb-6">
-                    <h3 class="text-2xl sm:text-4xl font-extrabold text-christmas-red mb-4 tracking-wide">🏆 Hauptpreise des Gewinnspiels von uns 🏆</h3>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="bg-purple-600 hover:bg-purple-500 px-4 md:px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-black uppercase tracking-widest transition shadow-lg shadow-purple-900/20 whitespace-nowrap">
+                        Support
+                    </a>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 max-w-3xl mx-auto">
-                        
-                        <div class="glass-card p-3 sm:p-6 border-2 border-white/30 hover:border-white transition-all transform hover:scale-[1.03]">
-                            <p class="text-base sm:text-xl font-bold text-white/80 mb-1">🥈 2. Platz</p>
-                            <p class="text-2xl sm:text-4xl font-extrabold text-white">500€</p>
-                        </div>
-                        
-                        <div class="glass-card p-4 sm:p-8 border-4 border-primary-blue shadow-2xl shadow-primary-blue/50 transform scale-105 hover:scale-110 transition-all z-10">
-                            <p class="text-lg sm:text-2xl font-extrabold text-christmas-gold mb-1">🥇 1. Platz</p>
-                            <p class="text-3xl sm:text-5xl font-black text-accent drop-shadow-lg">1.000€</p>
-                        </div>
-                        
-                        <div class="glass-card p-3 sm:p-6 border-2 border-white/30 hover:border-white transition-all transform hover:scale-[1.03]">
-                            <p class="text-base sm:text-xl font-bold text-white/80 mb-1">3. - 7. Platz</p>
-                            <p class="text-2xl sm:text-4xl font-extrabold text-white/70">5 x 100€</p>
-                        </div>
-                    </div>
-                    
-                    <p class="mt-6 text-lg sm:text-xl font-bold text-white/90">Gesamter Preispool: <span class="text-christmas-red text-xl sm:text-2xl font-extrabold">2.000€!</span></p>
-                </div>
-
-                <h3 class="text-2xl sm:text-3xl font-bold text-accent border-b border-white/20 pb-2">So sicherst Du Dir Deine Tickets für das Weihnachts-Gewinnspiel:</h3>
-                
-                <div class="space-y-4 sm:space-y-6">
-                    <div class="glass-card p-4 border-l-4 border-primary-blue">
-                        <h4 class="text-xl font-bold text-primary-blue mb-1">1. Für unsere Stammkunden:</h4>
-                        <p class="text-base sm:text-lg text-white/90">
-                            → <span class="font-extrabold">1 Ticket pro 10€ Einzahlung</span> bei den teilnehmenden Casinos.
-                        </p>
-                        <p class="text-sm text-white/60">(Beispiel: 100€ Einzahlung = 10 Tickets)</p>
-                    </div>
-
-                    <div class="glass-card p-4 border-l-4 border-primary-blue">
-                        <h4 class="text-xl font-bold text-primary-blue mb-1">2. Für unsere Neuzugänge:</h4>
-                        <p class="text-base sm:text-lg text-white/90">
-                            → <span class="font-extrabold">5× Tickets extra</span> bei Deiner ersten Einzahlung über unseren Link.
-                        </p>
-                        <p class="text-sm text-white/60">(Beispiel: 100€ Einzahlung = 10 Tickets (Basis) + 50 Tickets (Neukunde-Bonus) = 60 Tickets)</p>
-                    </div>
-                    
-                    <div class="glass-card p-4 border-l-4 border-primary-blue">
-                        <h4 class="text-xl font-bold text-primary-blue mb-1">3. Deine Chancen verbessern:</h4>
-                        <p class="text-base sm:text-lg text-white/90">
-                            → <span class="font-extrabold">+10 Tickets</span> für das Reposten unseres Gewinnspiel-Posts in Deiner Instagram Story - ohne eine Einzahlung.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="pt-4 text-center border-t border-white/20">
-                    <p class="text-base sm:text-lg font-bold text-white mb-2">Gültigkeitszeitraum: <span class="text-christmas-red">01. – 24. Dezember (23:59 Uhr)</span></p>
-                    <p class="text-base sm:text-lg font-bold text-white">Gewinner-Bekanntgabe: <span class="text-christmas-red">25. Dezember auf Instagram & Telegram!</span></p>
-                </div>
-                
-                <div class="pt-4">
-                    <button onclick="navigate('bonus-page')" class="btn-primary w-full px-6 py-3 rounded-lg font-bold shadow-xl text-center flex items-center justify-center space-x-2 text-lg">
-                        <span>Jetzt Bonis checken & Tickets sammeln!</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    <!-- Burger Button -->
+                    <button id="burger-btn" onclick="toggleMenu()" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
+                        <span class="burger-line line-1 w-6 h-0.5 bg-white rounded-full"></span>
+                        <span class="burger-line line-2 w-6 h-0.5 bg-white rounded-full"></span>
+                        <span class="burger-line line-3 w-6 h-0.5 bg-white rounded-full"></span>
                     </button>
                 </div>
             </div>
-        </section>
+        </nav>
 
-        <section id="leaderboard-page" class="page-section hidden">
-            <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                <span>Zurück zur Bonus-Übersicht</span>
-            </button>
-
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-accent mb-6 text-center">🏆 Unser Aktuelles Monats-Leaderboard für Dich</h2>
-            <div class="glass-card p-5 md:p-10 space-y-6">
-                <p class="text-base sm:text-lg text-white/90 mb-6">
-                    Schau, wer diesen Monat an der Spitze steht! Die Top 3 erhalten am Monatsende besondere Preise von uns, Deine Idioten.
-                </p>
-                <div class="overflow-x-auto rounded-lg">
-                    <table class="min-w-full text-left text-white/90">
-                        <thead class="text-accent border-b-2 border-accent/50">
-                            <tr>
-                                <th class="py-3 px-3 text-left">Rang</th>
-                                <th class="py-3 px-3 text-left">Spieler-ID</th>
-                                <th class="py-3 px-3 text-left">Wagered</th>
-                                <th class="py-3 px-3 text-left hidden sm:table-cell">Meistgespielte Seite</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-white/10 bg-primary-blue/20 font-bold text-accent">
-                                <td class="py-3 px-3">🥇 1</td>
-                                <td class="py-3 px-3">SackSocke</td>
-                                <td class="py-3 px-3">€ 15.000</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">Pistolo</td>
-                            </tr>
-                            <tr class="border-b border-white/10 bg-white/10 text-white font-semibold">
-                                <td class="py-3 px-3">🥈 2</td>
-                                <td class="py-3 px-3">Paradoxon</td>
-                                <td class="py-3 px-3">€ 12.000</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
-                            </tr>
-                            <tr class="border-b border-white/10 bg-white/5">
-                                <td class="py-3 px-3">🥉 3</td>
-                                <td class="py-3 px-3">BeautyWise</td>
-                                <td class="py-3 px-3">€ 9.800</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">SlotsPalace</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="py-3 px-3">4</td>
-                                <td class="py-3 px-3">PinkPug</td>
-                                <td class="py-3 px-3">€ 7.500</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">MyEmpire</td>
-                            </tr>
-                            <tr class="border-b border-white/10">
-                                <td class="py-3 px-3">5</td>
-                                <td class="py-3 px-3">Glueckskeks</td>
-                                <td class="py-3 px-3">€ 6.490</td>
-                                <td class="py-3 px-3 hidden sm:table-cell">RTBET</td>
-                            </tr>
-                            <tr><td class="py-3 px-3">6</td><td class="py-3 px-3">Bounz</td><td class="py-3 px-3">€ 5.108</td><td class="py-3 px-3 hidden sm:table-cell">SGCasino</td></tr>
-                            <tr><td class="py-3 px-3">7</td><td class="py-3 px-3">Bloodman123</td><td class="py-3 px-3">€ 4.480</td><td class="py-3 px-3 hidden sm:table-cell">AllySpin</td></tr>
-                            <tr><td class="py-3 px-3">8</td><td class="py-3 px-3">SZ777</td><td class="py-3 px-3">€ 3.900</td><td class="py-3 px-3 hidden sm:table-cell">MyEmpire</td></tr>
-                            <tr><td class="py-3 px-3">9</td><td class="py-3 px-3">DepoDust</td><td class="py-3 px-3">€ 3.550</td><td class="py-3 px-3 hidden sm:table-cell">Razed</td></tr>
-                            <tr><td class="py-3 px-3">10</td><td class="py-3 px-3">Apoo</td><td class="py-3 px-3">€ 3.200</td><td class="py-3 px-3 hidden sm:table-cell">SlotsPalace</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="text-xs text-center pt-4 text-white/60">Die Daten werden monatlich aktualisiert. Alle Angaben ohne Gewähr.</p>
-            </div>
-        </section>
-
-        <section id="support-page" class="page-section hidden">
-            <button onclick="navigate('bonus-page')" class="back-button flex items-center space-x-2 text-accent text-lg font-semibold mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                <span>Zurück zur Bonus-Übersicht</span>
-            </button>
-            
-            <h2 class="text-4xl sm:text-5xl font-extrabold text-accent mb-6 text-center">💬 Dein Support & Kontakt zu uns.</h2>
-            <div class="glass-card p-5 md:p-10 space-y-6 text-center">
-                <p class="text-base sm:text-lg text-white/90">
-                    Hast Du Fragen zu Boni, Casinos oder brauchst Du Hilfe beim Kopieren eines Codes? Unser Trio-Support steht Dir gerne zur Verfügung!
-                </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 pt-4">
-                    <a href="https://t.me/idiotenbonus/5" class="btn-primary flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl hover:opacity-90 transition-all">
-                        💬 Telegram
-                    </a>
-                    <a href="#" class="bg-gray-600 text-white/70 flex-1 max-w-sm px-6 py-3 rounded-lg font-bold shadow-xl cursor-not-allowed">
-                        💬 Live-Chat (Bald verfügbar)
-                    </a>
-                </div>
-                <p class="text-xs pt-4 text-white/60">Antwortzeiten können während der Feiertage variieren.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="mt-8 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm text-christmas-red font-bold mb-2">
-                Glücksspiel kann süchtig machen.
-            </p>
-            <div class="flex flex-col md:flex-row justify-center space-y-1 md:space-y-0 md:space-x-6 text-xs sm:text-sm">
-                <a href="https://www.bioeg.de/service/infotelefone/gluecksspielsucht/" target="_blank" class="hover:text-accent transition-colors text-white/70">
-                    Hilfe unter: https://www.bioeg.de/service/infotelefone/gluecksspielsucht/
-                </a>
-            </div>
-            <p class="mt-3 text-base font-extrabold text-christmas-red">Verantwortungsbewusst spielen (18+)</p>
-            <p class="mt-1 text-xs text-white/50">&copy; 2025 Eure Idioten.</p>
-        </div>
-    </footer>
-</div>
-
-<script>
-    // Casino Daten - MIT Platzhaltern für Logos und Razed-Spezialdaten
-    const casinos = [
-        { 
-            name: "SlotsGem", logo: "SlotsGemNeu.png", 
-            percent: 120, maxBonus: "600€", wager: "35x",
-            type: "Special", tags: ["50 Freegames ohne Einzahlung", "Sofort-Auszahlung", "Non-Sticky"], 
-            link: "https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601", 
-            code: "idioten", order: 1,
-            specialFeatures: ["50 Freespins ohne Einzahlung", "Exklusiver Willkommensbonus", "Schnelle Auszahlungen",]
-        },
-        { name: "MyEmpire", logo: "MyEmpireNeu.jpg", percent: 100, maxBonus: "500€", type: "Sticky", wager: "30x", tags: ["200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://myemp.lynnar.com/?mid=315090_2052039&clickid=merkuridioten-SB4452", code: null, order: 2 },
-        { name: "Sportaza", logo: "Sportasa.png", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://stzns.lynmonkel.com/?mid=278079_2052094", code: null, order: 3 },
-        { name: "AllySpin", logo: "allyspin.jpg", percent: 250, maxBonus: "1000€", type: "Non-Sticky", wager: "30x", tags: ["Riesiger Bonus", "200 Freegames", "Sofort-Auszahlung", "Sticky"], link: "https://all.monalvor.com/?mid=103181_2056662", code: null, order: 4 },
-        { name: "Frumzi", logo: "Frumzi.png", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://frm.lynmonkel.com/?mid=95901_1879546&clickid=merkuridioten-SB2899", code: null, order: 5 },
-        { name: "RTBET", logo: "RTBET.jpg", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://rtb.lynnar.com/?mid=315090_1878617&clickid=merkuridioten-SB2902", code: null, order: 6 },
-        { name: "Bankonbet", logo: "Bankonbet.png", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893", code: null, order: 7 },
-        { name: "Rabona", logo: "Rabona.png", percent: 100, maxBonus: "500€", type: "Non-Sticky", wager: "35x", tags: ["200 Freegames", "Sofort-Auszahlung", "Non-Sticky"], link: "https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894", code: null, order: 8 },
-        { 
-            name: "NeedForSlots", logo: "NeedForSlots.png", 
-            percent: 100, maxBonus: "500€", wager: "35x",
-            type: "Special", tags: ["50 Freegames ohne Einzahlung", "Sofort-Auszahlung", "Non-Sticky"], 
-            link: "https://track.padrinopartners.com/visit/?bta=35687&nci=5343&utm_campaign=Idiotenbonus", 
-            code: "FREE50", order: 9,
-            specialFeatures: ["50 Freespins ohne Einzahlung", "Exklusiver Willkommensbonus", "Schnelle Auszahlungen",]
-        },
-       
-       
-    ];
-
-    let currentFilter = 'all';
-
-    // Funktion zum Rendern der Casino-Karten (Optimiert für Mobile)
-    function renderCasinos(filter) {
-        const container = document.getElementById('casino-list');
-        container.innerHTML = '';
-        
-        const filteredCasinos = casinos.filter(c => 
-            filter === 'all' || 
-            c.type === filter || 
-            (filter === 'Special' && c.code) || 
-            (filter === 'Non-Sticky' && c.type === 'Non-Sticky') ||
-            (filter === 'Sticky' && c.type === 'Sticky')
-        );
-
-        filteredCasinos.forEach((c) => {
-            const casinoCard = document.createElement('div');
-            // Mobile-First: Flex Col auf Mobile, dann Flex Row ab LG
-            casinoCard.className = 'glass-card p-4 sm:p-5 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 shadow-xl transition-all hover:scale-[1.01]';
-            casinoCard.setAttribute('data-type', c.type);
-
-            let cardContent;
-
-            // --- SPEZIELLES DESIGN FÜR CODES (NeedForSlots & Razed) ---
-            if (c.code) {
-                const featureList = c.specialFeatures.map(f => `<li class="flex items-center space-x-2"><span class="text-christmas-gold text-lg">★</span><span class="text-sm">${f}</span></li>`).join('');
-
-                cardContent = `
-                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4">
-                        <img src="${c.logo}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-christmas-red shadow-lg">
-                        <div>
-                            <p class="text-lg font-extrabold text-christmas-red mb-0">#${c.order}</p>
-                            <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name} <span class="text-christmas-gold"></span></h4>
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0">
-                        <h5 class="text-base font-semibold text-accent mb-2">Exklusive Vorteile durch Code:</h5>
-                        <ul class="list-none space-y-1 text-white/90 text-sm">
-                            ${featureList}
-                        </ul>
-                    </div>
-                    
-                    <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end mt-4 lg:mt-0">
-                        <div class="p-2 sm:p-3 rounded-lg border-2 border-dashed border-accent/70 bg-white/5 text-center cursor-pointer transition-all hover:bg-accent/10 w-full mb-3" onclick="copyCode('${c.code}', this, '${c.name}')">
-                            <p class="text-xs font-semibold mb-1 text-white/70">Dein Trio-Code:</p>
-                            <div class="text-xl sm:text-2xl font-extrabold text-accent tracking-widest flex items-center justify-center">
-                                <span id="code-${c.name}" class="mr-2">${c.code}</span>
-                                <span class="text-xl sm:text-2xl">📋</span>
-                            </div>
-                            <p class="text-xs mt-1 text-white/50" id="copy-msg-${c.name}">Klicken, um Deinen Code zu kopieren!</p>
-                        </div>
-                        
-                        <a href="${c.link}" target="_blank" class="btn-primary w-full px-5 py-2 rounded-full font-bold shadow-xl text-center text-sm sm:text-base">
-                            Jetzt zu ${c.name}
-                        </a>
-                    </div>
-                `;
-           } else {
-                // --- STANDARD CASINO DESIGN ---
-                cardContent = `
-                    <div class="flex-shrink-0 w-full lg:w-1/4 flex items-center space-x-3 sm:space-x-4">
-                        <img src="${c.logo}" alt="${c.name} Logo" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-primary-blue shadow-lg">
-                        <div>
-                            <p class="text-lg font-extrabold text-accent mb-1">#${c.order}</p>
-                            <h4 class="text-xl sm:text-2xl font-bold text-white">${c.name}</h4>
-                        </div>
-                    </div>
-
-                    <div class="w-full lg:w-2/4 mt-4 lg:mt-0 lg:px-6 border-y lg:border-y-0 lg:border-x border-white/20 py-3 lg:py-0 flex flex-col space-y-3">
-                        
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
-                            <div class="text-center p-2 rounded-lg bg-white/5">
-                                <p class="text-xs font-semibold text-white/70">Bonus %</p>
-                                <p class="text-base sm:text-lg font-bold text-accent">${c.percent}%</p>
-                            </div>
-                            <div class="text-center p-2 rounded-lg bg-white/5">
-                                <p class="text-xs font-semibold text-white/70">Max Bonus</p>
-                                <p class="text-base sm:text-lg font-bold">${c.maxBonus}</p>
-                            </div>
-                            <div class="text-center p-2 rounded-lg bg-white/5 hidden md:block">
-                                <p class="text-xs font-semibold text-white/70">Bonus-Typ</p>
-                                <p class="text-base sm:text-lg font-bold">${c.type}</p> 
-                            </div>
-                            <div class="text-center p-2 rounded-lg bg-white/5">
-                                <p class="text-xs font-semibold text-white/70">Wager</p>
-                                <p class="text-base sm:text-lg font-bold">${c.wager}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap gap-2 justify-center pt-2">
-                            ${c.tags.map(tag => `
-                                <span class="p-2 rounded-lg bg-white/10 backdrop-filter backdrop-blur-sm text-xs font-medium text-white/90 shadow-inner border border-white/10 whitespace-nowrap">
-                                    ${tag}
-                                </span>
-                            `).join('')}
-                        </div>
+        <!-- Main Content -->
+        <main class="pt-36 pb-20 px-6">
+            <div id="deals-section" class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <!-- Hauptlogo Platzhalter -->
+                    <div class="mb-8 flex justify-center">
                         
                     </div>
                     
-                    <div class="w-full lg:w-1/4 flex flex-col justify-center items-center lg:items-end space-y-3 mt-4 lg:mt-0">
-                        <a href="${c.link}" target="_blank" class="btn-primary w-full lg:w-auto px-5 py-2 rounded-full font-bold shadow-xl text-center text-sm sm:text-base">
-                            Deinen Bonus holen!
+                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full purple-glow border-2 border-purple-500/20 mb-8 p-1">
+                        <div class="w-full h-full rounded-full overflow-hidden bg-neutral-900">
+                            <img src="logo.jpg" alt="Profile" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-7xl font-black italic mb-6 tracking-tighter leading-none uppercase text-white">
+                        Die #1 für <span class="text-purple-500">Casino Deals</span>
+                    </h1>
+                </div>
+
+                <!-- Filters -->
+                <div class="glass-card p-6 mb-16 flex flex-wrap gap-4 items-center justify-center">
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="searchInput" oninput="filterCasinos()" placeholder="Casino suchen..." class="w-full bg-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none placeholder:text-gray-600">
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 items-center justify-center">
+                        <select id="typeFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
+                            <option value="all">Alle Bonusarten</option>
+                            <option value="Non-Sticky">Non-Sticky</option>
+                            <option value="Sticky">Sticky</option>
+                        </select>
+
+                        <select id="bonusFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
+                            <option value="0">Min. Bonus: Egal</option>
+                            <option value="100">Ab 100€</option>
+                            <option value="500">Ab 500€</option>
+                        </select>
+
+                        <select id="wagerFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
+                            <option value="100">Max. Wager: Egal</option>
+                            <option value="35">Bis 35x</option>
+                            <option value="40">Bis 40x</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="space-y-6" id="casinoList">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- GIVEAWAY SECTION -->
+            <div id="giveaway-section" class="max-w-4xl mx-auto hidden pt-10">
+                <div class="glass-card p-16 text-center relative overflow-hidden">
+                    <div class="absolute -top-20 -left-20 w-64 h-64 bg-purple-600/10 blur-[100px] rounded-full"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-purple-500/10 rounded-3xl flex items-center justify-center mx-auto mb-10 border border-purple-500/20 text-purple-500">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="22" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                        </div>
+                        <h2 class="text-4xl md:text-6xl font-black italic mb-6 tracking-tighter uppercase leading-none text-white">
+                            Momentan <span class="text-white/20">kein</span><br>
+                            <span class="text-purple-500">Gewinnspiel</span>
+                        </h2>
+                        <div id="giveaway-container">
+                            <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="max-w-md mx-auto space-y-4">
+                                <input type="email" name="email" required placeholder="Deine E-Mail Adresse" class="w-full bg-white/5 rounded-2xl px-6 py-5 text-center focus:outline-none">
+                                <button type="submit" id="submit-btn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-black py-5 rounded-2xl transition duration-300 uppercase tracking-widest text-sm italic shadow-xl shadow-purple-900/30">Benachrichtigen lassen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/5 py-20 bg-black/40">
+            <div class="max-w-7xl mx-auto px-6 text-white">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+                    <div class="text-center md:text-left">
+                        <span class="text-3xl font-black italic tracking-tighter uppercase block mb-2">Idioten<span class="text-purple-500">bonus</span></span>
+                        <p class="text-gray-500 text-[10px] uppercase tracking-[0.2em]">Deals & Giveaways 2026</p>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-purple-400 transition"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-purple-400 transition"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg>
+                        </a>
+                        <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" class="group-hover:text-purple-400 transition"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.419-2.157 2.419z"/></svg>
                         </a>
                     </div>
-                `;
-            }
 
-            casinoCard.innerHTML = cardContent;
-            container.appendChild(casinoCard);
-        });
-        
-        updateFilterButtons(filter);
-    }
+                    <div class="text-[10px] text-gray-600 text-center md:text-right font-bold uppercase tracking-widest">
+                        Glücksspiel kann süchtig machen. 18+ Spielverantwortung.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-    // Funktion zum Kopieren des Codes
-    function copyCode(code, element, casinoName) {
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(code).then(() => {
-                showCopyMessage(casinoName, 'Code kopiert! ✅');
-            }).catch(err => {
-                fallbackCopy(code, casinoName);
+    <!-- Scripts -->
+    <script>
+        const casinos = [
+            { id: 1, name: "Slotsgem", bonus: "120%", bonusVal: 600, max: "600€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "SlotsGemNeu.png", badges: ["Exklusiv", "Blitzauszahlung"], code: "IDIOTEN", url: "https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601", noDeposit: true },
+            { id: 2, name: "MyEmpire", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "30x", wagerVal: 30, logo: "MyEmpireNeu.jpg", badges: ["Modernes Design", "Live Chat"], url: "https://myemp.lynnar.com/?mid=315090_2052039&clickid=merkuridioten-SB4452" },
+            { id: 3, name: "Sportaza", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Sportasa.png", badges: ["Sportwetten", "Live Casino"], url: "https://stzns.lynmonkel.com/?mid=278079_2052094" },
+            { id: 4, name: "AllySpin", bonus: "250%", bonusVal: 1000, max: "1000€", type: "Non-Sticky", wager: "30x", wagerVal: 30, logo: "allyspin.jpg", badges: ["Mega Bonus", "Highroller"], url: "https://all.monalvor.com/?mid=103181_2056662" },
+            { id: 5, name: "Frumzi", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Frumzi.png", badges: ["Schnelle Anmeldung", "Pay N Play"], url: "https://frm.lynmonkel.com/?mid=95901_1879546&clickid=merkuridioten-SB2899" },
+            { id: 6, name: "RTBET", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "RTBET.jpg", badges: ["Kryptofreundlich", "Gameshows"], url: "https://rtb.lynnar.com/?mid=315090_1878617&clickid=merkuridioten-SB2902" },
+            { id: 7, name: "Bankonbet", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Bankonbet.png", badges: ["Cashback", "VIP Service"], url: "https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893" },
+            { id: 8, name: "Rabona", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Rabona.png", badges: ["Top Auswahl", "Turniere"], url: "https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894" },
+            { id: 9, name: "NeedForSlots", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "NeedForSlots.png", badges: ["50 Freegames", "Speedy Withdrawals"], code: "BONUS20", url: "https://track.padrinopartners.com/visit/?bta=35687&nci=5343&utm_campaign=Idiotenbonus", noDeposit: true }
+        ];
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const burger = document.getElementById('burger-btn');
+            menu.classList.toggle('open');
+            burger.classList.toggle('burger-open');
+        }
+
+        function filterCasinos() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const type = document.getElementById('typeFilter').value;
+            const minBonus = parseInt(document.getElementById('bonusFilter').value);
+            const maxWager = parseInt(document.getElementById('wagerFilter').value);
+
+            const filtered = casinos.filter(c => {
+                const matchesSearch = c.name.toLowerCase().includes(search);
+                const matchesType = type === 'all' || c.type === type;
+                const matchesBonus = c.bonusVal >= minBonus;
+                const matchesWager = c.wagerVal <= maxWager;
+                return matchesSearch && matchesType && matchesBonus && matchesWager;
             });
-        } else {
-            fallbackCopy(code, casinoName);
+
+            renderCasinos(filtered);
         }
 
-        function fallbackCopy(code, name) {
-            const textarea = document.createElement('textarea');
-            textarea.value = code;
-            textarea.style.position = 'fixed';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showCopyMessage(name, 'Code kopiert! ✅');
-            } catch (err) {
-                showCopyMessage(name, 'Fehler beim Kopieren');
+        function renderCasinos(data = casinos) {
+            const list = document.getElementById('casinoList');
+            if(data.length === 0) {
+                list.innerHTML = `<div class="text-center p-20 text-gray-600 font-bold uppercase tracking-widest italic">Keine Deals gefunden</div>`;
+                return;
             }
-            document.body.removeChild(textarea);
-        }
-    }
+            list.innerHTML = data.map(c => `
+                <div class="glass-card p-6 flex flex-col lg:flex-row items-center gap-8 relative overflow-hidden">
+                    ${c.noDeposit ? `<div class="no-deposit-tag">50 Freegames Ohne Einzahlung!</div>` : ''}
+                    
+                    <div class="flex items-center gap-6 lg:w-[340px] flex-shrink-0">
+                        <span class="text-2xl md:text-3xl font-black text-white/5 italic select-none">#${c.id}</span>
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center border border-white/5 shrink-0 overflow-hidden">
+                            <img src="${c.logo}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/80?text=${c.name.substring(0,1)}'" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-col gap-2 overflow-hidden text-left">
+                            <div class="font-black text-lg md:text-xl uppercase italic tracking-tight truncate">${c.name}</div>
+                            <div class="flex gap-2 flex-wrap">
+                                ${c.badges.map(b => `<span class="liquid-badge">${b}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
 
-    function showCopyMessage(casinoName, message) {
-        const msgElement = document.getElementById(`copy-msg-${casinoName}`);
-        if (msgElement) {
-            const originalMsg = 'Klicken, um Deinen Code zu kopieren!';
-            msgElement.innerText = message;
-            const codeBox = msgElement.closest('.border-dashed');
-            if (codeBox) { codeBox.style.borderColor = 'var(--christmas-red)'; }
-            setTimeout(() => {
-                msgElement.innerText = originalMsg;
-                if (codeBox) { codeBox.style.borderColor = 'var(--primary-blue)'; }
-            }, 2000);
-        }
-    }
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 flex-grow w-full">
+                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
+                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Bonus</div>
+                            <div class="text-purple-400 font-black text-base md:text-lg">${c.bonus}</div>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
+                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Max. Bonus</div>
+                            <div class="text-white font-black text-base md:text-lg">${c.max}</div>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
+                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Typ</div>
+                            <div class="text-white font-black text-base md:text-lg">${c.type}</div>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
+                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Wager</div>
+                            <div class="text-white font-black text-base md:text-lg">${c.wager}</div>
+                        </div>
+                    </div>
 
-    // Navigation
-    function navigate(pageId) {
-        document.querySelectorAll('.page-section').forEach(section => {
-            section.classList.add('hidden');
-        });
-        document.getElementById(pageId).classList.remove('hidden');
-        if(pageId === 'bonus-page') {
-            document.getElementById('contest-banner-section').classList.remove('hidden');
-        } else {
-            document.getElementById('contest-banner-section').classList.add('hidden');
+                    <div class="flex flex-col gap-3 min-w-[240px] w-full lg:w-auto">
+                        <div class="flex gap-2">
+                            ${c.code ? `
+                                <button onclick="copyCode('${c.code}')" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white p-4 rounded-2xl transition group flex flex-col items-center justify-center">
+                                    <span class="text-[8px] uppercase font-black text-gray-500">Code</span>
+                                    <span class="text-xs font-black tracking-widest">${c.code}</span>
+                                </button>
+                            ` : ''}
+                            <a href="${c.url}" target="_blank" class="flex-[2.5] bg-purple-600 hover:bg-purple-500 text-white font-black py-5 px-6 rounded-2xl text-center text-xs transition uppercase italic tracking-widest shadow-lg shadow-purple-900/20 flex items-center justify-center">
+                                Bonus abholen!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('text-accent', 'font-extrabold');
-            btn.classList.add('text-white/80', 'font-semibold');
-        });
-        const activeBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
-        if (activeBtn) {
-            activeBtn.classList.add('text-accent', 'font-extrabold');
-            activeBtn.classList.remove('text-white/80', 'font-semibold');
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+        function switchTab(tab) {
+            const deals = document.getElementById('deals-section');
+            const giveaway = document.getElementById('giveaway-section');
+            const btnDeals = document.getElementById('nav-deals');
+            const btnGiveaway = document.getElementById('nav-giveaway');
 
-    function updateFilterButtons(activeFilter) {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            if (btn.getAttribute('data-filter') === activeFilter) {
-                btn.classList.add('bg-primary-blue', 'text-black');
-                btn.classList.remove('bg-white/10', 'text-white');
+            if(tab === 'deals') {
+                deals.classList.remove('hidden');
+                giveaway.classList.add('hidden');
+                btnDeals.classList.add('active');
+                btnGiveaway.classList.remove('active');
             } else {
-                btn.classList.remove('bg-primary-blue', 'text-black');
-                btn.classList.add('bg-white/10', 'text-white');
+                deals.classList.add('hidden');
+                giveaway.classList.remove('hidden');
+                btnDeals.classList.remove('active');
+                btnGiveaway.classList.add('active');
             }
-        });
-    }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-    document.getElementById('confirm-age-btn').addEventListener('click', () => {
-        document.getElementById('main-content').classList.remove('hidden');
-        document.getElementById('age-gate-modal').classList.add('hidden');
-        initializeApp(); 
-    });
+        function copyCode(code) {
+            const el = document.createElement('textarea');
+            el.value = code;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            const toast = document.getElementById('copyToast');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
 
-    function denyAccess() {
-        const modal = document.getElementById('age-gate-modal').querySelector('.glass-card');
-        modal.innerHTML = `<h2 class="text-4xl font-extrabold text-red-600 mb-4">🚫 Zugriff verweigert</h2><p class="text-lg text-white">Du musst 18 sein.</p>`;
-    }
+        function acceptAge() {
+            sessionStorage.setItem('ageAccepted', 'true');
+            document.getElementById('age-gate').style.display = 'none';
+            document.getElementById('main-wrapper').style.display = 'block';
+        }
 
-    function initializeApp() {
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => navigate(btn.getAttribute('data-page')));
-        });
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentFilter = btn.getAttribute('data-filter');
-                renderCasinos(currentFilter);
+        function leaveSite() {
+            window.location.href = "https://www.google.com";
+        }
+
+        const form = document.getElementById('giveaway-form');
+        if (form) {
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                const container = document.getElementById('giveaway-container');
+                
+                btn.innerHTML = 'Wird gesendet...';
+                btn.disabled = true;
+
+                const formData = new FormData(event.target);
+                
+                try {
+                    const response = await fetch(event.target.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    
+                    if (response.ok) {
+                        container.innerHTML = `
+                            <div class="p-8 bg-purple-500/20 border border-purple-500/30 rounded-3xl text-purple-400 font-bold italic animate-pulse text-center">
+                                Vielen Dank! Wir haben dich auf die Liste gesetzt. 🎰
+                            </div>
+                        `;
+                    } else {
+                        btn.innerHTML = 'Fehler! Bitte erneut versuchen.';
+                        btn.disabled = false;
+                    }
+                } catch (error) {
+                    btn.innerHTML = 'Verbindungsfehler!';
+                    btn.disabled = false;
+                }
             });
-        });
-        navigate('bonus-page');
-        renderCasinos(currentFilter);
-    }
-</script>
+        }
 
+        // Initialisierungs-Logik
+        window.addEventListener('DOMContentLoaded', () => {
+            if(sessionStorage.getItem('ageAccepted')) {
+                document.getElementById('age-gate').style.display = 'none';
+                document.getElementById('main-wrapper').style.display = 'block';
+            } else {
+                document.getElementById('age-gate').style.display = 'flex';
+                document.getElementById('main-wrapper').style.display = 'none';
+            }
+            renderCasinos();
+        });
+    </script>
 </body>
 </html>
