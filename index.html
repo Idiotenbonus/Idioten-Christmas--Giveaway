@@ -1,325 +1,1088 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idiotenbonus | Die #1 für Casino Deals</title>
+    <meta name="description" content="Idiotenbonus – Die besten Casino Bonus Deals, Freispiele und Gewinnspiele 2026.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#faf5ff', 100: '#f3e8ff', 200: '#e9d5ff',
+                            300: '#d8b4fe', 400: '#c084fc', 500: '#a855f7',
+                            600: '#9333ea', 700: '#7c3aed', 800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        surface: {
+                            0: '#09090b', 1: '#0f0f12', 2: '#18181b',
+                            3: '#1e1e22', 4: '#27272a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --accent: #a855f7;
-            --accent-hover: #9333ea;
-            --bg: #030303;
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            background-color: var(--bg);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #09090b;
+            color: #fafafa;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Initialer Status: Content versteckt, Age-Gate sichtbar */
+        /* ══════════ SCROLLBAR ══════════ */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.25);
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(168, 85, 247, 0.45);
+        }
+
+        /* ══════════ AGE GATE ══════════ */
         #main-wrapper {
             display: none;
         }
 
-        select option {
-            background-color: #1a1a1a !important;
-            color: white !important;
+        #age-gate {
+            background: #09090b;
+            z-index: 10000;
+            display: flex;
+            position: fixed;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        #age-gate .gate-card {
+            animation: scaleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(168, 85, 247, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.1);
+        @keyframes scaleFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .purple-glow {
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.2);
+        /* ══════════ NOISE TEXTURE ══════════ */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
         }
 
-        .liquid-badge {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            padding: 5px 12px;
+        /* ══════════ HERO GLOW ══════════ */
+        .hero-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, transparent 70%);
+            top: -250px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            top: 100px;
+            right: -100px;
+            pointer-events: none;
+            animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes pulseGlow {
+            from {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(1);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        /* ══════════ CARD SYSTEM ══════════ */
+        .deal-card {
+            background: #0f0f12;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deal-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.06), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .deal-card:hover {
+            border-color: rgba(147, 51, 234, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.6), 0 0 48px -8px rgba(147, 51, 234, 0.08);
+        }
+
+        .deal-card:hover::before {
+            opacity: 1;
+        }
+
+        /* ══════════ FEATURED CARD (TOP 1) ══════════ */
+        .deal-card.featured {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), #0f0f12 40%);
+            border-color: rgba(147, 51, 234, 0.12);
+        }
+
+        /* ══════════ RANK SYSTEM ══════════ */
+        .rank-badge {
+            min-width: 36px;
+            height: 36px;
             border-radius: 10px;
-            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .rank-1 {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #451a03;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.25);
+        }
+
+        .rank-2 {
+            background: linear-gradient(135deg, #d1d5db, #9ca3af);
+            color: #1f2937;
+        }
+
+        .rank-3 {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: #fff;
+        }
+
+        .rank-other {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ══════════ BADGES ══════════ */
+        .tag {
+            background: rgba(147, 51, 234, 0.08);
+            color: #c084fc;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.6rem;
             font-weight: 700;
-            color: #d8b4fe;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.02em;
             white-space: nowrap;
         }
 
-        .no-deposit-tag {
-            background: linear-gradient(90deg, #a855f7, #7c3aed);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 0 0 0 12px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
+        .no-deposit-flag {
             position: absolute;
             top: 0;
             right: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 10;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 6px 14px;
+            border-radius: 0 0 0 14px;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            z-index: 5;
         }
 
-        #age-gate {
-            background: radial-gradient(circle at center, #1a1a1a 0%, #030303 100%);
-            z-index: 10000;
+        .vpn-flag {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #451a03;
+            font-size: 0.55rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 6px 14px;
+            border-radius: 0 0 0 14px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+            z-index: 5;
             display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        select, input {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
+        .vpn-flag svg {
+            width: 12px;
+            height: 12px;
         }
 
-        .nav-btn {
+        /* ══════════ RAINBET HIGHLIGHT CHIPS ══════════ */
+        .highlight-chip {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
             position: relative;
-            padding-bottom: 4px;
-            color: #9ca3af;
+            overflow: hidden;
+        }
+
+        .highlight-chip .chip-icon {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        /* ══════════ CODE BUTTON COPY FEEDBACK ══════════ */
+        .code-btn {
+            position: relative;
+        }
+
+        .code-btn .code-label,
+        .code-btn .code-value {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .code-btn.copied .code-label,
+        .code-btn.copied .code-value {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .code-btn .copy-confirm {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .code-btn.copied .copy-confirm {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .code-btn.copied {
+            border-color: rgba(52, 211, 153, 0.3) !important;
+            background: rgba(52, 211, 153, 0.06) !important;
+        }
+
+
+
+        /* ══════════ INFO BLOCK IN CARDS ══════════ */
+        .info-block {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        /* ══════════ CTA BUTTON ══════════ */
+        .cta-primary {
+            background: linear-gradient(135deg, #9333ea, #7c3aed);
+            color: #fff;
+            font-weight: 800;
+            border-radius: 14px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.2);
+        }
+
+        .cta-primary:hover {
+            box-shadow: 0 8px 32px rgba(147, 51, 234, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .cta-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 50%);
+            border-radius: inherit;
+        }
+
+        /* ══════════ NAVIGATION ══════════ */
+        .nav-glass {
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(24px) saturate(1.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-link {
+            color: #71717a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 6px 0;
+            position: relative;
             transition: color 0.3s ease;
         }
 
-        .nav-btn.active {
-            color: #ffffff;
+        .nav-link:hover {
+            color: #a1a1aa;
         }
 
-        .nav-btn.active::after {
+        .nav-link.active {
+            color: #fafafa;
+        }
+
+        .nav-link.active::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -4px;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 2px;
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
+            background: #a855f7;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
         }
 
+        /* ══════════ MOBILE MENU ══════════ */
         #mobile-menu {
             transform: translateY(-100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #mobile-menu.open {
             transform: translateY(0);
         }
 
-        .copy-notification {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #a855f7;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 700;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
-        }
-
         .burger-line {
             transition: all 0.3s ease;
         }
 
-        .burger-open .line-1 { transform: rotate(45deg) translate(5px, 5px); }
-        .burger-open .line-2 { opacity: 0; }
-        .burger-open .line-3 { transform: rotate(-45deg) translate(5px, -5px); }
+        .burger-open .line-1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger-open .line-2 {
+            opacity: 0;
+        }
+
+        .burger-open .line-3 {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ══════════ INPUTS ══════════ */
+        select option {
+            background: #18181b;
+            color: #fff;
+        }
+
+        .filter-input {
+            background: #0f0f12;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #fafafa;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .filter-input:focus {
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.06);
+        }
+
+        .filter-input::placeholder {
+            color: #3f3f46;
+        }
+
+        /* ══════════ TOAST ══════════ */
+        #copyToast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(16px);
+            background: #18181b;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            color: #e9d5ff;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 10001;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        #copyToast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ══════════ ANIMATIONS ══════════ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════════ PROFILE RING ══════════ */
+        .profile-outer {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .profile-outer::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #a855f7, #6366f1, #a855f7);
+            animation: profileSpin 5s linear infinite;
+            opacity: 0.6;
+        }
+
+        .profile-outer::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%);
+            animation: pulseRing 3s ease-in-out infinite;
+        }
+
+        @keyframes profileSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulseRing {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        /* ══════════ GRADIENT TEXT ══════════ */
+        .text-gradient {
+            background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ══════════ GIVEAWAY ══════════ */
+        .giveaway-wrapper {
+            position: relative;
+        }
+
+        .giveaway-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), transparent 50%, rgba(99, 102, 241, 0.1));
+            z-index: -1;
+        }
+
+        /* ══════════ SOCIAL ICON ══════════ */
+        .social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #0f0f12;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #71717a;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            color: #c084fc;
+            border-color: rgba(168, 85, 247, 0.2);
+            background: rgba(168, 85, 247, 0.06);
+            transform: translateY(-2px);
+        }
+
+        /* ══════════ FOOTER DIVIDER ══════════ */
+        .footer-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+        }
+
+        /* ══════════ TAB FADE ══════════ */
+        .tab-content {
+            transition: opacity 0.3s ease;
+        }
+
+        /* ══════════ MOBILE RESPONSIVE ══════════ */
+        @media (max-width: 768px) {
+
+            /* Hero adjustments */
+            #hero {
+                margin-bottom: 2rem !important;
+                padding-top: 0 !important;
+            }
+
+            #hero h1 {
+                font-size: 2rem !important;
+                line-height: 1.15 !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            #hero p {
+                font-size: 0.8rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+
+            .profile-outer .w-24 {
+                width: 4.5rem !important;
+                height: 4.5rem !important;
+            }
+
+            /* Main content */
+            main {
+                padding-top: 5rem !important;
+                padding-bottom: 4rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            /* Filters – stack vertically */
+            #filters {
+                flex-direction: column;
+                gap: 0.5rem !important;
+                margin-bottom: 1.25rem !important;
+                padding: 0 0.25rem;
+            }
+
+            #filters .relative,
+            #filters select {
+                width: 100% !important;
+            }
+
+            #filters .filter-input {
+                width: 100% !important;
+                padding: 12px 14px !important;
+                font-size: 0.75rem !important;
+            }
+
+            #filters .relative input {
+                width: 100% !important;
+            }
+
+            /* Deal cards */
+            .deal-card {
+                padding: 1rem !important;
+                border-radius: 16px !important;
+                gap: 0.75rem !important;
+            }
+
+            .deal-card .flex.items-center.gap-4 {
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+
+            /* Rank badge */
+            .rank-badge {
+                min-width: 30px !important;
+                height: 30px !important;
+                border-radius: 8px !important;
+                font-size: 0.65rem !important;
+            }
+
+            /* Casino logo */
+            .deal-card .w-14 {
+                width: 2.75rem !important;
+                height: 2.75rem !important;
+                border-radius: 10px !important;
+            }
+
+            /* Casino name */
+            .deal-card .font-extrabold.text-base {
+                font-size: 0.9rem !important;
+            }
+
+            /* Tags */
+            .tag {
+                font-size: 0.5rem !important;
+                padding: 2px 6px !important;
+            }
+
+            /* Info blocks & highlight chips */
+            .info-block,
+            .highlight-chip {
+                padding: 10px 6px !important;
+                border-radius: 10px !important;
+            }
+
+            .info-block .text-base,
+            .highlight-chip .text-sm {
+                font-size: 0.75rem !important;
+            }
+
+            .highlight-chip .chip-icon {
+                font-size: 0.85rem !important;
+            }
+
+            /* Grid for stats in cards */
+            .deal-card .grid.grid-cols-2 {
+                gap: 0.4rem !important;
+            }
+
+            /* Action buttons */
+            .deal-card .flex.gap-2.min-w-\[200px\] {
+                min-width: 0 !important;
+                gap: 0.4rem !important;
+            }
+
+            .code-btn {
+                padding: 0.6rem !important;
+                border-radius: 10px !important;
+            }
+
+            .cta-primary {
+                padding: 0.75rem 0.75rem !important;
+                font-size: 0.6rem !important;
+                border-radius: 10px !important;
+                letter-spacing: 0.08em !important;
+            }
+
+            /* Badge flags */
+            .no-deposit-flag,
+            .vpn-flag {
+                font-size: 0.45rem !important;
+                padding: 4px 10px !important;
+                border-radius: 0 0 0 10px !important;
+            }
+
+            /* Giveaway section */
+            #giveaway-section .bg-surface-1 {
+                padding: 2rem 1.25rem !important;
+                border-radius: 18px !important;
+            }
+
+            #giveaway-section h2 {
+                font-size: 1.5rem !important;
+            }
+
+            /* Footer */
+            footer {
+                padding-bottom: 2rem !important;
+            }
+
+            footer .flex.items-center.gap-2 {
+                gap: 0.35rem !important;
+            }
+
+            .social-btn {
+                width: 38px !important;
+                height: 38px !important;
+                border-radius: 10px !important;
+            }
+
+            /* Hero glow - smaller on mobile */
+            .hero-glow {
+                width: 350px !important;
+                height: 350px !important;
+                top: -120px !important;
+            }
+
+            .hero-glow-2 {
+                width: 200px !important;
+                height: 200px !important;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 380px) {
+            #hero h1 {
+                font-size: 1.6rem !important;
+            }
+
+            .deal-card {
+                padding: 0.75rem !important;
+            }
+
+            .info-block,
+            .highlight-chip {
+                padding: 8px 4px !important;
+            }
+
+            .info-block .text-base,
+            .highlight-chip .text-sm {
+                font-size: 0.65rem !important;
+            }
+
+            .cta-primary {
+                font-size: 0.55rem !important;
+                padding: 0.65rem 0.5rem !important;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <!-- Age Gate -->
-    <div id="age-gate" class="fixed inset-0 items-center justify-center p-6">
-        <div class="glass-card max-w-sm w-full p-10 text-center border-purple-500/30">
+    <!-- Toast -->
+    <div id="copyToast">✓ Code kopiert!</div>
+
+    <!-- ═══════ AGE GATE ═══════ -->
+    <div id="age-gate">
+        <div
+            class="gate-card max-w-[380px] w-full text-center p-8 md:p-10 rounded-3xl bg-surface-1 border border-white/[0.04]">
             <div class="mb-8 flex justify-center">
-                <div class="relative">
-                    <div class="w-20 h-20 rounded-full border-2 border-red-500/50 flex items-center justify-center text-2xl font-black text-white">18+</div>
-                    <div class="absolute inset-0 rounded-full border-4 border-purple-500/20 blur-md animate-pulse"></div>
+                <div
+                    class="w-20 h-20 rounded-2xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center">
+                    <span class="text-2xl font-black text-brand-400">18+</span>
                 </div>
             </div>
-            <h2 class="text-3xl font-black italic mb-3 uppercase tracking-tighter text-white">
-                Alters<span class="text-purple-500">prüfung</span>
+            <h2 class="text-2xl font-extrabold mb-2 tracking-tight text-white">
+                Altersprüfung
             </h2>
-            <p class="text-gray-400 text-sm mb-10 leading-relaxed">
-                Glücksspiel kann süchtig machen. Bitte bestätige, dass du mindestens 18 Jahre alt bist.
+            <p class="text-zinc-500 text-sm mb-8 leading-relaxed">
+                Glücksspiel kann süchtig machen.<br>Bitte bestätige, dass du mindestens 18 Jahre alt bist.
             </p>
-            <div class="space-y-4">
-                <button onclick="acceptAge()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-black py-4 rounded-xl transition duration-300 shadow-lg shadow-purple-900/20 uppercase tracking-widest text-sm italic">Ich bin über 18</button>
-                <button onclick="leaveSite()" class="w-full bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-4 rounded-xl transition text-sm uppercase">Verlassen</button>
+            <div class="space-y-3">
+                <button onclick="acceptAge()" class="cta-primary w-full py-4 text-sm tracking-wide">
+                    Ich bin über 18
+                </button>
+                <button onclick="leaveSite()"
+                    class="w-full bg-white/[0.03] hover:bg-white/[0.06] text-zinc-500 font-semibold py-4 rounded-xl transition text-sm">
+                    Verlassen
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Main Wrapper (Nav + Main + Footer) -->
+    <!-- ═══════ MAIN WRAPPER ═══════ -->
     <div id="main-wrapper">
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 z-[90] bg-[#030303] pt-28 px-6 md:hidden">
-            <div class="flex flex-col gap-8">
-                <button onclick="switchTab('deals'); toggleMenu();" class="text-3xl font-black italic uppercase tracking-tighter text-left border-b border-white/5 pb-4">
-                    Bonis
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 z-[90] bg-surface-0 pt-28 px-8 md:hidden">
+            <div class="flex flex-col gap-6">
+                <button onclick="switchTab('deals'); toggleMenu();"
+                    class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">
+                    Casino Deals
                 </button>
-                <button onclick="switchTab('giveaway'); toggleMenu();" class="text-3xl font-black italic uppercase tracking-tighter text-left border-b border-white/5 pb-4">
+                <button onclick="switchTab('giveaway'); toggleMenu();"
+                    class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">
                     Gewinnspiel
                 </button>
-                <div class="mt-4 flex gap-4">
-                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="text-purple-500 font-bold">Instagram</a>
-                    <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="text-purple-500 font-bold">Discord</a>
+                <div class="mt-6 flex gap-5">
+                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank"
+                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Instagram</a>
+                    <a href="https://discord.gg/Tu6cXpFs62" target="_blank"
+                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Discord</a>
+                    <a href="https://www.youtube.com/@IdiotenBonus" target="_blank"
+                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">YouTube</a>
                 </div>
             </div>
         </div>
 
         <!-- Navigation -->
-        <nav class="fixed top-0 w-full z-[100] bg-black/60 backdrop-blur-xl border-b border-white/5">
-            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <nav class="fixed top-0 w-full z-[100] nav-glass">
+            <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
                 <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('deals')">
-                    <span class="text-2xl font-black italic tracking-tighter uppercase text-white">Idioten<span class="text-purple-500">bonus</span></span>
-                </div>
-                
-                <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[0.2em]">
-                    <button id="nav-deals" onclick="switchTab('deals')" class="nav-btn active flex items-center gap-2">Bonis</button>
-                    <button id="nav-giveaway" onclick="switchTab('giveaway')" class="nav-btn flex items-center gap-2">Gewinnspiel</button>
+                    <span class="text-lg font-extrabold tracking-tight text-white">idioten<span
+                            class="text-brand-500">bonus</span></span>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="bg-purple-600 hover:bg-purple-500 px-4 md:px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-black uppercase tracking-widest transition shadow-lg shadow-purple-900/20 whitespace-nowrap">
+                <div class="hidden md:flex items-center gap-8">
+                    <button id="nav-deals" onclick="switchTab('deals')" class="nav-link active">Deals</button>
+                    <button id="nav-giveaway" onclick="switchTab('giveaway')" class="nav-link">Gewinnspiel</button>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank"
+                        class="cta-primary px-4 py-2 text-[0.65rem] tracking-widest rounded-xl">
                         Support
                     </a>
-                    
-                    <!-- Burger Button -->
-                    <button id="burger-btn" onclick="toggleMenu()" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
-                        <span class="burger-line line-1 w-6 h-0.5 bg-white rounded-full"></span>
-                        <span class="burger-line line-2 w-6 h-0.5 bg-white rounded-full"></span>
-                        <span class="burger-line line-3 w-6 h-0.5 bg-white rounded-full"></span>
+                    <button id="burger-btn" onclick="toggleMenu()"
+                        class="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
+                        <span class="burger-line line-1 w-5 h-[1.5px] bg-white rounded-full"></span>
+                        <span class="burger-line line-2 w-5 h-[1.5px] bg-white rounded-full"></span>
+                        <span class="burger-line line-3 w-5 h-[1.5px] bg-white rounded-full"></span>
                     </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Main Content -->
-        <main class="pt-36 pb-20 px-6">
-            <div id="deals-section" class="max-w-7xl mx-auto">
-                <div class="text-center mb-20">
-                    <!-- Hauptlogo Platzhalter -->
-                    <div class="mb-8 flex justify-center">
-                        
-                    </div>
-                    
-                    <div class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full purple-glow border-2 border-purple-500/20 mb-8 p-1">
-                        <div class="w-full h-full rounded-full overflow-hidden bg-neutral-900">
-                            <img src="logo.jpg" alt="Profile" class="w-full h-full object-cover">
+        <!-- ═══════ MAIN CONTENT ═══════ -->
+        <main class="pt-28 pb-24 px-5">
+
+            <!-- DEALS SECTION -->
+            <div id="deals-section" class="tab-content max-w-6xl mx-auto">
+
+                <!-- Hero -->
+                <div class="relative text-center mb-16 pt-4" id="hero">
+                    <div class="hero-glow"></div>
+                    <div class="hero-glow-2"></div>
+
+                    <!-- Profile -->
+                    <div class="relative z-10 mb-7 flex justify-center animate-in" style="animation-delay: 0.1s;">
+                        <div class="profile-outer">
+                            <div
+                                class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-surface-2 border-2 border-surface-3 relative z-10">
+                                <img src="logo.jpg" alt="Idiotenbonus" class="w-full h-full object-cover">
+                            </div>
                         </div>
                     </div>
-                    <h1 class="text-4xl md:text-7xl font-black italic mb-6 tracking-tighter leading-none uppercase text-white">
-                        Die #1 für <span class="text-purple-500">Casino Deals</span>
-                    </h1>
+
+                    <!-- Title -->
+                    <div class="relative z-10 animate-in" style="animation-delay: 0.2s;">
+                        <h1
+                            class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-4">
+                            Die #1 für<br>
+                            <span class="text-gradient">Casino Deals</span>
+                        </h1>
+                        <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto mb-8">
+                            Exklusive Bonis, verifizierte Codes und die besten Non-Sticky Deals – handverlesen für dich.
+                        </p>
+                    </div>
+
+
                 </div>
 
                 <!-- Filters -->
-                <div class="glass-card p-6 mb-16 flex flex-wrap gap-4 items-center justify-center">
-                    <div class="relative w-full md:w-64">
-                        <input type="text" id="searchInput" oninput="filterCasinos()" placeholder="Casino suchen..." class="w-full bg-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none placeholder:text-gray-600">
+                <div class="flex flex-wrap gap-2.5 items-center justify-center mb-10 reveal-item" id="filters">
+                    <div class="relative">
+                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none"
+                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        <input type="text" id="searchInput" oninput="filterCasinos()" placeholder="Suchen..."
+                            class="filter-input pl-9 pr-4 w-44 md:w-56 !text-xs !normal-case !tracking-normal !font-medium">
                     </div>
-                    
-                    <div class="flex flex-wrap gap-4 items-center justify-center">
-                        <select id="typeFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
-                            <option value="all">Alle Bonusarten</option>
-                            <option value="Non-Sticky">Non-Sticky</option>
-                            <option value="Sticky">Sticky</option>
-                        </select>
-
-                        <select id="bonusFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
-                            <option value="0">Min. Bonus: Egal</option>
-                            <option value="100">Ab 100€</option>
-                            <option value="500">Ab 500€</option>
-                        </select>
-
-                        <select id="wagerFilter" onchange="filterCasinos()" class="bg-white/5 rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-wider focus:outline-none cursor-pointer">
-                            <option value="100">Max. Wager: Egal</option>
-                            <option value="35">Bis 35x</option>
-                            <option value="40">Bis 40x</option>
-                        </select>
-                    </div>
+                    <select id="typeFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
+                        <option value="all">Alle Typen</option>
+                        <option value="Non-Sticky">Non-Sticky</option>
+                        <option value="Sticky">Sticky</option>
+                    </select>
+                    <select id="bonusFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
+                        <option value="0">Min. Bonus: –</option>
+                        <option value="100">Ab 100€</option>
+                        <option value="500">Ab 500€</option>
+                    </select>
+                    <select id="wagerFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
+                        <option value="100">Max. Wager: –</option>
+                        <option value="35">Bis 35x</option>
+                        <option value="40">Bis 40x</option>
+                    </select>
                 </div>
 
-                <div class="space-y-6" id="casinoList">
-                    <!-- Injected via JS -->
-                </div>
+                <!-- Casino List -->
+                <div class="space-y-4" id="casinoList"></div>
             </div>
 
             <!-- GIVEAWAY SECTION -->
-            <div id="giveaway-section" class="max-w-4xl mx-auto hidden pt-10">
-                <div class="glass-card p-16 text-center relative overflow-hidden">
-                    <div class="absolute -top-20 -left-20 w-64 h-64 bg-purple-600/10 blur-[100px] rounded-full"></div>
-                    <div class="relative z-10">
-                        <div class="w-20 h-20 bg-purple-500/10 rounded-3xl flex items-center justify-center mx-auto mb-10 border border-purple-500/20 text-purple-500">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="22" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            <div id="giveaway-section" class="tab-content max-w-3xl mx-auto hidden pt-4">
+                <div class="giveaway-wrapper">
+                    <div class="bg-surface-1 rounded-[22px] p-10 md:p-16 text-center relative overflow-hidden">
+                        <div
+                            class="absolute top-0 left-0 w-80 h-80 bg-brand-600/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                         </div>
-                        <h2 class="text-4xl md:text-6xl font-black italic mb-6 tracking-tighter uppercase leading-none text-white">
-                            Momentan <span class="text-white/20">kein</span><br>
-                            <span class="text-purple-500">Gewinnspiel</span>
-                        </h2>
-                        <div id="giveaway-container">
-                            <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="max-w-md mx-auto space-y-4">
-                                <input type="email" name="email" required placeholder="Deine E-Mail Adresse" class="w-full bg-white/5 rounded-2xl px-6 py-5 text-center focus:outline-none">
-                                <button type="submit" id="submit-btn" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-black py-5 rounded-2xl transition duration-300 uppercase tracking-widest text-sm italic shadow-xl shadow-purple-900/30">Benachrichtigen lassen</button>
-                            </form>
+                        <div
+                            class="absolute bottom-0 right-0 w-60 h-60 bg-indigo-600/5 rounded-full blur-[80px] translate-x-1/2 translate-y-1/2 pointer-events-none">
+                        </div>
+
+                        <div class="relative z-10">
+                            <div
+                                class="w-16 h-16 bg-brand-500/8 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-brand-500/10 text-brand-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <polyline points="20 12 20 22 4 22 4 12" />
+                                    <rect width="20" height="5" x="2" y="7" />
+                                    <line x1="12" x2="12" y1="22" y2="7" />
+                                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                                </svg>
+                            </div>
+
+                            <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
+                                Aktuell <span class="text-zinc-700">kein</span><br>
+                                <span class="text-gradient">Gewinnspiel</span>
+                            </h2>
+                            <p class="text-zinc-500 text-sm mb-10 max-w-sm mx-auto">
+                                Lass dich benachrichtigen, sobald das nächste Gewinnspiel startet.
+                            </p>
+
+                            <div id="giveaway-container">
+                                <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST"
+                                    class="max-w-sm mx-auto space-y-3">
+                                    <input type="email" name="email" required placeholder="deine@email.de"
+                                        class="filter-input w-full py-4 text-center !text-sm !normal-case !tracking-normal !font-medium !rounded-2xl">
+                                    <button type="submit" id="submit-btn"
+                                        class="cta-primary w-full py-4 text-sm tracking-wide">
+                                        Benachrichtigen lassen
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </main>
 
-        <!-- Footer -->
-        <footer class="border-t border-white/5 py-20 bg-black/40">
-            <div class="max-w-7xl mx-auto px-6 text-white">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-12">
+        <!-- ═══════ FOOTER ═══════ -->
+        <footer class="pb-12 pt-4">
+            <div class="max-w-6xl mx-auto px-5">
+                <div class="footer-line mb-12"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                     <div class="text-center md:text-left">
-                        <span class="text-3xl font-black italic tracking-tighter uppercase block mb-2">Idioten<span class="text-purple-500">bonus</span></span>
-                        <p class="text-gray-500 text-[10px] uppercase tracking-[0.2em]">Deals & Giveaways 2026</p>
-                    </div>
-                    
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-purple-400 transition"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                        </a>
-                        <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-purple-400 transition"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg>
-                        </a>
-                        <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 transition group">
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" class="group-hover:text-purple-400 transition"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.419-2.157 2.419z"/></svg>
-                        </a>
+                        <span class="text-lg font-extrabold tracking-tight block mb-1">idioten<span
+                                class="text-brand-500">bonus</span></span>
+                        <p class="text-zinc-700 text-[0.6rem] uppercase tracking-[0.2em] font-semibold">Deals &
+                            Giveaways · 2026</p>
                     </div>
 
-                    <div class="text-[10px] text-gray-600 text-center md:text-right font-bold uppercase tracking-widest">
-                        Glücksspiel kann süchtig machen. 18+ Spielverantwortung.
+                    <div class="flex items-center gap-2">
+                        <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="social-btn"
+                            aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="social-btn"
+                            aria-label="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z" />
+                                <path d="m10 15 5-3-5-3z" />
+                            </svg>
+                        </a>
+                        <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="social-btn" aria-label="Discord">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path
+                                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z" />
+                            </svg>
+                        </a>
+                        <div class="w-px h-6 bg-white/[0.06] mx-1"></div>
+                        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="social-btn"
+                            aria-label="Back to top">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="m18 15-6-6-6 6" />
+                            </svg>
+                        </button>
                     </div>
+
+                    <p
+                        class="text-[0.6rem] text-zinc-700 text-center md:text-right font-semibold uppercase tracking-widest leading-relaxed">
+                        Glücksspiel kann süchtig machen.<br>18+ · Spielverantwortung.
+                    </p>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- Scripts -->
+    <!-- ═══════ SCRIPTS ═══════ -->
     <script>
         const casinos = [
-            { id: 1, name: "Rainbet", bonus: "100%", bonusVal: 600, max: "600€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Rainbet.png", badges: ["Exklusiv", "VPN Österreich", "VIP-Programm", "Weekly´s & Monthly´s"], code: "idioten", url: "https://rainbet.com?r=idioten" },
+            { id: 1, name: "Rainbet", bonus: "–", bonusVal: 0, max: "–", type: "Non-Sticky", wager: "–", wagerVal: 0, logo: "Rainbet.png", badges: ["Exklusiv", "Originals", "VIP-Programm"], code: "idioten", url: "https://rainbet.com?r=idioten", vpnRequired: true, isRainbet: true },
             { id: 2, name: "Slotsgem", bonus: "120%", bonusVal: 600, max: "600€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "SlotsGemNeu.png", badges: ["Exklusiv", "Blitzauszahlung"], code: "idioten", url: "https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601", noDeposit: true },
             { id: 3, name: "Spinfin", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Spinfin.png", badges: ["Schnelle Auszahlungen", "Live Casino"], url: "https://go.driveaffiliates.com/visit/?bta=35618&brand=spinfin&afp=idiotenbonus&utm_campaign=idiotenbonus" },
             { id: 4, name: "Goldzino", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Goldzino.png", badges: ["Top Auswahl", "Live Casino"], url: "https://track.stormaffiliates.com/visit/?bta=35714&brand=goldzino&afp=idiotenbonus&utm_campaign=idiotenbonus" },
@@ -328,179 +1091,249 @@
             { id: 7, name: "Rabona", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Rabona.png", badges: ["Top Auswahl", "Turniere"], url: "https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894" },
         ];
 
+        // ── Menu ──
         function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const burger = document.getElementById('burger-btn');
-            menu.classList.toggle('open');
-            burger.classList.toggle('burger-open');
+            document.getElementById('mobile-menu').classList.toggle('open');
+            document.getElementById('burger-btn').classList.toggle('burger-open');
         }
 
+        // ── Filter ──
         function filterCasinos() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const type = document.getElementById('typeFilter').value;
             const minBonus = parseInt(document.getElementById('bonusFilter').value);
             const maxWager = parseInt(document.getElementById('wagerFilter').value);
-
             const filtered = casinos.filter(c => {
-                const matchesSearch = c.name.toLowerCase().includes(search);
-                const matchesType = type === 'all' || c.type === type;
-                const matchesBonus = c.bonusVal >= minBonus;
-                const matchesWager = c.wagerVal <= maxWager;
-                return matchesSearch && matchesType && matchesBonus && matchesWager;
+                const matchSearch = c.name.toLowerCase().includes(search);
+                const matchType = type === 'all' || c.type === type;
+                // Rainbet has no deposit bonus, so skip bonus/wager filters for it
+                if (c.isRainbet) return matchSearch && matchType;
+                return matchSearch && matchType && c.bonusVal >= minBonus && c.wagerVal <= maxWager;
             });
-
             renderCasinos(filtered);
         }
 
-        function renderCasinos(data = casinos) {
-            const list = document.getElementById('casinoList');
-            if(data.length === 0) {
-                list.innerHTML = `<div class="text-center p-20 text-gray-600 font-bold uppercase tracking-widest italic">Keine Deals gefunden</div>`;
-                return;
-            }
-            list.innerHTML = data.map(c => `
-                <div class="glass-card p-6 flex flex-col lg:flex-row items-center gap-8 relative overflow-hidden">
-                    ${c.noDeposit ? `<div class="no-deposit-tag">50 Freegames Ohne Einzahlung!</div>` : ''}
-                    
-                    <div class="flex items-center gap-6 lg:w-[340px] flex-shrink-0">
-                        <span class="text-2xl md:text-3xl font-black text-white/5 italic select-none">#${c.id}</span>
-                        <div class="w-16 h-16 md:w-20 md:h-20 bg-white/5 rounded-2xl flex items-center justify-center border border-white/5 shrink-0 overflow-hidden">
-                            <img src="${c.logo}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/80?text=${c.name.substring(0,1)}'" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex flex-col gap-2 overflow-hidden text-left">
-                            <div class="font-black text-lg md:text-xl uppercase italic tracking-tight truncate">${c.name}</div>
-                            <div class="flex gap-2 flex-wrap">
-                                ${c.badges.map(b => `<span class="liquid-badge">${b}</span>`).join('')}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 flex-grow w-full">
-                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
-                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Bonus</div>
-                            <div class="text-purple-400 font-black text-base md:text-lg">${c.bonus}</div>
-                        </div>
-                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
-                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Max. Bonus</div>
-                            <div class="text-white font-black text-base md:text-lg">${c.max}</div>
-                        </div>
-                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
-                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Typ</div>
-                            <div class="text-white font-black text-base md:text-lg">${c.type}</div>
-                        </div>
-                        <div class="bg-white/5 rounded-2xl p-4 text-center border border-white/5">
-                            <div class="text-[9px] text-gray-500 uppercase font-black tracking-widest mb-1">Wager</div>
-                            <div class="text-white font-black text-base md:text-lg">${c.wager}</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-3 min-w-[240px] w-full lg:w-auto">
-                        <div class="flex gap-2">
-                            ${c.code ? `
-                                <button onclick="copyCode('${c.code}')" class="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white p-4 rounded-2xl transition group flex flex-col items-center justify-center">
-                                    <span class="text-[8px] uppercase font-black text-gray-500">Code</span>
-                                    <span class="text-xs font-black tracking-widest">${c.code}</span>
-                                </button>
-                            ` : ''}
-                            <a href="${c.url}" target="_blank" class="flex-[2.5] bg-purple-600 hover:bg-purple-500 text-white font-black py-5 px-6 rounded-2xl text-center text-xs transition uppercase italic tracking-widest shadow-lg shadow-purple-900/20 flex items-center justify-center">
-                                Bonus abholen!
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        // ── Rank class ──
+        function rankClass(id) {
+            return id <= 3 ? `rank-${id}` : 'rank-other';
         }
 
+        // ── Render ──
+        function renderCasinos(data = casinos) {
+            const list = document.getElementById('casinoList');
+
+            if (!data.length) {
+                list.innerHTML = `<div class="text-center py-20 text-zinc-700 font-bold text-sm uppercase tracking-widest">Keine Deals gefunden</div>`;
+                return;
+            }
+
+            list.innerHTML = data.map((c, i) => {
+                // Badge flags
+                let flagHtml = '';
+                if (c.vpnRequired) {
+                    flagHtml = `<div class="vpn-flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN benötigt</div>`;
+                } else if (c.noDeposit) {
+                    flagHtml = `<div class="no-deposit-flag">50 Free Spins ohne Einzahlung!</div>`;
+                }
+
+                // Center stats – Rainbet gets special highlight chips
+                let centerHtml;
+                if (c.isRainbet) {
+                    centerHtml = `
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 flex-grow w-full relative z-10">
+                            <div class="highlight-chip">
+                                <span class="chip-icon">🔄</span>
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Weekly</div>
+                                <div class="text-amber-400 font-extrabold text-sm">Rewards</div>
+                            </div>
+                            <div class="highlight-chip">
+                                <span class="chip-icon">🏆</span>
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Monthly</div>
+                                <div class="text-amber-400 font-extrabold text-sm">Boni</div>
+                            </div>
+                            <div class="highlight-chip">
+                                <span class="chip-icon">🎮</span>
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Originals</div>
+                                <div class="text-emerald-400 font-extrabold text-sm">Exklusiv</div>
+                            </div>
+                            <div class="highlight-chip">
+                                <span class="chip-icon">⚡</span>
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Auszahlung</div>
+                                <div class="text-emerald-400 font-extrabold text-sm">Instant</div>
+                            </div>
+                        </div>`;
+                } else {
+                    centerHtml = `
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 flex-grow w-full relative z-10">
+                            <div class="info-block">
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Bonus</div>
+                                <div class="text-gradient font-extrabold text-base">${c.bonus}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Max</div>
+                                <div class="text-white font-extrabold text-base">${c.max}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Typ</div>
+                                <div class="font-extrabold text-base ${c.type === 'Non-Sticky' ? 'text-emerald-400' : 'text-zinc-400'}">${c.type}</div>
+                            </div>
+                            <div class="info-block">
+                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Wager</div>
+                                <div class="text-white font-extrabold text-base">${c.wager}</div>
+                            </div>
+                        </div>`;
+                }
+
+                return `
+                <div class="deal-card ${c.id === 1 ? 'featured' : ''} p-5 md:p-6 flex flex-col lg:flex-row items-center gap-5 lg:gap-7 animate-in" style="animation-delay: ${i * 0.06}s;">
+                    ${flagHtml}
+
+                    <!-- Left: Identity -->
+                    <div class="flex items-center gap-4 lg:w-[300px] flex-shrink-0 relative z-10">
+                        <div class="rank-badge ${rankClass(c.id)}">${c.id}</div>
+                        <div class="w-14 h-14 md:w-16 md:h-16 bg-surface-2 rounded-xl flex items-center justify-center border border-white/[0.04] shrink-0 overflow-hidden">
+                            <img src="${c.logo}" alt="${c.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\'text-xl font-black text-zinc-600\\'>${c.name[0]}</span>'" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-col gap-1.5 overflow-hidden text-left">
+                            <div class="font-extrabold text-base md:text-lg tracking-tight truncate">${c.name}</div>
+                            <div class="flex gap-1.5 flex-wrap">${c.badges.map(b => `<span class="tag">${b}</span>`).join('')}</div>
+                        </div>
+                    </div>
+
+                    <!-- Center: Stats -->
+                    ${centerHtml}
+
+                    <!-- Right: Actions -->
+                    <div class="flex gap-2 min-w-[200px] w-full lg:w-auto relative z-10">
+                        ${c.code ? `
+                            <button onclick="copyCode('${c.code}', this)" class="code-btn flex-1 bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.06] hover:border-brand-500/20 text-white p-3.5 rounded-xl transition-all flex flex-col items-center justify-center gap-0.5 group">
+                                <span class="code-label text-[0.5rem] uppercase font-bold text-zinc-600 group-hover:text-zinc-500 transition">Code</span>
+                                <span class="code-value text-xs font-extrabold tracking-wider">${c.code}</span>
+                                <span class="copy-confirm">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="text-[0.5rem] font-bold text-emerald-400 mt-0.5">Kopiert!</span>
+                                </span>
+                            </button>
+                        ` : ''}
+                        <a href="${c.url}" target="_blank" class="cta-primary flex-[2] py-4 px-5 text-xs tracking-widest uppercase">
+                            Bonus holen →
+                        </a>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        // ── Tabs ──
         function switchTab(tab) {
             const deals = document.getElementById('deals-section');
             const giveaway = document.getElementById('giveaway-section');
             const btnDeals = document.getElementById('nav-deals');
             const btnGiveaway = document.getElementById('nav-giveaway');
+            const current = tab === 'deals' ? giveaway : deals;
+            const next = tab === 'deals' ? deals : giveaway;
 
-            if(tab === 'deals') {
-                deals.classList.remove('hidden');
-                giveaway.classList.add('hidden');
-                btnDeals.classList.add('active');
-                btnGiveaway.classList.remove('active');
-            } else {
-                deals.classList.add('hidden');
-                giveaway.classList.remove('hidden');
-                btnDeals.classList.remove('active');
-                btnGiveaway.classList.add('active');
-            }
+            current.style.opacity = '0';
+            setTimeout(() => {
+                current.classList.add('hidden');
+                next.classList.remove('hidden');
+                next.style.opacity = '0';
+                requestAnimationFrame(() => {
+                    next.style.opacity = '1';
+                });
+                btnDeals.classList.toggle('active', tab === 'deals');
+                btnGiveaway.classList.toggle('active', tab === 'giveaway');
+            }, 200);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function copyCode(code) {
-            const el = document.createElement('textarea');
-            el.value = code;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            
+        // ── Copy ──
+        function copyCode(code, btnEl) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code);
+            } else {
+                const t = document.createElement('textarea');
+                t.value = code;
+                document.body.appendChild(t);
+                t.select();
+                document.execCommand('copy');
+                document.body.removeChild(t);
+            }
+            // Toast
             const toast = document.getElementById('copyToast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+            // Button animation
+            if (btnEl) {
+                btnEl.classList.add('copied');
+                setTimeout(() => btnEl.classList.remove('copied'), 1800);
+            }
         }
 
+        // ── Age Gate ──
         function acceptAge() {
             sessionStorage.setItem('ageAccepted', 'true');
-            document.getElementById('age-gate').style.display = 'none';
-            document.getElementById('main-wrapper').style.display = 'block';
+            const gate = document.getElementById('age-gate');
+            gate.style.opacity = '0';
+            gate.style.transition = 'opacity 0.35s ease';
+            setTimeout(() => {
+                gate.style.display = 'none';
+                document.getElementById('main-wrapper').style.display = 'block';
+            }, 350);
         }
 
         function leaveSite() {
-            window.location.href = "https://www.google.com";
+            window.location.href = 'https://www.google.com';
         }
 
+        // ── Giveaway Form ──
         const form = document.getElementById('giveaway-form');
         if (form) {
-            form.addEventListener('submit', async function(event) {
-                event.preventDefault();
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
                 const btn = document.getElementById('submit-btn');
                 const container = document.getElementById('giveaway-container');
-                
-                btn.innerHTML = 'Wird gesendet...';
+                btn.innerHTML = '<span style="opacity:0.6">Wird gesendet...</span>';
                 btn.disabled = true;
-
-                const formData = new FormData(event.target);
-                
                 try {
-                    const response = await fetch(event.target.action, {
+                    const res = await fetch(e.target.action, {
                         method: 'POST',
-                        body: formData,
+                        body: new FormData(e.target),
                         headers: { 'Accept': 'application/json' }
                     });
-                    
-                    if (response.ok) {
+                    if (res.ok) {
                         container.innerHTML = `
-                            <div class="p-8 bg-purple-500/20 border border-purple-500/30 rounded-3xl text-purple-400 font-bold italic animate-pulse text-center">
-                                Vielen Dank! Wir haben dich auf die Liste gesetzt. 🎰
-                            </div>
-                        `;
+                            <div class="p-8 bg-brand-500/6 border border-brand-500/10 rounded-2xl text-brand-300 font-bold text-center animate-in">
+                                <span class="text-2xl block mb-2">🎰</span>
+                                Vielen Dank! Wir benachrichtigen dich.
+                            </div>`;
                     } else {
-                        btn.innerHTML = 'Fehler! Bitte erneut versuchen.';
+                        btn.innerHTML = 'Fehler – erneut versuchen';
                         btn.disabled = false;
                     }
-                } catch (error) {
-                    btn.innerHTML = 'Verbindungsfehler!';
+                } catch {
+                    btn.innerHTML = 'Verbindungsfehler';
                     btn.disabled = false;
                 }
             });
         }
 
-        // Initialisierungs-Logik
+        // ── Scroll Reveal ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+        // ── Init ──
         window.addEventListener('DOMContentLoaded', () => {
-            if(sessionStorage.getItem('ageAccepted')) {
+            if (sessionStorage.getItem('ageAccepted')) {
                 document.getElementById('age-gate').style.display = 'none';
                 document.getElementById('main-wrapper').style.display = 'block';
-            } else {
-                document.getElementById('age-gate').style.display = 'flex';
-                document.getElementById('main-wrapper').style.display = 'none';
             }
             renderCasinos();
+            document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+
         });
     </script>
 </body>
+
 </html>
