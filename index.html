@@ -1,1411 +1,715 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idiotenbonus | Die #1 für Casino Deals</title>
     <meta name="description" content="Idiotenbonus – Die besten Casino Bonus Deals, Freispiele und Gewinnspiele 2026.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: {
-                            50: '#faf5ff', 100: '#f3e8ff', 200: '#e9d5ff',
-                            300: '#d8b4fe', 400: '#c084fc', 500: '#a855f7',
-                            600: '#9333ea', 700: '#7c3aed', 800: '#6b21a8',
-                            900: '#581c87',
-                        },
-                        surface: {
-                            0: '#09090b', 1: '#0f0f12', 2: '#18181b',
-                            3: '#1e1e22', 4: '#27272a',
-                        }
+                        brand: { 50:'#faf5ff',100:'#f3e8ff',200:'#e9d5ff',300:'#d8b4fe',400:'#c084fc',500:'#a855f7',600:'#9333ea',700:'#7c3aed',800:'#6b21a8',900:'#581c87' },
+                        surface: { 0:'#09090b',1:'#0f0f12',2:'#18181b',3:'#1e1e22',4:'#27272a' }
                     }
                 }
             }
         }
     </script>
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #09090b;
-            color: #fafafa;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ══════════ SCROLLBAR ══════════ */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(168, 85, 247, 0.25);
-            border-radius: 99px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(168, 85, 247, 0.45);
-        }
-
-        /* ══════════ AGE GATE ══════════ */
-        #main-wrapper {
-            display: none;
-        }
-
-        #age-gate {
-            background: #09090b;
-            z-index: 10000;
-            display: flex;
-            position: fixed;
-            inset: 0;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        #age-gate .gate-card {
-            animation: scaleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes scaleFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.92);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* ══════════ NOISE TEXTURE ══════════ */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.4;
-        }
-
-        /* ══════════ HERO GLOW ══════════ */
-        .hero-glow {
-            position: absolute;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.12) 0%, transparent 70%);
-            top: -250px;
-            left: 50%;
-            transform: translateX(-50%);
-            pointer-events: none;
-            animation: pulseGlow 6s ease-in-out infinite alternate;
-        }
-
-        .hero-glow-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-            top: 100px;
-            right: -100px;
-            pointer-events: none;
-            animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes pulseGlow {
-            from {
-                opacity: 0.6;
-                transform: translateX(-50%) scale(1);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(-50%) scale(1.1);
-            }
-        }
-
-        /* ══════════ CARD SYSTEM ══════════ */
-        .deal-card {
-            background: #0f0f12;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 20px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            padding: 2.5rem !important; /* Made larger vertically */
-        }
-
-        .deal-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.06), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.35s ease;
-        }
-
-        .deal-card:hover {
-            border-color: rgba(147, 51, 234, 0.15);
-            transform: translateY(-4px);
-            box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.6), 0 0 48px -8px rgba(147, 51, 234, 0.08);
-        }
-
-        .deal-card:hover::before {
-            opacity: 1;
-        }
-
-        /* ══════════ FEATURED CARD (TOP 1) ══════════ */
-        .deal-card.featured {
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), #0f0f12 40%);
-            border-color: rgba(147, 51, 234, 0.12);
-        }
-
-        /* ══════════ RANK SYSTEM ══════════ */
-        .rank-badge {
-            min-width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-        }
-
-        .rank-1 {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: #451a03;
-            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.25);
-        }
-
-        .rank-2 {
-            background: linear-gradient(135deg, #d1d5db, #9ca3af);
-            color: #1f2937;
-        }
-
-        .rank-3 {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            color: #fff;
-        }
-
-        .rank-other {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ══════════ BADGES ══════════ */
-        .tag {
-            background: rgba(147, 51, 234, 0.08);
-            color: #c084fc;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
-
-        .no-deposit-flag {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-            color: #fff;
-            font-size: 0.55rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 6px 14px;
-            border-radius: 0 0 0 14px;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-            z-index: 5;
-        }
-
-        .vpn-flag {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #451a03;
-            font-size: 0.55rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 6px 14px;
-            border-radius: 0 0 0 14px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .vpn-flag svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        /* ══════════ RAINBET HIGHLIGHT CHIPS ══════════ */
-        .highlight-chip {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-chip .chip-icon {
-            font-size: 1rem;
-            margin-bottom: 4px;
-            display: block;
-        }
-
-        /* ══════════ CODE BUTTON COPY FEEDBACK ══════════ */
-        .code-btn {
-            position: relative;
-        }
-
-        .code-btn .code-label,
-        .code-btn .code-value {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .code-btn.copied .code-label,
-        .code-btn.copied .code-value {
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .code-btn .copy-confirm {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: none;
-        }
-
-        .code-btn.copied .copy-confirm {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .code-btn.copied {
-            border-color: rgba(52, 211, 153, 0.3) !important;
-            background: rgba(52, 211, 153, 0.06) !important;
-        }
-
-
-
-        /* ══════════ INFO BLOCK IN CARDS ══════════ */
-        .info-block {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 28px 20px; /* Slightly more vertical padding */
-            text-align: center;
-        }
-
-        /* ══════════ CTA BUTTON ══════════ */
-        .cta-primary {
-            background: linear-gradient(135deg, #9333ea, #7c3aed);
-            color: #fff;
-            font-weight: 800;
-            border-radius: 14px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.2);
-        }
-
-        .cta-primary:hover {
-            box-shadow: 0 8px 32px rgba(147, 51, 234, 0.35);
-            transform: translateY(-1px);
-        }
-
-        .cta-primary::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 50%);
-            border-radius: inherit;
-        }
-
-        /* ══════════ NAVIGATION ══════════ */
-        .nav-glass {
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(24px) saturate(1.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .nav-link {
-            color: #71717a;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            padding: 6px 0;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #a1a1aa;
-        }
-
-        .nav-link.active {
-            color: #fafafa;
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #a855f7;
-            border-radius: 2px;
-            box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
-        }
-
-        /* ══════════ MOBILE MENU ══════════ */
-        #mobile-menu {
-            transform: translateY(-100%);
-            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #mobile-menu.open {
-            transform: translateY(0);
-        }
-
-        .burger-line {
-            transition: all 0.3s ease;
-        }
-
-        .burger-open .line-1 {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .burger-open .line-2 {
-            opacity: 0;
-        }
-
-        .burger-open .line-3 {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* ══════════ INPUTS ══════════ */
-        select option {
-            background: #18181b;
-            color: #fff;
-        }
-
-        .filter-input {
-            background: #0f0f12;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: #fafafa;
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .filter-input:focus {
-            border-color: rgba(168, 85, 247, 0.3);
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.06);
-        }
-
-        .filter-input::placeholder {
-            color: #3f3f46;
-        }
-
-        /* ══════════ TOAST ══════════ */
-        #copyToast {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(16px);
-            background: #18181b;
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            color: #e9d5ff;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            z-index: 10001;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-        }
-
-        #copyToast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ══════════ ANIMATIONS ══════════ */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-in {
-            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        .reveal-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ══════════ PROFILE RING ══════════ */
-        .profile-outer {
-            position: relative;
-            display: inline-flex;
-        }
-
-        .profile-outer::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #a855f7, #6366f1, #a855f7);
-            animation: profileSpin 5s linear infinite;
-            opacity: 0.6;
-        }
-
-        .profile-outer::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%);
-            animation: pulseRing 3s ease-in-out infinite;
-        }
-
-        @keyframes profileSpin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes pulseRing {
-
-            0%,
-            100% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1.05);
-            }
-        }
-
-        /* ══════════ GRADIENT TEXT ══════════ */
-        .text-gradient {
-            background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ══════════ GIVEAWAY ══════════ */
-        .giveaway-wrapper {
-            position: relative;
-        }
-
-        .giveaway-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 21px;
-            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), transparent 50%, rgba(99, 102, 241, 0.1));
-            z-index: -1;
-        }
-
-        /* Live Badge for Hero */
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            padding: 4px 12px;
-            border-radius: 99px;
-            color: #c084fc;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 1rem;
-            animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        }
-
-        .live-dot {
-            width: 6px;
-            height: 6px;
-            background: #a855f7;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #a855f7;
-            animation: pulse-dot 1.5s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes bounceIn {
-            from { opacity: 0; transform: scale(0.3) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* ══════════ SOCIAL ICON ══════════ */
-        .social-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: #0f0f12;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #71717a;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            color: #c084fc;
-            border-color: rgba(168, 85, 247, 0.2);
-            background: rgba(168, 85, 247, 0.06);
-            transform: translateY(-2px);
-        }
-
-        /* ══════════ FOOTER DIVIDER ══════════ */
-        .footer-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-        }
-
-        /* ══════════ TAB FADE ══════════ */
-        .tab-content {
-            transition: opacity 0.3s ease;
-        }
-
-        /* ══════════ MOBILE RESPONSIVE ══════════ */
-        @media (max-width: 768px) {
-
-            /* Hero adjustments */
-            #hero {
-                margin-bottom: 2rem !important;
-                padding-top: 0 !important;
-            }
-
-            #hero h1 {
-                font-size: 2rem !important;
-                line-height: 1.15 !important;
-                margin-bottom: 0.5rem !important;
-            }
-
-            #hero p {
-                font-size: 0.8rem !important;
-                margin-bottom: 1.25rem !important;
-            }
-
-            .profile-outer .w-24 {
-                width: 4.5rem !important;
-                height: 4.5rem !important;
-            }
-
-            /* Main content */
-            main {
-                padding-top: 5rem !important;
-                padding-bottom: 4rem !important;
-                padding-left: 0.75rem !important;
-                padding-right: 0.75rem !important;
-            }
-
-            /* Filters – stack vertically */
-            #filters {
-                flex-direction: column;
-                gap: 0.5rem !important;
-                margin-bottom: 1.25rem !important;
-                padding: 0 0.25rem;
-            }
-
-            #filters .relative,
-            #filters select {
-                width: 100% !important;
-            }
-
-            #filters .filter-input {
-                width: 100% !important;
-                padding: 12px 14px !important;
-                font-size: 0.75rem !important;
-            }
-
-            #filters .relative input {
-                width: 100% !important;
-            }
-
-            /* Deal cards */
-            .deal-card {
-                padding: 1.25rem !important;
-                border-radius: 16px !important;
-                gap: 0.75rem !important;
-            }
-
-            .deal-card .flex.items-center.gap-4 {
-                width: 100% !important;
-                gap: 0.75rem !important;
-            }
-
-            /* Rank badge */
-            .rank-badge {
-                min-width: 30px !important;
-                height: 30px !important;
-                border-radius: 8px !important;
-                font-size: 0.65rem !important;
-            }
-
-            /* Casino logo */
-            .deal-card .w-14 {
-                width: 2.75rem !important;
-                height: 2.75rem !important;
-                border-radius: 10px !important;
-            }
-
-            /* Casino name */
-            .deal-card .font-extrabold.text-base {
-                font-size: 0.9rem !important;
-            }
-
-            /* Tags */
-            .tag {
-                font-size: 0.5rem !important;
-                padding: 2px 6px !important;
-            }
-
-            /* Info blocks & highlight chips */
-            .info-block,
-            .highlight-chip {
-                padding: 12px 6px !important;
-                border-radius: 10px !important;
-            }
-
-            .info-block .text-base,
-            .highlight-chip .text-sm {
-                font-size: 0.75rem !important;
-            }
-
-            .highlight-chip .chip-icon {
-                font-size: 0.85rem !important;
-            }
-
-            /* Grid for stats in cards */
-            .deal-card .grid.grid-cols-2 {
-                gap: 0.4rem !important;
-            }
-
-            /* Action buttons */
-            .deal-card .flex.gap-2.min-w-\[200px\] {
-                min-width: 0 !important;
-                gap: 0.4rem !important;
-            }
-
-            .code-btn {
-                padding: 0.6rem !important;
-                border-radius: 10px !important;
-            }
-
-            .cta-primary {
-                padding: 0.75rem 0.75rem !important;
-                font-size: 0.6rem !important;
-                border-radius: 10px !important;
-                letter-spacing: 0.08em !important;
-            }
-
-            /* Badge flags */
-            .no-deposit-flag,
-            .vpn-flag {
-                font-size: 0.45rem !important;
-                padding: 4px 10px !important;
-                border-radius: 0 0 0 10px !important;
-            }
-
-            /* Giveaway section */
-            #giveaway-section .bg-surface-1 {
-                padding: 2rem 1.25rem !important;
-                border-radius: 18px !important;
-            }
-
-            #giveaway-section h2 {
-                font-size: 1.5rem !important;
-            }
-
-            /* Footer */
-            footer {
-                padding-bottom: 2rem !important;
-            }
-
-            footer .flex.items-center.gap-2 {
-                gap: 0.35rem !important;
-            }
-
-            .social-btn {
-                width: 38px !important;
-                height: 38px !important;
-                border-radius: 10px !important;
-            }
-
-            /* Hero glow - smaller on mobile */
-            .hero-glow {
-                width: 350px !important;
-                height: 350px !important;
-                top: -120px !important;
-            }
-
-            .hero-glow-2 {
-                width: 200px !important;
-                height: 200px !important;
-            }
-        }
-
-        /* Small phones */
-        @media (max-width: 380px) {
-            #hero h1 {
-                font-size: 1.6rem !important;
-            }
-
-            .deal-card {
-                padding: 0.75rem !important;
-            }
-
-            .info-block,
-            .highlight-chip {
-                padding: 8px 4px !important;
-            }
-
-            .info-block .text-base,
-            .highlight-chip .text-sm {
-                font-size: 0.65rem !important;
-            }
-
-            .cta-primary {
-                font-size: 0.55rem !important;
-                padding: 0.65rem 0.5rem !important;
-            }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{overflow-x:hidden;}
+        body{background:#09090b;color:#fafafa;font-family:'Inter',sans-serif;overflow-x:hidden;max-width:100vw;-webkit-font-smoothing:antialiased;}
+        ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}
+        ::-webkit-scrollbar-thumb{background:rgba(168,85,247,0.25);border-radius:99px;}
+        ::-webkit-scrollbar-thumb:hover{background:rgba(168,85,247,0.45);}
+
+        /* AGE GATE */
+        #main-wrapper{display:none;}
+        #age-gate{background:#09090b;z-index:10000;display:flex;position:fixed;inset:0;align-items:center;justify-content:center;padding:1.5rem;}
+        #age-gate .gate-card{animation:scaleFadeIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards;}
+        @keyframes scaleFadeIn{from{opacity:0;transform:scale(0.92);}to{opacity:1;transform:scale(1);}}
+
+        /* NOISE */
+        body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+
+        /* HERO GLOW */
+        .hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(147,51,234,0.12) 0%,transparent 70%);top:-250px;left:50%;transform:translateX(-50%);pointer-events:none;animation:pulseGlow 6s ease-in-out infinite alternate;}
+        .hero-glow-2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.08) 0%,transparent 70%);top:100px;right:-100px;pointer-events:none;animation:pulseGlow 8s ease-in-out infinite alternate-reverse;}
+        @keyframes pulseGlow{from{opacity:0.6;transform:translateX(-50%) scale(1);}to{opacity:1;transform:translateX(-50%) scale(1.1);}}
+
+        /* ── DEAL CARDS (BrutalerBonus-Stil) ── */
+        .deal-card{background:#0f0f12;border:1px solid rgba(255,255,255,0.04);border-radius:20px;transition:border-color 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;}
+        .deal-card:hover{border-color:rgba(147,51,234,0.15);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 48px -8px rgba(147,51,234,0.06);}
+        .deal-card.featured{background:linear-gradient(135deg,rgba(147,51,234,0.07),#0f0f12 45%);border-color:rgba(147,51,234,0.12);}
+        .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.05),#0f0f12 50%);border-color:rgba(251,191,36,0.15);}
+
+        .card-main{padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;user-select:none;}
+        @media(min-width:768px){.card-main{flex-direction:row;align-items:center;gap:4rem;padding:2.5rem;}}
+
+        .card-details{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);}
+        .card-details.open{max-height:600px;}
+        .card-details-inner{padding:1.5rem 1.25rem 2rem;border-top:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);}
+        @media(min-width:768px){.card-details-inner{padding:2.5rem;}}
+
+        /* RANK */
+        .rank-badge{min-width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.72rem;flex-shrink:0;}
+        .rank-1{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;box-shadow:0 4px 16px rgba(251,191,36,0.25);}
+        .rank-2{background:linear-gradient(135deg,#d1d5db,#9ca3af);color:#1f2937;}
+        .rank-3{background:linear-gradient(135deg,#d97706,#b45309);color:#fff;}
+        .rank-other{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.2);}
+
+        /* STAT CHIPS */
+        .stat-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:6px 12px;font-size:0.7rem;font-weight:700;color:#71717a;white-space:nowrap;letter-spacing:0.02em;}
+        .stat-chip.accent{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.15);color:#c084fc;}
+        .stat-chip.green{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.15);color:#34d399;}
+        .stat-chip.gold{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2);color:#fbbf24;}
+        .stat-chip.red{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.15);color:#f87171;}
+
+        /* TAGS */
+        .tag{background:rgba(147,51,234,0.08);color:#c084fc;padding:2px 7px;border-radius:6px;font-size:0.58rem;font-weight:700;white-space:nowrap;}
+        .tag-gold{background:rgba(251,191,36,0.1);color:#fbbf24;padding:2px 7px;border-radius:6px;font-size:0.58rem;font-weight:700;white-space:nowrap;}
+
+        /* FLAGS */
+        .no-deposit-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(251,191,36,0.3);z-index:5;}
+
+        /* CODE BTN */
+        .code-btn{position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 14px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:80px;}
+        .code-btn:hover{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2);}
+        .code-btn .code-label,.code-btn .code-value{transition:all 0.3s cubic-bezier(0.16,1,0.3,1);}
+        .code-btn.copied .code-label,.code-btn.copied .code-value{opacity:0;transform:scale(0.8);}
+        .code-btn .copy-confirm{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.5);transition:all 0.35s cubic-bezier(0.16,1,0.3,1);pointer-events:none;}
+        .code-btn.copied .copy-confirm{opacity:1;transform:scale(1);}
+        .code-btn.copied{border-color:rgba(52,211,153,0.3)!important;background:rgba(52,211,153,0.06)!important;}
+
+        /* CTA */
+        .cta-primary{background:linear-gradient(135deg,#9333ea,#7c3aed);color:#fff;font-weight:800;border-radius:12px;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(147,51,234,0.2);}
+        .cta-primary:hover{box-shadow:0 8px 32px rgba(147,51,234,0.35);transform:translateY(-1px);}
+        .cta-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent 50%);border-radius:inherit;}
+        .cta-freshbet{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 20px rgba(217,119,6,0.25);}
+        .cta-freshbet:hover{box-shadow:0 8px 32px rgba(217,119,6,0.4);}
+
+        /* CHEVRON */
+        .chevron{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s ease,background 0.2s;}
+        .chevron.open{transform:rotate(180deg);background:rgba(168,85,247,0.1);}
+
+        /* NAV */
+        .nav-glass{background:rgba(9,9,11,0.8);backdrop-filter:blur(24px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,0.04);}
+        .nav-link{color:#71717a;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;padding:6px 0;position:relative;transition:color 0.3s ease;}
+        .nav-link:hover{color:#a1a1aa;}
+        .nav-link.active{color:#fafafa;}
+        .nav-link.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:#a855f7;border-radius:2px;box-shadow:0 0 8px rgba(168,85,247,0.5);}
+
+        /* MOBILE MENU */
+        #mobile-menu{transform:translateY(-100%);transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);}
+        #mobile-menu.open{transform:translateY(0);}
+        .burger-line{transition:all 0.3s ease;}
+        .burger-open .line-1{transform:rotate(45deg) translate(5px,5px);}
+        .burger-open .line-2{opacity:0;}
+        .burger-open .line-3{transform:rotate(-45deg) translate(5px,-5px);}
+
+        /* FILTERS */
+        select option{background:#18181b;color:#fff;}
+        .filter-input{background:#0f0f12;border:1px solid rgba(255,255,255,0.06);color:#fafafa;border-radius:12px;padding:10px 14px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:border-color 0.2s,box-shadow 0.2s;outline:none;-webkit-appearance:none;}
+        .filter-input:focus{border-color:rgba(168,85,247,0.3);box-shadow:0 0 0 3px rgba(168,85,247,0.06);}
+        .filter-input::placeholder{color:#3f3f46;}
+
+        /* TICKET INPUTS */
+        .ticket-input{background:#0f0f12;border:1px solid rgba(255,255,255,0.06);color:#fafafa;border-radius:14px;padding:14px 18px;font-size:0.85rem;font-family:'Inter',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;outline:none;width:100%;}
+        .ticket-input:focus{border-color:rgba(168,85,247,0.3);box-shadow:0 0 0 3px rgba(168,85,247,0.06);}
+        .ticket-input::placeholder{color:#3f3f46;}
+        select.ticket-input{-webkit-appearance:none;cursor:pointer;}
+        textarea.ticket-input{resize:vertical;min-height:120px;}
+
+        /* TOAST */
+        #copyToast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(16px);background:#18181b;border:1px solid rgba(168,85,247,0.2);color:#e9d5ff;padding:12px 24px;border-radius:14px;font-weight:700;font-size:0.8rem;z-index:10001;opacity:0;pointer-events:none;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);box-shadow:0 16px 48px rgba(0,0,0,0.5);}
+        #copyToast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+        /* ANIMATIONS */
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+        .animate-in{animation:fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both;}
+        .reveal-item{opacity:0;transform:translateY(20px);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1);}
+        .reveal-item.visible{opacity:1;transform:translateY(0);}
+
+        /* PROFILE */
+        .profile-outer{position:relative;display:inline-flex;}
+        .profile-outer::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,#a855f7,#6366f1,#a855f7);animation:profileSpin 5s linear infinite;opacity:0.6;}
+        .profile-outer::after{content:'';position:absolute;inset:-8px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,0.2),transparent 70%);animation:pulseRing 3s ease-in-out infinite;}
+        @keyframes profileSpin{to{transform:rotate(360deg);}}
+        @keyframes pulseRing{0%,100%{opacity:0.4;transform:scale(1);}50%{opacity:0.8;transform:scale(1.05);}}
+
+        /* TEXT */
+        .text-gradient{background:linear-gradient(135deg,#c084fc 0%,#a855f7 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .text-gradient-gold{background:linear-gradient(135deg,#fbbf24 0%,#f59e0b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+        /* GIVEAWAY */
+        .giveaway-wrapper{position:relative;}
+        .giveaway-wrapper::before{content:'';position:absolute;inset:-1px;border-radius:21px;background:linear-gradient(135deg,rgba(147,51,234,0.15),transparent 50%,rgba(99,102,241,0.1));z-index:-1;}
+
+        /* LIVE */
+        .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);padding:4px 12px;border-radius:99px;color:#c084fc;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-top:1rem;animation:bounceIn 0.8s cubic-bezier(0.175,0.885,0.32,1.275) both;}
+        .live-dot{width:6px;height:6px;background:#a855f7;border-radius:50%;box-shadow:0 0 8px #a855f7;animation:pulse-dot 1.5s infinite;}
+        @keyframes pulse-dot{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:0.5;}100%{transform:scale(1);opacity:1;}}
+        @keyframes bounceIn{from{opacity:0;transform:scale(0.3) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+
+        /* SUPPORT */
+        .support-card{background:#0f0f12;border:1px solid rgba(255,255,255,0.05);border-radius:20px;padding:2rem;}
+        .support-card-green{background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.12);border-radius:20px;padding:2rem;}
+
+        /* SOCIAL */
+        .social-btn{width:44px;height:44px;border-radius:12px;background:#0f0f12;border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;color:#71717a;transition:all 0.3s ease;}
+        .social-btn:hover{color:#c084fc;border-color:rgba(168,85,247,0.2);background:rgba(168,85,247,0.06);transform:translateY(-2px);}
+        .footer-line{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);}
+        .tab-content{transition:opacity 0.3s ease;}
+
+        /* MOBILE */
+        @media(max-width:768px){
+            #hero{margin-bottom:2rem!important;padding-top:0!important;}
+            #hero h1{font-size:2rem!important;line-height:1.15!important;}
+            #hero p{font-size:0.8rem!important;}
+            main{padding-top:5rem!important;padding-bottom:4rem!important;padding-left:0.75rem!important;padding-right:0.75rem!important;}
+            #filters{flex-direction:column;gap:0.5rem!important;padding:0 0.25rem;}
+            #filters .relative,#filters select{width:100%!important;}
+            .card-main{padding:1.25rem!important;}
+            .card-details-inner{padding:1.25rem!important;}
+            .support-card,.support-card-green{padding:1.25rem!important;border-radius:16px!important;}
+            .social-btn{width:38px!important;height:38px!important;}
+            .hero-glow{width:350px!important;height:350px!important;top:-120px!important;}
+        }
+        @media(max-width:380px){
+            #hero h1{font-size:1.6rem!important;}
+            .cta-primary{font-size:0.6rem!important;}
         }
     </style>
 </head>
-
 <body>
 
-    <div id="copyToast">✓ Code kopiert!</div>
+<div id="copyToast">✓ Code kopiert!</div>
 
-    <div id="age-gate">
-        <div
-            class="gate-card max-w-[380px] w-full text-center p-8 md:p-10 rounded-3xl bg-surface-1 border border-white/[0.04]">
-            <div class="mb-8 flex justify-center">
-                <div
-                    class="w-20 h-20 rounded-2xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center">
-                    <span class="text-2xl font-black text-brand-400">18+</span>
-                </div>
-            </div>
-            <h2 class="text-2xl font-extrabold mb-2 tracking-tight text-white">
-                Altersprüfung
-            </h2>
-            <p class="text-zinc-500 text-sm mb-8 leading-relaxed">
-                Glücksspiel kann süchtig machen.<br>Bitte bestätige, dass du mindestens 18 Jahre alt bist.
-            </p>
-            <div class="space-y-3">
-                <button onclick="acceptAge()" class="cta-primary w-full py-4 text-sm tracking-wide">
-                    Ich bin über 18
-                </button>
-                <button onclick="leaveSite()"
-                    class="w-full bg-white/[0.03] hover:bg-white/[0.06] text-zinc-500 font-semibold py-4 rounded-xl transition text-sm">
-                    Verlassen
-                </button>
+<!-- AGE GATE -->
+<div id="age-gate">
+    <div class="gate-card max-w-[380px] w-full text-center p-8 md:p-10 rounded-3xl bg-surface-1 border border-white/[0.04]">
+        <div class="mb-8 flex justify-center"><div class="w-20 h-20 rounded-2xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center"><span class="text-2xl font-black text-brand-400">18+</span></div></div>
+        <h2 class="text-2xl font-extrabold mb-2 tracking-tight text-white">Altersprüfung</h2>
+        <p class="text-zinc-500 text-sm mb-8 leading-relaxed">Glücksspiel kann süchtig machen.<br>Bitte bestätige, dass du mindestens 18 Jahre alt bist.</p>
+        <div class="space-y-3">
+            <button onclick="acceptAge()" class="cta-primary w-full py-4 text-sm tracking-wide">Ich bin über 18</button>
+            <button onclick="leaveSite()" class="w-full bg-white/[0.03] hover:bg-white/[0.06] text-zinc-500 font-semibold py-4 rounded-xl transition text-sm">Verlassen</button>
+        </div>
+    </div>
+</div>
+
+<div id="main-wrapper">
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-[90] bg-surface-0 pt-28 px-8 md:hidden">
+        <div class="flex flex-col gap-6">
+            <button onclick="switchTab('deals'); toggleMenu();" class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">Casino Deals</button>
+            <button onclick="switchTab('giveaway'); toggleMenu();" class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">Gewinnspiel</button>
+            <button onclick="switchTab('support'); toggleMenu();" class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">Support</button>
+            <div class="mt-6 flex gap-5">
+                <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Instagram</a>
+                <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Discord</a>
+                <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">YouTube</a>
             </div>
         </div>
     </div>
 
-    <div id="main-wrapper">
+    <!-- NAV -->
+    <nav class="fixed top-0 w-full z-[100] nav-glass">
+        <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('deals')">
+                <span class="text-lg font-extrabold tracking-tight text-white">idioten<span class="text-brand-500">bonus</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <button id="nav-deals" onclick="switchTab('deals')" class="nav-link active">Deals</button>
+                <button id="nav-giveaway" onclick="switchTab('giveaway')" class="nav-link">Gewinnspiel</button>
+                <button id="nav-support" onclick="switchTab('support')" class="nav-link">Support</button>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="switchTab('support')" class="cta-primary px-4 py-2 text-[0.65rem] tracking-widest rounded-xl">Support</button>
+                <button id="burger-btn" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
+                    <span class="burger-line line-1 w-5 h-[1.5px] bg-white rounded-full"></span>
+                    <span class="burger-line line-2 w-5 h-[1.5px] bg-white rounded-full"></span>
+                    <span class="burger-line line-3 w-5 h-[1.5px] bg-white rounded-full"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-        <div id="mobile-menu" class="fixed inset-0 z-[90] bg-surface-0 pt-28 px-8 md:hidden">
-            <div class="flex flex-col gap-6">
-                <button onclick="switchTab('deals'); toggleMenu();"
-                    class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">
-                    Casino Deals
-                </button>
-                <button onclick="switchTab('giveaway'); toggleMenu();"
-                    class="text-2xl font-extrabold tracking-tight text-left text-white border-b border-white/[0.04] pb-5">
-                    Gewinnspiel
-                </button>
-                <div class="mt-6 flex gap-5">
-                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank"
-                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Instagram</a>
-                    <a href="https://discord.gg/Tu6cXpFs62" target="_blank"
-                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Discord</a>
-                    <a href="https://www.youtube.com/@IdiotenBonus" target="_blank"
-                        class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">YouTube</a>
+    <main class="pt-28 pb-24 px-5">
+
+        <!-- DEALS TAB -->
+        <div id="deals-section" class="tab-content max-w-6xl mx-auto">
+            <div class="relative text-center mb-16 pt-4" id="hero">
+                <div class="hero-glow"></div><div class="hero-glow-2"></div>
+                <div class="relative z-10 mb-7 flex flex-col items-center animate-in" style="animation-delay:0.1s;">
+                    <div class="profile-outer">
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-surface-2 border-2 border-surface-3 relative z-10">
+                            <img src="logo.jpg" alt="Idiotenbonus" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="live-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        Exklusive Deals 2026
+                    </div>
+                </div>
+                <div class="relative z-10 animate-in" style="animation-delay:0.2s;">
+                    <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-4">Die #1 für<br><span class="text-gradient">Casino Deals</span></h1>
+                    <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto mb-8">Exklusive Bonis, verifizierte Codes und die besten Non-Sticky Deals – handverlesen für dich.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2.5 items-center justify-center mb-10 reveal-item" id="filters">
+                <div class="relative">
+                    <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <input type="text" id="searchInput" oninput="filterCasinos()" placeholder="Suchen..." class="filter-input pl-9 pr-4 w-44 md:w-56 !text-xs !normal-case !tracking-normal !font-medium">
+                </div>
+                <select id="typeFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
+                    <option value="all">Alle Typen</option>
+                    <option value="Non-Sticky">Non-Sticky</option>
+                    <option value="Sticky">Sticky</option>
+                </select>
+            </div>
+
+            <div class="space-y-3" id="casinoList"></div>
+        </div>
+
+        <!-- GIVEAWAY TAB -->
+        <div id="giveaway-section" class="tab-content max-w-4xl mx-auto hidden pt-4">
+            <div class="bg-surface-1 rounded-[22px] p-10 md:p-16 text-center border border-white/[0.04]">
+                <div class="text-6xl mb-6">🎰</div>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4">Momentan kein<br>Gewinnspiel aktiv.</h2>
+                <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">Trag dich hier ein – du wirst als Erstes benachrichtigt wenn das nächste Gewinnspiel startet!</p>
+                <div class="max-w-sm mx-auto" id="giveaway-container">
+                    <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="space-y-3">
+                        <input type="hidden" name="_subject" value="📧 Newsletter-Anmeldung – Idiotenbonus">
+                        <input type="email" name="email" required placeholder="deine@email.de" class="filter-input w-full py-4 text-center !text-sm !normal-case !tracking-normal !font-medium !rounded-2xl">
+                        <button type="submit" id="submit-btn" class="cta-primary w-full py-4 text-sm tracking-wide">BENACHRICHTIGEN</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <nav class="fixed top-0 w-full z-[100] nav-glass">
-            <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-                <div class="flex items-center gap-2 cursor-pointer" onclick="switchTab('deals')">
-                    <span class="text-lg font-extrabold tracking-tight text-white">idioten<span
-                            class="text-brand-500">bonus</span></span>
+        <!-- SUPPORT TAB -->
+        <div id="support-section" class="tab-content max-w-4xl mx-auto hidden pt-4">
+            <div class="text-center mb-12 animate-in">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[0.65rem] font-bold uppercase tracking-widest mb-6">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Support Center
                 </div>
-
-                <div class="hidden md:flex items-center gap-8">
-                    <button id="nav-deals" onclick="switchTab('deals')" class="nav-link active">Deals</button>
-                    <button id="nav-giveaway" onclick="switchTab('giveaway')" class="nav-link">Gewinnspiel</button>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank"
-                        class="cta-primary px-4 py-2 text-[0.65rem] tracking-widest rounded-xl">
-                        Support
-                    </a>
-                    <button id="burger-btn" onclick="toggleMenu()"
-                        class="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
-                        <span class="burger-line line-1 w-5 h-[1.5px] bg-white rounded-full"></span>
-                        <span class="burger-line line-2 w-5 h-[1.5px] bg-white rounded-full"></span>
-                        <span class="burger-line line-3 w-5 h-[1.5px] bg-white rounded-full"></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <main class="pt-28 pb-24 px-5">
-
-            <div id="deals-section" class="tab-content max-w-6xl mx-auto">
-
-                <div class="relative text-center mb-16 pt-4" id="hero">
-                    <div class="hero-glow"></div>
-                    <div class="hero-glow-2"></div>
-
-                    <div class="relative z-10 mb-7 flex flex-col items-center animate-in" style="animation-delay: 0.1s;">
-                        <div class="profile-outer">
-                            <div
-                                class="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-surface-2 border-2 border-surface-3 relative z-10">
-                                <img src="logo.jpg" alt="Idiotenbonus" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="live-badge cursor-pointer" onclick="switchTab('giveaway')">
-                            <span class="live-dot"></span>
-                            2000€ Gewinnspiel LIVE
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 animate-in" style="animation-delay: 0.2s;">
-                        <h1
-                            class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] mb-4">
-                            Die #1 für<br>
-                            <span class="text-gradient">Casino Deals</span>
-                        </h1>
-                        <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto mb-8">
-                            Exklusive Bonis, verifizierte Codes und die besten Non-Sticky Deals – handverlesen für dich.
-                        </p>
-                    </div>
-
-
-                </div>
-
-                <div class="flex flex-wrap gap-2.5 items-center justify-center mb-10 reveal-item" id="filters">
-                    <div class="relative">
-                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none"
-                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
-                        <input type="text" id="searchInput" oninput="filterCasinos()" placeholder="Suchen..."
-                            class="filter-input pl-9 pr-4 w-44 md:w-56 !text-xs !normal-case !tracking-normal !font-medium">
-                    </div>
-                    <select id="typeFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
-                        <option value="all">Alle Typen</option>
-                        <option value="Non-Sticky">Non-Sticky</option>
-                        <option value="Sticky">Sticky</option>
-                    </select>
-                    <select id="bonusFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
-                        <option value="0">Min. Bonus: –</option>
-                        <option value="100">Ab 100€</option>
-                        <option value="500">Ab 500€</option>
-                    </select>
-                    <select id="wagerFilter" onchange="filterCasinos()" class="filter-input cursor-pointer">
-                        <option value="100">Max. Wager: –</option>
-                        <option value="35">Bis 35x</option>
-                        <option value="40">Bis 40x</option>
-                    </select>
-                </div>
-
-                <div class="space-y-4" id="casinoList"></div>
+                <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4">Wir sind für<br><span class="text-gradient">dich da.</span></h2>
+                <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto">Bonusfrage, Auszahlungsproblem oder technisches Anliegen – schreib uns ein Ticket.</p>
             </div>
 
-            <div id="giveaway-section" class="tab-content max-w-4xl mx-auto hidden pt-4">
-                <div class="giveaway-wrapper">
-                    <div class="bg-surface-1 rounded-[22px] p-8 md:p-14 relative overflow-hidden border border-white/[0.04]">
-                        
-                        <div class="relative z-10 text-center mb-12">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[0.65rem] font-bold uppercase tracking-widest mb-6">
-                                <span class="live-dot"></span> Mai Special
-                            </div>
-                            <h2 class="text-4xl md:text-6xl font-black tracking-tight mb-4">
-                                2000€ <span class="text-gradient">Gewinnspiel</span>
-                            </h2>
-                            <p class="text-zinc-500 text-sm md:text-base max-w-xl mx-auto">
-                                Wir hauen im ganzen Mai richtig raus! Spiele in deinen Lieblings-Casinos und sichere dir Tickets für die große Verlosung.
-                            </p>
-                        </div>
-
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
-                            <div class="bg-surface-2 p-5 rounded-2xl border border-white/[0.05] text-center">
-                                <div class="text-amber-400 text-xs font-black uppercase mb-1">1. Platz</div>
-                                <div class="text-2xl font-black">1000€</div>
-                            </div>
-                            <div class="bg-surface-2 p-5 rounded-2xl border border-white/[0.05] text-center">
-                                <div class="text-zinc-300 text-xs font-black uppercase mb-1">2. Platz</div>
-                                <div class="text-2xl font-black">500€</div>
-                            </div>
-                            <div class="bg-surface-2 p-5 rounded-2xl border border-white/[0.05] text-center">
-                                <div class="text-orange-400 text-xs font-black uppercase mb-1">3. Platz</div>
-                                <div class="text-2xl font-black">200€</div>
-                            </div>
-                            <div class="bg-surface-2 p-5 rounded-2xl border border-white/[0.05] text-center">
-                                <div class="text-zinc-500 text-xs font-black uppercase mb-1">4-6. Platz</div>
-                                <div class="text-2xl font-black">100€</div>
-                            </div>
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-4 mb-12">
-                            <div class="bg-brand-500/5 p-6 rounded-2xl border border-brand-500/10">
-                                <h4 class="text-brand-400 font-bold mb-4 flex items-center gap-2">
-                                    <span class="text-lg">🥇</span> Golzino Tickets
-                                </h4>
-                                <ul class="space-y-3 text-sm text-zinc-400">
-                                    <li class="flex justify-between"><span>25€ Einzahlung</span> <span class="text-white font-bold">5 Tickets</span></li>
-                                    <li class="flex justify-between"><span>50€ Einzahlung</span> <span class="text-white font-bold">10 Tickets</span></li>
-                                    <li class="flex justify-between"><span>100€ Einzahlung</span> <span class="text-white font-bold">20 Tickets</span></li>
-                                </ul>
-                            </div>
-                            <div class="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.05]">
-                                <h4 class="text-zinc-300 font-bold mb-4 flex items-center gap-2">
-                                    <span class="text-lg">🎲</span> Andere Casinos
-                                </h4>
-                                <ul class="space-y-3 text-sm text-zinc-400">
-                                    <li class="flex justify-between"><span>50€ Einzahlung</span> <span class="text-white font-bold">15 Tickets</span></li>
-                                    <li class="flex justify-between"><span>100€ Einzahlung</span> <span class="text-white font-bold">20 Tickets</span></li>
-                                    <li class="text-[0.65rem] pt-2 italic">*Rainbet ist vom Gewinnspiel ausgeschlossen.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="max-w-md mx-auto text-center">
-                            <h3 class="font-bold text-lg mb-6">So nimmst du teil:</h3>
-                            <div class="flex flex-col gap-4 text-left mb-10">
-                                <div class="flex gap-4 items-start">
-                                    <div class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shrink-0">1</div>
-                                    <p class="text-sm text-zinc-400">Folge uns auf <a href="https://www.instagram.com/Idiotenbonus/" class="text-brand-400 font-bold">Instagram</a>.</p>
-                                </div>
-                                <div class="flex gap-4 items-start">
-                                    <div class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shrink-0">2</div>
-                                    <p class="text-sm text-zinc-400">Trage deine Email unten ein.</p>
-                                </div>
-                                <div class="flex gap-4 items-start">
-                                    <div class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold shrink-0">3</div>
-                                    <p class="text-sm text-zinc-400">Sende uns einen Screenshot deiner Einzahlung per <span class="text-white font-bold">Instagram DM</span>.</p>
-                                </div>
-                            </div>
-
-                            <div id="giveaway-container">
-                                <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="space-y-3">
-                                    <input type="email" name="email" required placeholder="deine@email.de"
-                                        class="filter-input w-full py-4 text-center !text-sm !normal-case !tracking-normal !font-medium !rounded-2xl">
-                                    <button type="submit" id="submit-btn" class="cta-primary w-full py-4 text-sm tracking-wide">
-                                        JETZT TEILNEHMEN
-                                    </button>
-                                </form>
-                                <p class="text-[0.6rem] text-zinc-600 mt-6 uppercase tracking-widest font-bold">
-                                    Auflösung: 7.06.2026 @ 0:00 Uhr | Teilnahme ab 18+
-                                </p>
-                            </div>
-                        </div>
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="support-card-green animate-in" style="animation-delay:0.1s;">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     </div>
+                    <p class="text-xs font-black uppercase tracking-widest text-emerald-400 mb-1">Casino</p>
+                    <p class="text-white font-bold text-sm mb-2">24/7 Live Chat</p>
+                    <p class="text-zinc-600 text-xs leading-relaxed">Direkt beim Casino – am schnellsten für Konto- & Auszahlungsfragen.</p>
+                </div>
+                <div class="support-card animate-in" style="animation-delay:0.15s;">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+                    </div>
+                    <p class="text-xs font-black uppercase tracking-widest text-brand-400 mb-1">Unser Team</p>
+                    <p class="text-white font-bold text-sm mb-2">Ticket schreiben</p>
+                    <p class="text-zinc-600 text-xs leading-relaxed">Fragen zu Deals, Codes & Gewinnspiel – Antwort innerhalb 24h.</p>
+                </div>
+                <div class="support-card animate-in" style="animation-delay:0.2s;">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <p class="text-xs font-black uppercase tracking-widest text-amber-400 mb-1">Hilfe</p>
+                    <p class="text-white font-bold text-sm mb-2">Suchtprävention</p>
+                    <p class="text-zinc-600 text-xs leading-relaxed"><a href="https://www.check-dein-spiel.de" target="_blank" class="text-amber-400 font-bold hover:text-amber-300 transition">check-dein-spiel.de</a> — kostenlos & anonym.</p>
                 </div>
             </div>
 
-        </main>
-
-        <footer class="pb-12 pt-4">
-            <div class="max-w-6xl mx-auto px-5">
-                <div class="footer-line mb-12"></div>
-                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div class="text-center md:text-left">
-                        <span class="text-lg font-extrabold tracking-tight block mb-1">idioten<span
-                                class="text-brand-500">bonus</span></span>
-                        <p class="text-zinc-700 text-[0.6rem] uppercase tracking-[0.2em] font-semibold">Deals &
-                            Giveaways · 2026</p>
+            <div class="support-card animate-in" style="animation-delay:0.25s;">
+                <div class="flex items-center gap-4 mb-7">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
-
-                    <div class="flex items-center gap-2">
-                        <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="social-btn"
-                            aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="social-btn"
-                            aria-label="YouTube">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z" />
-                                <path d="m10 15 5-3-5-3z" />
-                            </svg>
-                        </a>
-                        <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="social-btn" aria-label="Discord">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                <path
-                                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z" />
-                            </svg>
-                        </a>
-                        <div class="w-px h-6 bg-white/[0.06] mx-1"></div>
-                        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="social-btn"
-                            aria-label="Back to top">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="m18 15-6-6-6 6" />
-                            </svg>
-                        </button>
+                    <div>
+                        <h3 class="text-lg font-black text-white">Support Ticket</h3>
+                        <p class="text-zinc-600 text-xs mt-0.5">Wir antworten innerhalb von 24h per E-Mail.</p>
                     </div>
+                </div>
 
-                    <p
-                        class="text-[0.6rem] text-zinc-700 text-center md:text-right font-semibold uppercase tracking-widest leading-relaxed">
-                        Glücksspiel kann süchtig machen.<br>18+ · Spielverantwortung.
-                    </p>
+                <div id="ticket-container">
+                    <form id="ticket-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="space-y-4">
+                        <input type="hidden" name="_subject" value="🎫 Support Ticket – Idiotenbonus">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Name *</label>
+                                <input type="text" name="name" required placeholder="Max Mustermann" class="ticket-input">
+                            </div>
+                            <div>
+                                <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">E-Mail *</label>
+                                <input type="email" name="email" required placeholder="deine@email.de" class="ticket-input">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Casino (optional)</label>
+                                <select name="casino" class="ticket-input">
+                                    <option value="">Kein bestimmtes Casino</option>
+                                    <option>Freshbet</option>
+                                    <option>Slotsgem</option>
+                                    <option>Allyspin</option>
+                                    <option>Westace</option>
+                                    <option>Legiano</option>
+                                    <option>Bankonbet</option>
+                                    <option>Vegashero</option>
+                                    <option>N1Bet</option>
+                                    <option>Sportaza</option>
+                                    <option>Mystake</option>
+                                    <option>Rabona</option>
+                                    <option>Zoccer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Kategorie *</label>
+                                <select name="kategorie" required class="ticket-input">
+                                    <option value="" disabled selected>Bitte wählen …</option>
+                                    <option>Bonusfrage</option>
+                                    <option>Auszahlung</option>
+                                    <option>Technisches Problem</option>
+                                    <option>Konto / Login</option>
+                                    <option>Gewinnspiel</option>
+                                    <option>Free Spins Code</option>
+                                    <option>Sonstiges</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Nachricht *</label>
+                            <textarea name="nachricht" required placeholder="Beschreibe dein Anliegen so genau wie möglich …" class="ticket-input" rows="5"></textarea>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                            <svg class="w-4 h-4 text-zinc-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+                            <p class="text-[0.65rem] text-zinc-600 leading-relaxed">Screenshot vorhanden? Antworte auf unsere Bestätigungs-E-Mail mit dem Bild als Anhang.</p>
+                        </div>
+                        <button type="submit" id="ticket-btn" class="cta-primary w-full py-4 text-sm tracking-widest uppercase">Ticket absenden</button>
+                    </form>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
 
-    <script>
-        const casinos = [
-            { id: 1, name: "Legiano", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Legiano.png", badges: ["Top Auswahl", "Turniere"], url: "https://lgno.monalvor.com/?mid=103181_2147649&clickid=merkuridioten-SB6002" },
-            { id: 2, name: "Bankonbet", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Bankonbet.png", badges: ["Schnelle Auszahlungen", "Live Casino"], url: "https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893" },
-            { id: 3, name: "Vegashero", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Vegashero.png", badges: ["Schnelle Auszahlungen", "Live Casino", "Sportwetten"], url: "https://vgr.lynmonkel.com/?mid=346920_2133311&clickid=merkuridioten-SB5748" },
-            { id: 4, name: "N1Bet", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "N1Bet.png", badges: ["Schnelle Auszahlungen", "Live Casino", "Sportwetten"], url: "https://n1betpartners.com/n1f2mi9qlc" },
-            { id: 5, name: "Sportaza", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Sportasa.png", badges: ["Sportwetten", "Live Casino"], url: "https://stzns.lynmonkel.com/?mid=278079_2052094" },
-            { id: 6, name: "Mystake", bonus: "150%", bonusVal: 500, max: "500€", type: "Sticky", wager: "35x", wagerVal: 35, logo: "Mystake.png", badges: ["Schnelle Auszahlung", "Live Casino"], url: "https://go.affiliatemystake.com/visit/?bta=3132393&nci=5664&utm_campaign=merkuridioten&afp=merkuridioten-SB2897" },
-            { id: 7, name: "Rabona", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Rabona.png", badges: ["Top Auswahl", "Turniere"], url: "https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894" },
-            { id: 8, name: "Zoccer", bonus: "100%", bonusVal: 500, max: "500€", type: "Non-Sticky", wager: "35x", wagerVal: 35, logo: "Zoccer.png", badges: ["Top Auswahl", "Turniere"], url: "https://socr.virelon.com/?mid=361838_2133314&clickid=merkuridioten-SB5749" },
-            
-        ];
+    </main>
 
-        // ── Menu ──
-        function toggleMenu() {
-            document.getElementById('mobile-menu').classList.toggle('open');
-            document.getElementById('burger-btn').classList.toggle('burger-open');
-        }
-
-        // ── Filter ──
-        function filterCasinos() {
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const type = document.getElementById('typeFilter').value;
-            const minBonus = parseInt(document.getElementById('bonusFilter').value);
-            const maxWager = parseInt(document.getElementById('wagerFilter').value);
-            const filtered = casinos.filter(c => {
-                const matchSearch = c.name.toLowerCase().includes(search);
-                const matchType = type === 'all' || c.type === type;
-                // Rainbet has no deposit bonus, so skip bonus/wager filters for it
-                if (c.isRainbet) return matchSearch && matchType;
-                return matchSearch && matchType && c.bonusVal >= minBonus && c.wagerVal <= maxWager;
-            });
-            renderCasinos(filtered);
-        }
-
-        // ── Rank class ──
-        function rankClass(id) {
-            return id <= 3 ? `rank-${id}` : 'rank-other';
-        }
-
-        // ── Render ──
-        function renderCasinos(data = casinos) {
-            const list = document.getElementById('casinoList');
-
-            if (!data.length) {
-                list.innerHTML = `<div class="text-center py-20 text-zinc-700 font-bold text-sm uppercase tracking-widest">Keine Deals gefunden</div>`;
-                return;
-            }
-
-            list.innerHTML = data.map((c, i) => {
-                // Badge flags
-                let flagHtml = '';
-                if (c.vpnRequired) {
-                    flagHtml = `<div class="vpn-flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>VPN benötigt</div>`;
-                } else if (c.noDeposit) {
-                    flagHtml = `<div class="no-deposit-flag">50 Free Spins ohne Einzahlung!</div>`;
-                }
-
-                // Center stats – Rainbet gets special highlight chips
-                let centerHtml;
-                if (c.isRainbet) {
-                    centerHtml = `
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 flex-grow w-full relative z-10">
-                            <div class="highlight-chip">
-                                <span class="chip-icon">🔄</span>
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Weekly</div>
-                                <div class="text-amber-400 font-extrabold text-sm">Rewards</div>
-                            </div>
-                            <div class="highlight-chip">
-                                <span class="chip-icon">🏆</span>
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Monthly</div>
-                                <div class="text-amber-400 font-extrabold text-sm">Boni</div>
-                            </div>
-                            <div class="highlight-chip">
-                                <span class="chip-icon">🎮</span>
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Originals</div>
-                                <div class="text-emerald-400 font-extrabold text-sm">Exklusiv</div>
-                            </div>
-                            <div class="highlight-chip">
-                                <span class="chip-icon">⚡</span>
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Auszahlung</div>
-                                <div class="text-emerald-400 font-extrabold text-sm">Instant</div>
-                            </div>
-                        </div>`;
-                } else {
-                    centerHtml = `
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 flex-grow w-full relative z-10">
-                            <div class="info-block">
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Bonus</div>
-                                <div class="text-gradient font-extrabold text-base">${c.bonus}</div>
-                            </div>
-                            <div class="info-block">
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Max</div>
-                                <div class="text-white font-extrabold text-base">${c.max}</div>
-                            </div>
-                            <div class="info-block">
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Typ</div>
-                                <div class="font-extrabold text-base ${c.type === 'Non-Sticky' ? 'text-emerald-400' : 'text-zinc-400'}">${c.type}</div>
-                            </div>
-                            <div class="info-block">
-                                <div class="text-[0.5rem] text-zinc-600 uppercase font-bold tracking-widest mb-1">Wager</div>
-                                <div class="text-white font-extrabold text-base">${c.wager}</div>
-                            </div>
-                        </div>`;
-                }
-
-                return `
-                <div class="deal-card ${c.id === 1 ? 'featured' : ''} flex flex-col lg:flex-row items-center gap-5 lg:gap-7 animate-in" style="animation-delay: ${i * 0.06}s;">
-                    ${flagHtml}
-
-                    <div class="flex items-center gap-4 lg:w-[300px] flex-shrink-0 relative z-10">
-                        <div class="rank-badge ${rankClass(c.id)}">${c.id}</div>
-                        <div class="w-14 h-14 md:w-16 md:h-16 bg-surface-2 rounded-xl flex items-center justify-center border border-white/[0.04] shrink-0 overflow-hidden">
-                            <img src="${c.logo}" alt="${c.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\'text-xl font-black text-zinc-600\\'>${c.name[0]}</span>'" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex flex-col gap-1.5 overflow-hidden text-left">
-                            <div class="font-extrabold text-base md:text-lg tracking-tight truncate">${c.name}</div>
-                            <div class="flex gap-1.5 flex-wrap">${c.badges.map(b => `<span class="tag">${b}</span>`).join('')}</div>
-                        </div>
-                    </div>
-
-                    ${centerHtml}
-
-                    <div class="flex gap-2 min-w-[200px] w-full lg:w-auto relative z-10">
-                        ${c.code ? `
-                            <button onclick="copyCode('${c.code}', this)" class="code-btn flex-1 bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.06] hover:border-brand-500/20 text-white p-3.5 rounded-xl transition-all flex flex-col items-center justify-center gap-0.5 group">
-                                <span class="code-label text-[0.5rem] uppercase font-bold text-zinc-600 group-hover:text-zinc-500 transition">Code</span>
-                                <span class="code-value text-xs font-extrabold tracking-wider">${c.code}</span>
-                                <span class="copy-confirm">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                    <span class="text-[0.5rem] font-bold text-emerald-400 mt-0.5">Kopiert!</span>
-                                </span>
-                            </button>
-                        ` : ''}
-                        <a href="${c.url}" target="_blank" class="cta-primary flex-[2] py-4 px-5 text-xs tracking-widest uppercase">
-                            Bonus holen →
-                        </a>
-                    </div>
+    <footer class="pb-12 pt-4">
+        <div class="max-w-6xl mx-auto px-5">
+            <div class="footer-line mb-12"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                    <span class="text-lg font-extrabold tracking-tight block mb-1">idioten<span class="text-brand-500">bonus</span></span>
+                    <p class="text-zinc-700 text-[0.6rem] uppercase tracking-[0.2em] font-semibold">Deals & Giveaways · 2026</p>
                 </div>
-            `;
-            }).join('');
+                <div class="flex items-center gap-2">
+                    <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="social-btn" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg></a>
+                    <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="social-btn" aria-label="Discord"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z"/></svg></a>
+                    <div class="w-px h-6 bg-white/[0.06] mx-1"></div>
+                    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="social-btn" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg></button>
+                </div>
+                <p class="text-[0.6rem] text-zinc-700 text-center md:text-right font-semibold uppercase tracking-widest leading-relaxed">Glücksspiel kann süchtig machen.<br>18+ · Spielverantwortung.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+const casinos = [
+    {
+        id:1, name:"Freshbet", type:"Rakeback/VIP", wagerVal:0,
+        logo:"Freshbet.png", code:"IDB11", noDeposit:true,
+        description:"30 gratis Free Spins ohne Einzahlung mit Code IDB11. Kein klassischer Willkommensbonus, dafür Rakeback-Programm und VIP-Club mit langfristigen Vorteilen für aktive Spieler.",
+        highlights:["Rakeback", "VIP Club", "Live Casino", "Sportwetten"],
+        url:"https://go.affision.com/visit/?bta=48591&nci=5389&afp=Idiobonus"
+    },
+    {
+        id:2, name:"Slotsgem", bonus:"120%", bonusVal:600, max:"600€", freespins:"125 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"SlotsGemNeu.png",
+        description:"120% Bonus bis zu 600€ plus 125 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar.",
+        url:"https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601"
+    },
+    {
+        id:3, name:"Allyspin", bonus:"250%", bonusVal:1000, max:"1000€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"allyspin.jpg",
+        description:"Massiver 250% Boost bis zu 1000€ plus 200 Freispiele. Non-Sticky – Gewinne bleiben sofort verfügbar solange der Bonus unberührt ist.",
+        url:"https://all.monalvor.com/?mid=103181_2056662&clickid=idiotenbonus-SB4489"
+    },
+    {
+        id:4, name:"Westace", bonus:"400%", bonusVal:15000, max:"15.000€", freespins:"400 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Westace.png",
+        description:"Unglaublicher 400% Bonus bis zu 15.000€ plus 400 Freispiele. Non-Sticky – maximale Flexibilität beim Spielen.",
+        url:"https://wstc.lynmonkel.com/?mid=335011_2148019&clickid=merkuridioten-SB6019"
+    },
+    {
+        id:5, name:"Legiano", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Legiano.png",
+        description:"Einer der beliebtesten Non-Sticky Anbieter mit großartigen Turnieren und regelmäßigen Aktionen für Bestandskunden.",
+        url:"https://lgno.monalvor.com/?mid=103181_2147649&clickid=merkuridioten-SB6002"
+    },
+    {
+        id:6, name:"Bankonbet", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Bankonbet.png",
+        description:"Bekannt für besonders schnelle Auszahlungen und ein starkes Live Casino Angebot.",
+        url:"https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893"
+    },
+    {
+        id:7, name:"Vegashero", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Vegashero.png",
+        description:"Toller Allrounder mit Sportwetten, Live Casino und schnellen Auszahlungen.",
+        url:"https://vgr.lynmonkel.com/?mid=346920_2133311&clickid=merkuridioten-SB5748"
+    },
+    {
+        id:8, name:"N1Bet", bonus:"100%", bonusVal:500, max:"500€", freespins:"150 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"N1Bet.png",
+        description:"Starkes Sportwetten-Angebot kombiniert mit einem soliden Casino-Bereich und schnellen Zahlungen.",
+        url:"https://n1betpartners.com/n1f2mi9qlc"
+    },
+    {
+        id:9, name:"Sportaza", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Sportasa.png",
+        description:"Ideal für Sportwetten-Fans mit einem breiten Casino-Angebot als Ergänzung.",
+        url:"https://stzns.lynmonkel.com/?mid=278079_2052094"
+    },
+    {
+        id:10, name:"Mystake", bonus:"150%", bonusVal:500, max:"500€", freespins:null,
+        type:"Sticky", wager:"35x", wagerVal:35, logo:"Mystake.png",
+        description:"150% Bonus – Achtung: Sticky-Variante. Bonus und Einzahlung werden gemeinsam umgesetzt.",
+        url:"https://go.affiliatemystake.com/visit/?bta=3132393&nci=5664&utm_campaign=merkuridioten&afp=merkuridioten-SB2897"
+    },
+    {
+        id:11, name:"Rabona", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Rabona.png",
+        description:"Beliebter Anbieter mit einer guten Turnierstruktur und fairen Non-Sticky Konditionen.",
+        url:"https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894"
+    },
+    {
+        id:12, name:"Zoccer", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Zoccer.png",
+        description:"Neuer Anbieter mit spannendem Konzept – kombiniert Sportwetten-Feeling mit Casino-Deals.",
+        url:"https://socr.virelon.com/?mid=361838_2133314&clickid=merkuridioten-SB5749"
+    },
+];
+
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');document.getElementById('burger-btn').classList.toggle('burger-open');}
+
+function filterCasinos(){
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const type = document.getElementById('typeFilter').value;
+    const filtered = casinos.filter(c => {
+        const matchSearch = c.name.toLowerCase().includes(search) || (c.bonus||'').toLowerCase().includes(search);
+        const matchType = type === 'all' || c.type === type || c.noDeposit;
+        return matchSearch && matchType;
+    });
+    renderCasinos(filtered);
+}
+
+function rankClass(id){ return id <= 3 ? 'rank-' + id : 'rank-other'; }
+
+function toggleCard(id){
+    const el = document.getElementById('details-' + id);
+    const chevron = document.getElementById('chevron-' + id);
+    const lbl = document.getElementById('lbl-' + id);
+    if(!el || !chevron) return;
+    el.classList.toggle('open');
+    chevron.classList.toggle('open');
+    if(lbl) lbl.textContent = el.classList.contains('open') ? 'WENIGER' : 'DETAILS';
+}
+
+function makeCard(c, i) {
+    const isFresh = c.noDeposit;
+
+    // Build chips
+    let chipsHTML = '';
+    if(isFresh) {
+        chipsHTML = '<span class="stat-chip gold">🎰 30 Free Spins</span>'
+                  + '<span class="stat-chip gold">Ohne Einzahlung</span>'
+                  + '<span class="stat-chip">Rakeback</span>'
+                  + '<span class="stat-chip">VIP Club</span>';
+    } else {
+        chipsHTML = '<span class="stat-chip accent">' + c.bonus + ' bis ' + c.max + '</span>'
+                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
+                  + (c.freespins ? '<span class="stat-chip gold">✨ ' + c.freespins + '</span>' : '')
+                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
+    }
+
+    // Build code button
+    let codeBtnHTML = '';
+    if(c.code) {
+        codeBtnHTML = '<button data-code="' + c.code + '" class="code-btn" onclick="event.stopPropagation();handleCopy(this)">'
+                    + '<span class="code-label text-[0.5rem] uppercase font-bold text-zinc-600">Code</span>'
+                    + '<span class="code-value text-xs font-extrabold tracking-wider">' + c.code + '</span>'
+                    + '<span class="copy-confirm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[0.5rem] font-bold text-emerald-400">Kopiert!</span></span>'
+                    + '</button>';
+    }
+
+    // Build detail section
+    let detailHTML = '';
+    if(isFresh) {
+        const highlights = (c.highlights || []).map(h => '<span class="stat-chip">' + h + '</span>').join('');
+        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
+                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">Angebot</p><p class="text-zinc-400 text-sm leading-relaxed">' + c.description + '</p></div>'
+                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">Features</p><div class="flex flex-wrap gap-2 mb-4">' + highlights + '</div>'
+                   + '<div class="p-3 rounded-xl bg-amber-500/5 border border-amber-500/15"><p class="text-xs text-amber-300 font-bold">💡 Tipp</p><p class="text-xs text-zinc-500 mt-1">Code <strong class="text-white font-mono">IDB11</strong> bei der Registrierung eingeben.</p></div></div>'
+                   + '</div>';
+    } else {
+        const logik = c.type === 'Non-Sticky'
+            ? 'Du spielst zuerst mit deinem Echtgeld. Gewinne sind sofort auszahlbar, solange der Bonus unberührt bleibt.'
+            : 'Einzahlung und Bonus werden gemeinsam umgesetzt. Auszahlungen erst nach Erfüllung aller Bedingungen möglich.';
+        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
+                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-brand-400 mb-3">Über dieses Casino</p><p class="text-zinc-400 text-sm leading-relaxed">' + c.description + '</p></div>'
+                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">' + (c.type === 'Non-Sticky' ? 'Non-Sticky Logik' : 'Sticky Logik') + '</p><p class="text-zinc-500 text-sm leading-relaxed">' + logik + '</p></div>'
+                   + '</div>';
+    }
+
+    const cardClass = 'deal-card ' + (isFresh ? 'freshbet' : (c.id === 1 ? 'featured' : '')) + ' animate-in';
+    const delay = 'animation-delay:' + (i * 0.05) + 's;';
+
+    const div = document.createElement('div');
+    div.className = cardClass;
+    div.setAttribute('style', delay);
+    div.innerHTML =
+        (isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
+        + '<div class="card-main" onclick="toggleCard(' + c.id + ')">'
+        +   '<div class="flex items-center gap-3 flex-shrink-0">'
+        +     '<div class="rank-badge ' + rankClass(c.id) + '">' + c.id + '</div>'
+        +     '<div class="w-28 h-16 md:w-36 md:h-20 bg-surface-2 rounded-2xl flex items-center justify-center border border-white/[0.04] shrink-0 overflow-hidden">'
+        +       '<img src="' + c.logo + '" alt="' + c.name + '" class="w-full h-full object-contain p-3">'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="flex-grow text-center md:text-left min-w-0">'
+        +     '<h3 class="font-extrabold text-lg md:text-xl tracking-tight mb-3">' + c.name + '</h3>'
+        +     '<div class="flex flex-wrap justify-center md:justify-start gap-2">' + chipsHTML + '</div>'
+        +   '</div>'
+        +   '<div class="flex flex-row md:flex-col items-center gap-3 md:gap-4 w-full md:w-56 flex-shrink-0">'
+        +     codeBtnHTML
+        +     '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isFresh ? 'cta-freshbet' : '') + ' flex-1 md:w-full py-3 md:py-4 px-4 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
+        +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
+        +       '<span id="lbl-' + c.id + '">DETAILS</span>'
+        +       '<div class="chevron" id="chevron-' + c.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>'
+        +     '</button>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="card-details" id="details-' + c.id + '"><div class="card-details-inner">' + detailHTML + '</div></div>';
+    return div;
+}
+
+function renderCasinos(data) {
+    if(data === undefined) data = casinos;
+    const list = document.getElementById('casinoList');
+    list.innerHTML = '';
+    if(!data.length) {
+        list.innerHTML = '<div class="text-center py-20 text-zinc-700 font-bold text-sm uppercase tracking-widest">Keine Deals gefunden</div>';
+        return;
+    }
+    data.forEach((c, i) => list.appendChild(makeCard(c, i)));
+}
+
+const ALL_TABS = ['deals', 'giveaway', 'support'];
+function switchTab(tab) {
+    ALL_TABS.forEach(t => {
+        const el = document.getElementById(t + '-section');
+        const btn = document.getElementById('nav-' + t);
+        if(t === tab) {
+            el.classList.remove('hidden');
+            el.style.opacity = '1';
+            if(btn) btn.classList.add('active');
+        } else {
+            el.style.opacity = '0';
+            setTimeout(() => el.classList.add('hidden'), 200);
+            if(btn) btn.classList.remove('active');
         }
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+}
 
-        // ── Tabs ──
-        function switchTab(tab) {
-            const deals = document.getElementById('deals-section');
-            const giveaway = document.getElementById('giveaway-section');
-            const btnDeals = document.getElementById('nav-deals');
-            const btnGiveaway = document.getElementById('nav-giveaway');
-            const current = tab === 'deals' ? giveaway : deals;
-            const next = tab === 'deals' ? deals : giveaway;
+function handleCopy(btnEl) {
+    const code = btnEl.getAttribute('data-code');
+    copyCode(code, btnEl);
+}
 
-            current.style.opacity = '0';
-            setTimeout(() => {
-                current.classList.add('hidden');
-                next.classList.remove('hidden');
-                next.style.opacity = '0';
-                requestAnimationFrame(() => {
-                    next.style.opacity = '1';
-                });
-                btnDeals.classList.toggle('active', tab === 'deals');
-                btnGiveaway.classList.toggle('active', tab === 'giveaway');
-            }, 200);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function copyCode(code, btnEl) {
+    if(navigator.clipboard) { navigator.clipboard.writeText(code); }
+    else { const t = document.createElement('textarea'); t.value = code; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); }
+    const toast = document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+    if(btnEl) { btnEl.classList.add('copied'); setTimeout(() => btnEl.classList.remove('copied'), 1800); }
+}
 
-        // ── Copy ──
-        function copyCode(code, btnEl) {
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(code);
-            } else {
-                const t = document.createElement('textarea');
-                t.value = code;
-                document.body.appendChild(t);
-                t.select();
-                document.execCommand('copy');
-                document.body.removeChild(t);
-            }
-            // Toast
-            const toast = document.getElementById('copyToast');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
-            // Button animation
-            if (btnEl) {
-                btnEl.classList.add('copied');
-                setTimeout(() => btnEl.classList.remove('copied'), 1800);
-            }
-        }
+function acceptAge() {
+    sessionStorage.setItem('ageAccepted', 'true');
+    const gate = document.getElementById('age-gate');
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.35s ease';
+    setTimeout(() => {
+        gate.style.display = 'none';
+        document.getElementById('main-wrapper').style.display = 'block';
+    }, 350);
+}
 
-        // ── Age Gate ──
-        function acceptAge() {
-            sessionStorage.setItem('ageAccepted', 'true');
-            const gate = document.getElementById('age-gate');
-            gate.style.opacity = '0';
-            gate.style.transition = 'opacity 0.35s ease';
-            setTimeout(() => {
-                gate.style.display = 'none';
-                document.getElementById('main-wrapper').style.display = 'block';
-            }, 350);
-        }
+function leaveSite() { window.location.href = 'https://www.google.com'; }
 
-        function leaveSite() {
-            window.location.href = 'https://www.google.com';
-        }
+// Giveaway form
+const form = document.getElementById('giveaway-form');
+if(form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        const container = document.getElementById('giveaway-container');
+        btn.innerHTML = '<span style="opacity:0.6">Wird gesendet...</span>';
+        btn.disabled = true;
+        try {
+            const res = await fetch(e.target.action, {method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}});
+            if(res.ok) {
+                container.innerHTML = '<div class="p-8 rounded-2xl text-center" style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15)"><div class="text-2xl mb-2">✅</div><p class="text-white font-bold">Eingetragen! Wir melden uns sobald es losgeht.</p></div>';
+            } else { btn.innerHTML = 'Fehler – erneut versuchen'; btn.disabled = false; }
+        } catch { btn.innerHTML = 'Verbindungsfehler'; btn.disabled = false; }
+    });
+}
 
-        // ── Giveaway Form ──
-        const form = document.getElementById('giveaway-form');
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('submit-btn');
-                const container = document.getElementById('giveaway-container');
-                btn.innerHTML = '<span style="opacity:0.6">Wird gesendet...</span>';
-                btn.disabled = true;
-                try {
-                    const res = await fetch(e.target.action, {
-                        method: 'POST',
-                        body: new FormData(e.target),
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    if (res.ok) {
-                        container.innerHTML = `
-                            <div class="p-8 bg-brand-500/6 border border-brand-500/10 rounded-2xl text-brand-300 font-bold text-center animate-in">
-                                <span class="text-2xl block mb-2">🎰</span>
-                                Fast geschafft! Schick uns jetzt den Screenshot per Instagram DM.
-                            </div>`;
-                    } else {
-                        btn.innerHTML = 'Fehler – erneut versuchen';
-                        btn.disabled = false;
-                    }
-                } catch {
-                    btn.innerHTML = 'Verbindungsfehler';
-                    btn.disabled = false;
-                }
-            });
-        }
+// Ticket form
+const ticketForm = document.getElementById('ticket-form');
+if(ticketForm) {
+    ticketForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('ticket-btn');
+        const container = document.getElementById('ticket-container');
+        btn.innerHTML = '<span style="opacity:0.6">Wird gesendet…</span>';
+        btn.disabled = true;
+        try {
+            const res = await fetch(e.target.action, {method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}});
+            if(res.ok) {
+                container.innerHTML = '<div class="p-8 rounded-2xl text-center" style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15)"><div class="text-3xl mb-3">✅</div><p class="text-white font-black text-lg mb-1">Ticket eingegangen!</p><p class="text-zinc-500 text-sm leading-relaxed">Wir melden uns innerhalb von 24h per E-Mail.<br>Screenshot? Antworte einfach auf unsere Bestätigungs-E-Mail.</p></div>';
+            } else { btn.innerHTML = 'Fehler – erneut versuchen'; btn.disabled = false; }
+        } catch { btn.innerHTML = 'Verbindungsfehler'; btn.disabled = false; }
+    });
+}
 
-        // ── Scroll Reveal ──
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
 
-        // ── Init ──
-        window.addEventListener('DOMContentLoaded', () => {
-            if (sessionStorage.getItem('ageAccepted')) {
-                document.getElementById('age-gate').style.display = 'none';
-                document.getElementById('main-wrapper').style.display = 'block';
-            }
-            renderCasinos();
-            document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
-
-        });
-    </script>
+window.addEventListener('DOMContentLoaded', () => {
+    if(sessionStorage.getItem('ageAccepted')) {
+        document.getElementById('age-gate').style.display = 'none';
+        document.getElementById('main-wrapper').style.display = 'block';
+    }
+    renderCasinos();
+    document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+});
+</script>
 </body>
-
 </html>
