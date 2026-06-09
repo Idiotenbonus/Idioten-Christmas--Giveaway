@@ -46,7 +46,7 @@
         .deal-card{background:#0f0f12;border:1px solid rgba(255,255,255,0.04);border-radius:20px;transition:border-color 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;}
         .deal-card:hover{border-color:rgba(147,51,234,0.15);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 48px -8px rgba(147,51,234,0.06);}
         .deal-card.featured{background:linear-gradient(135deg,rgba(147,51,234,0.07),#0f0f12 45%);border-color:rgba(147,51,234,0.12);}
-        .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.05),#0f0f12 45%);border-color:rgba(251,191,36,0.15);}
+        .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.05),#0f0f12 50%);border-color:rgba(251,191,36,0.15);}
 
         .card-main{padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;user-select:none;}
         @media(min-width:768px){.card-main{flex-direction:row;align-items:center;gap:4rem;padding:2.5rem;}}
@@ -362,9 +362,9 @@
                                 <select name="casino" class="ticket-input">
                                     <option value="">Kein bestimmtes Casino</option>
                                     <option>Freshbet</option>
-                                    <option>Slotsgem</option>
                                     <option>DudeSpin</option>
                                     <option>Golisimo</option>
+                                    <option>Slotsgem</option>
                                     <option>Allyspin</option>
                                     <option>Westace</option>
                                     <option>Legiano</option>
@@ -607,10 +607,12 @@ function makeCard(c, i) {
         +     '<h3 class="font-extrabold text-lg md:text-xl tracking-tight mb-3">' + c.name + '</h3>'
         +     '<div class="flex flex-wrap justify-center md:justify-start gap-2">' + chipsHTML + '</div>'
         +   '</div>'
-        +   '<div class="flex flex-row md:flex-col items-center gap-3 md:gap-4 w-full md:w-56 flex-shrink-0">'
-        +     codeBtnHTML
-        +     '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isFresh ? 'cta-freshbet' : '') + ' flex-1 md:w-full py-3 md:py-4 px-4 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
-        +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
+        +   '<div class="flex flex-col items-stretch gap-2 w-full md:w-56 flex-shrink-0">'
+        +     '<div class="flex items-center gap-2 w-full">'
+        +       codeBtnHTML
+        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
+        +     '</div>'
+        +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
         +       '<span id="lbl-' + c.id + '">DETAILS</span>'
         +       '<div class="chevron" id="chevron-' + c.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>'
         +     '</button>'
