@@ -22,7 +22,7 @@
     </script>
     <style>
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        html{overflow-x:hidden;}
+        html{overflow-x:hidden;scroll-behavior: smooth;}
         body{background:#09090b;color:#fafafa;font-family:'Inter',sans-serif;overflow-x:hidden;max-width:100vw;-webkit-font-smoothing:antialiased;}
         ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}
         ::-webkit-scrollbar-thumb{background:rgba(168,85,247,0.25);border-radius:99px;}
@@ -244,7 +244,7 @@
 
         <!-- DEALS TAB -->
         <div id="deals-section" class="tab-content max-w-6xl mx-auto">
-            <div class="relative text-center mb-16 pt-4" id="hero">
+            <div class="relative text-center mb-12 pt-4" id="hero">
                 <div class="hero-glow"></div><div class="hero-glow-2"></div>
                 <div class="relative z-10 mb-7 flex flex-col items-center animate-in" style="animation-delay:0.1s;">
                     <div class="profile-outer">
@@ -263,6 +263,22 @@
                 </div>
             </div>
 
+            <!-- LIVE EVENT PROMO BANNER ON DEALS SECTION -->
+            <div class="relative z-10 max-w-xl mx-auto mb-10 animate-in" style="animation-delay:0.25s;">
+                <div onclick="switchTab('giveaway')" class="cursor-pointer bg-gradient-to-r from-purple-950/40 via-surface-1 to-amber-950/20 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl p-4 flex items-center justify-between gap-4 transition duration-300 group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl animate-bounce">🏆</span>
+                        <div class="text-left">
+                            <span class="text-[10px] text-amber-400 font-extrabold uppercase tracking-widest block">AKTIVES GEWINNSPIEL 2026</span>
+                            <span class="text-sm font-black text-white group-hover:text-amber-300 transition">10.000€ WM CHALLENGE IST LIVE!</span>
+                        </div>
+                    </div>
+                    <div class="bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-[10px] tracking-widest uppercase px-4 py-2.5 rounded-xl transition duration-200">
+                        ANSEHEN ➔
+                    </div>
+                </div>
+            </div>
+
             <div class="flex flex-wrap gap-2.5 items-center justify-center mb-10 reveal-item" id="filters">
                 <div class="relative">
                     <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -278,19 +294,154 @@
             <div class="space-y-3" id="casinoList"></div>
         </div>
 
-        <!-- GIVEAWAY TAB -->
+        <!-- GIVEAWAY TAB (AKTIVE WM-CHALLENGE) -->
         <div id="giveaway-section" class="tab-content max-w-4xl mx-auto hidden pt-4">
-            <div class="bg-surface-1 rounded-[22px] p-10 md:p-16 text-center border border-white/[0.04]">
-                <div class="text-6xl mb-6">🎰</div>
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight mb-4">Momentan kein<br>Gewinnspiel aktiv.</h2>
-                <p class="text-zinc-500 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">Trag dich hier ein – du wirst als Erstes benachrichtigt wenn das nächste Gewinnspiel startet!</p>
-                <div class="max-w-sm mx-auto" id="giveaway-container">
-                    <form id="giveaway-form" action="https://formspree.io/f/mykdjjzb" method="POST" class="space-y-3">
-                        <input type="hidden" name="_subject" value="📧 Newsletter-Anmeldung – Idiotenbonus">
-                        <input type="email" name="email" required placeholder="deine@email.de" class="filter-input w-full py-4 text-center !text-sm !normal-case !tracking-normal !font-medium !rounded-2xl">
-                        <button type="submit" id="submit-btn" class="cta-primary w-full py-4 text-sm tracking-wide">BENACHRICHTIGEN</button>
-                    </form>
+            <div class="bg-surface-1 rounded-[22px] p-6 md:p-12 border border-white/[0.04] relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Banner Header (Bildschirmfoto 2026-06-14 um 16.29.33.jpg) -->
+                <div class="text-center max-w-2xl mx-auto mb-10 relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[0.65rem] font-bold uppercase tracking-widest mb-6">
+                        ⚽ ACTIVE CHALLENGE 2026
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-4">
+                        🏆 WM CHALLENGE
+                    </h2>
+                    <p class="text-gradient-gold text-2xl md:text-4xl font-extrabold mb-2 tracking-tight">
+                        10.000€ PRIZEPOOL
+                    </p>
+                    <p class="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-6">
+                        Auszahlung auf <span class="text-white border-b border-amber-500 pb-0.5">25 PLÄTZE</span>
+                    </p>
+                    <div class="text-zinc-400 text-xs md:text-sm leading-relaxed bg-white/[0.02] border border-white/[0.04] p-4 rounded-xl text-left">
+                        <span class="text-emerald-400 font-bold block mb-1">✅ NICHT NUR EIN EINZELNER JACKPOT!</span>
+                        Deine besten Gewinne aus <span class="text-white font-bold underline">ALLEN</span> teilnehmenden Brands werden addiert! Wer die WM ohnehin spielt, sollte die Extra-Preisgelder mitnehmen!
+                    </div>
                 </div>
+
+                <!-- Custom styled Side-By-Side Buttons according to user mock (Bildschirmfoto 2026-06-14 um 16.16.38.jpg) -->
+                <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12 relative z-10">
+                    <!-- Left Button: Purple gradient "LIVE LEADERBOARD" -->
+                    <a href="https://www.worldcup-jackpot.live" target="_blank" class="flex items-center justify-center p-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-95 transition-all text-center select-none cursor-pointer">
+                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
+                            📊 LIVE LEADERBOARD
+                        </span>
+                    </a>
+
+                    <!-- Right Button: Blue/Sky "WETTSCHEINE EINREICHEN" -->
+                    <a href="https://t.me/wcjackpotbot" target="_blank" class="flex items-center justify-center p-5 rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 hover:opacity-95 transition-all text-center select-none cursor-pointer">
+                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
+                            🤖 WETTSCHEINE EINREICHEN
+                        </span>
+                    </a>
+                </div>
+
+                <!-- The 4 Participating Casino Brands -->
+                <div class="bg-surface-0/60 rounded-2xl p-6 border border-white/[0.02] mb-12 relative z-10">
+                    <h3 class="text-center text-[10px] font-black tracking-widest text-zinc-500 uppercase mb-6">4 Brands – 1 Challenge</h3>
+                    
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                        <!-- Brand 1: DUDESPIN -->
+                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-emerald-500/30 transition-all">
+                            <div>
+                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">1) DUDESPIN</span>
+                                <h4 class="text-emerald-400 font-black text-sm tracking-wider uppercase">DUDESPIN</h4>
+                            </div>
+                            <a href="https://ddspn.lynmonkel.com/?mid=95901_2171798&clickid=merkuridioten-SB7126" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
+                        </div>
+
+                        <!-- Brand 2: BETSCORE -->
+                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-red-500/30 transition-all">
+                            <div>
+                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">2) BETSCORE</span>
+                                <h4 class="text-red-500 font-black text-sm tracking-wider uppercase">BETSCORE</h4>
+                            </div>
+                            <a href="https://bsr.lynmonkel.com/?mid=51585_2181508&clickid=merkuridioten-SB7390" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
+                        </div>
+
+                        <!-- Brand 3: GOLISIMO -->
+                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-amber-500/30 transition-all">
+                            <div>
+                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">3) GOLISIMO</span>
+                                <h4 class="text-amber-400 font-black text-sm tracking-wider uppercase">GOLISIMO</h4>
+                            </div>
+                            <a href="https://gls.lynnar.com/?mid=315090_2163347&clickid=merkuridioten-SB7023" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
+                        </div>
+
+                        <!-- Brand 4: BANKONBET -->
+                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-sky-500/30 transition-all">
+                            <div>
+                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">4) BANKONBET</span>
+                                <h4 class="text-sky-400 font-black text-sm tracking-wider uppercase">BANKONBET</h4>
+                            </div>
+                            <a href="https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanatory Rules & Info sections -->
+                <div class="grid md:grid-cols-2 gap-6 text-left relative z-10 border-t border-white/[0.04] pt-8">
+                    <!-- Spalte 1: Wie funktioniert die Wertung -->
+                    <div>
+                        <h4 class="text-white font-bold text-sm uppercase mb-2 flex items-center gap-1.5">
+                            <span class="text-brand-400">📈</span> Wie funktioniert die Wertung?
+                        </h4>
+                        <p class="text-zinc-500 text-xs leading-relaxed mb-3">
+                            Pro teilnehmender Brand zählt jeweils dein <strong>höchster eingereichter Gewinn</strong>. Du kannst auch mehrere der 4 Brands nutzen (dadurch haben aktive Nutzer einen erheblichen Vorteil!).
+                        </p>
+                        <div class="p-3 bg-black/40 border border-white/[0.04] rounded-lg text-[10px] text-zinc-500 space-y-1">
+                            <strong class="text-zinc-400">Beispiel:</strong><br>
+                            Brand A → 1.000€ Gewinn | Brand B → 1.500€ Gewinn<br>
+                            Brand C → 800€ Gewinn | Brand D → 700€ Gewinn<br>
+                            <span class="text-brand-400 font-bold">Gesamtwertung = 4.000 Punkte</span>
+                        </div>
+                    </div>
+
+                    <!-- Spalte 2: Voraussetzungen & Fairness -->
+                    <div>
+                        <h4 class="text-white font-bold text-sm uppercase mb-2 flex items-center gap-1.5">
+                            <span class="text-emerald-400">✅</span> Voraussetzungen
+                        </h4>
+                        <ul class="text-zinc-500 text-xs space-y-1.5 list-disc pl-4 mb-4">
+                            <li>Mindestquote <strong class="text-zinc-300">5,0</strong> pro Schein</li>
+                            <li>Wettschein muss gewonnen sein</li>
+                            <li>Gewinnbetrag & Wettschein-ID vollständig sichtbar</li>
+                            <li>Nur ein Gewinn pro Brand wird gewertet</li>
+                        </ul>
+
+                        <h4 class="text-white font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
+                            🔍 Verifizierung & Fairness
+                        </h4>
+                        <p class="text-zinc-500 text-[11px] leading-relaxed">
+                            Fake-Screenshots führen zum sofortigen Ausschluss. Wettscheine werden täglich direkt bei den Brands gegengeprüft (Dauer ca. 1-2 Tage).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Laufzeit und Telegramgruppe -->
+                <div class="mt-8 pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+                    <div class="text-left">
+                        <span class="text-zinc-500 text-[10px] font-bold block uppercase">📅 Laufzeit des Events</span>
+                        <span class="text-white text-xs font-bold">Bis einschließlich 19.07.2026 (Komplette WM)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="https://t.me/Idiotenbonus" target="_blank" class="bg-brand-600 hover:bg-brand-500 text-white text-[10px] font-black tracking-widest uppercase px-4 py-2.5 rounded-xl transition">
+                            Telegramgruppe Beitreten 🍀
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Support Redirect Banner (As requested instead of @WCJackpotAdmin buttons) -->
+                <div class="mt-6 p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 text-center relative z-10">
+                    <p class="text-xs text-zinc-500 leading-relaxed">
+                        🔧 Hast du technische Fragen oder benötigst Hilfe beim Gewinnspiel?
+                    </p>
+                    <button onclick="switchTab('support')" class="text-xs font-bold text-amber-400 hover:text-amber-300 underline mt-1">
+                        Hier geht's direkt zu unserem Support Center →
+                    </button>
+                </div>
+
             </div>
         </div>
 
@@ -359,7 +510,7 @@
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Casino (optional)</label>
-                                <select name="casino" class="ticket-input">
+                                <select name="casino" id="supportCasinoSelect" class="ticket-input">
                                     <option value="">Kein bestimmtes Casino</option>
                                     <option>Freshbet</option>
                                     <option>DudeSpin</option>
@@ -369,6 +520,7 @@
                                     <option>Westace</option>
                                     <option>Legiano</option>
                                     <option>Bankonbet</option>
+                                    <option>Betscore</option>
                                     <option>Vegashero</option>
                                     <option>N1Bet</option>
                                     <option>Sportaza</option>
@@ -381,11 +533,12 @@
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Kategorie *</label>
                                 <select name="kategorie" required class="ticket-input">
                                     <option value="" disabled selected>Bitte wählen …</option>
+                                    <!-- Added "Gewinnspiel / WM Challenge" for streamlined help categories -->
+                                    <option>Gewinnspiel / WM Challenge</option>
                                     <option>Bonusfrage</option>
                                     <option>Auszahlung</option>
                                     <option>Technisches Problem</option>
                                     <option>Konto / Login</option>
-                                    <option>Gewinnspiel</option>
                                     <option>Free Spins Code</option>
                                     <option>Sonstiges</option>
                                 </select>
@@ -431,86 +584,92 @@
 <script>
 const casinos = [
     {
+        id:1, name:"Betscore", bonus:"350%%", bonusVal:17000, max:"17000€", freespins:"200 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Betscore.png",
+        description:"350% Bonus bis zu 17000 plus 150 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 350% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
+        url:"https://bsr.lynmonkel.com/?mid=51585_2181508&clickid=merkuridioten-SB7390"
+    },
+    {
         id:1, name:"DudeSpin", bonus:"300%", bonusVal:2000, max:"2000€", freespins:"150 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"DudeSpin.png",
         description:"300% Bonus bis zu 2000€ plus 150 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 300% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
         url:"https://ddspn.lynmonkel.com/?mid=95901_2171798&clickid=merkuridioten-SB7126"
     },
     {
-        id:2, name:"Golisimo", bonus:"300%", bonusVal:2500, max:"2500€", freespins:"300 FS",
+        id:4, name:"Golisimo", bonus:"300%", bonusVal:2500, max:"2500€", freespins:"300 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Golisimo.png",
         description:"300% Bonus bis zu 2500€ plus 300 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 300% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
         url:"https://gls.lynnar.com/?mid=315090_2163347&clickid=merkuridioten-SB7023"
     },
     {
-        id:3, name:"Slotsgem", bonus:"120%", bonusVal:600, max:"600€", freespins:"125 FS",
+        id:5, name:"Slotsgem", bonus:"120%", bonusVal:600, max:"600€", freespins:"125 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"SlotsGemNeu.png",
         description:"120% Bonus bis zu 600€ plus 125 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar.",
         url:"https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601"
     },
     {
-        id:4, name:"Freshbet", type:"Rakeback/VIP", wagerVal:0,
+        id:6, name:"Freshbet", type:"Rakeback/VIP", wagerVal:0,
         logo:"Freshbet.png", code:"IDB11", noDeposit:true,
         description:"30 gratis Free Spins ohne Einzahlung mit Code IDB11. Kein klassischer Willkommensbonus, dafür Rakeback-Programm und VIP-Club mit langfristigen Vorteilen für aktive Spieler.",
         highlights:["Rakeback", "VIP Club", "Live Casino", "Sportwetten"],
         url:"https://go.affision.com/visit/?bta=48591&nci=5389&afp=Idiobonus"
     },
     {
-        id:5, name:"Allyspin", bonus:"250%", bonusVal:1000, max:"1000€", freespins:"200 FS",
+        id:7, name:"Allyspin", bonus:"250%", bonusVal:1000, max:"1000€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"allyspin.jpg",
         description:"Massiver 250% Boost bis zu 1000€ plus 200 Freispiele. Non-Sticky – Gewinne bleiben sofort verfügbar solange der Bonus unberührt ist.",
         url:"https://all.monalvor.com/?mid=103181_2056662&clickid=idiotenbonus-SB4489"
     },
     {
-        id:6, name:"Westace", bonus:"400%", bonusVal:15000, max:"15.000€", freespins:"400 FS",
+        id:8, name:"Westace", bonus:"400%", bonusVal:15000, max:"15.000€", freespins:"400 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Westace.png",
         description:"Unglaublicher 400% Bonus bis zu 15.000€ plus 400 Freispiele. Non-Sticky – maximale Flexibilität beim Spielen.",
         url:"https://wstc.lynmonkel.com/?mid=335011_2148019&clickid=merkuridioten-SB6019"
     },
     {
-        id:7, name:"Legiano", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:9, name:"Legiano", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Legiano.png",
         description:"Einer der beliebtesten Non-Sticky Anbieter mit großartigen Turnieren und regelmäßigen Aktionen für Bestandskunden.",
         url:"https://lgno.monalvor.com/?mid=103181_2147649&clickid=merkuridioten-SB6002"
     },
     {
-        id:8, name:"Bankonbet", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:10, name:"Bankonbet", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Bankonbet.png",
         description:"Bekannt für besonders schnelle Auszahlungen und ein starkes Live Casino Angebot.",
         url:"https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893"
     },
     {
-        id:9, name:"Vegashero", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:11, name:"Vegashero", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Vegashero.png",
         description:"Toller Allrounder mit Sportwetten, Live Casino und schnellen Auszahlungen.",
         url:"https://vgr.lynmonkel.com/?mid=346920_2133311&clickid=merkuridioten-SB5748"
     },
     {
-        id:10, name:"N1Bet", bonus:"100%", bonusVal:500, max:"500€", freespins:"150 FS",
+        id:12, name:"N1Bet", bonus:"100%", bonusVal:500, max:"500€", freespins:"150 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"N1Bet.png",
         description:"Starkes Sportwetten-Angebot kombiniert mit einem soliden Casino-Bereich und schnellen Zahlungen.",
         url:"https://n1betpartners.com/n1f2mi9qlc"
     },
     {
-        id:11, name:"Sportaza", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:13, name:"Sportaza", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Sportasa.png",
-        description:"Ideal für Sportwetten-Fans mit einem breiten Casino-Angebot als Ergänzung.",
+        description:"Idal für Sportwetten-Fans mit einem breiten Casino-Angebot als Ergänzung.",
         url:"https://stzns.lynmonkel.com/?mid=278079_2052094"
     },
     {
-        id:12, name:"Mystake", bonus:"150%", bonusVal:500, max:"500€", freespins:null,
+        id:14, name:"Mystake", bonus:"150%", bonusVal:500, max:"500€", freespins:null,
         type:"Sticky", wager:"35x", wagerVal:35, logo:"Mystake.png",
         description:"150% Bonus – Achtung: Sticky-Variante. Bonus und Einzahlung werden gemeinsam umgesetzt.",
         url:"https://go.affiliatemystake.com/visit/?bta=3132393&nci=5664&utm_campaign=merkuridioten&afp=merkuridioten-SB2897"
     },
     {
-        id:13, name:"Rabona", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:15, name:"Rabona", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Rabona.png",
         description:"Beliebter Anbieter mit einer guten Turnierstruktur und fairen Non-Sticky Konditionen.",
         url:"https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894"
     },
     {
-        id:14, name:"Zoccer", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
+        id:16, name:"Zoccer", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Zoccer.png",
         description:"Neuer Anbieter mit spannendem Konzept – kombiniert Sportwetten-Feeling mit Casino-Deals.",
         url:"https://socr.virelon.com/?mid=361838_2133314&clickid=merkuridioten-SB5749"
@@ -677,24 +836,6 @@ function acceptAge() {
 }
 
 function leaveSite() { window.location.href = 'https://www.google.com'; }
-
-// Giveaway form
-const form = document.getElementById('giveaway-form');
-if(form) {
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('submit-btn');
-        const container = document.getElementById('giveaway-container');
-        btn.innerHTML = '<span style="opacity:0.6">Wird gesendet...</span>';
-        btn.disabled = true;
-        try {
-            const res = await fetch(e.target.action, {method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}});
-            if(res.ok) {
-                container.innerHTML = '<div class="p-8 rounded-2xl text-center" style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15)"><div class="text-2xl mb-2">✅</div><p class="text-white font-bold">Eingetragen! Wir melden uns sobald es losgeht.</p></div>';
-            } else { btn.innerHTML = 'Fehler – erneut versuchen'; btn.disabled = false; }
-        } catch { btn.innerHTML = 'Verbindungsfehler'; btn.disabled = false; }
-    });
-}
 
 // Ticket form
 const ticketForm = document.getElementById('ticket-form');
