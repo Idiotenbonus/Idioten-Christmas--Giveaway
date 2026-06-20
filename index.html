@@ -47,6 +47,12 @@
         .deal-card:hover{border-color:rgba(147,51,234,0.15);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 48px -8px rgba(147,51,234,0.06);}
         .deal-card.featured{background:linear-gradient(135deg,rgba(147,51,234,0.07),#0f0f12 45%);border-color:rgba(147,51,234,0.12);}
         .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.05),#0f0f12 50%);border-color:rgba(251,191,36,0.15);}
+        .deal-card.winz{background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(168,85,247,0.05) 45%,#0f0f12 75%);border-color:rgba(251,191,36,0.25);box-shadow:0 0 40px -14px rgba(251,191,36,0.18);}
+        .deal-card.winz:hover{border-color:rgba(251,191,36,0.42);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 56px -8px rgba(251,191,36,0.2);}
+        .winz-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(251,191,36,0.3);z-index:5;}
+        .cta-winz{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);}
+        .cta-winz:hover{box-shadow:0 8px 32px rgba(245,158,11,0.45);}
+        .deal-card.winz .card-details.open{max-height:1600px;}
 
         .card-main{padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;user-select:none;}
         @media(min-width:768px){.card-main{flex-direction:row;align-items:center;gap:4rem;padding:2.5rem;}}
@@ -510,6 +516,7 @@
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Casino (optional)</label>
                                 <select name="casino" id="supportCasinoSelect" class="ticket-input">
                                     <option value="">Kein bestimmtes Casino</option>
+                                    <option>Winz</option>
                                     <option>Freshbet</option>
                                     <option>DudeSpin</option>
                                     <option>Golisimo</option>
@@ -581,6 +588,14 @@
 
 <script>
 const casinos = [
+    // ⚠️ WINZ – bitte die echten Bonuswerte unten eintragen (bonus / max / freespins / wager)!
+    {
+        id:100, name:"Winz", bonus:"100%", bonusVal:200, max:"1000€", freespins:"",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Winz.png",
+        code:"IDIOTEN", winz:true,
+        description:"100% Bonus bis zu 1000. Non-Sticky – du spielst zuerst mit deinem Echtgeld, deine Gewinne sind jederzeit auszahlbar. Den vollen Willkommensbonus aktivierst du, indem du beim Registrieren den Code IDIOTEN eingibst und anschließend eine Einzahlung tätigst – der Bonus wird dann automatisch gutgeschrieben.",
+        url:"https://winzmedia.top/ak2ffp9hh"
+    },
     {
         id:1, name:"Betscore", bonus:"350%%", bonusVal:17000, max:"17000€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Betscore.png",
@@ -700,11 +715,19 @@ function toggleCard(id){
 }
 
 function makeCard(c, i) {
+    const isWinz = c.winz;
     const isFresh = c.noDeposit;
+    const rank = casinos.indexOf(c) + 1;
 
     // Build chips
     let chipsHTML = '';
-    if(isFresh) {
+    if(isWinz) {
+        chipsHTML = '<span class="stat-chip accent">' + c.bonus + ' bis ' + c.max + '</span>'
+                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
+                  + (c.freespins ? '<span class="stat-chip gold">✨ ' + c.freespins + '</span>' : '')
+                  + '<span class="stat-chip gold">🎁 Promo: IDIOTEN</span>'
+                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
+    } else if(isFresh) {
         chipsHTML = '<span class="stat-chip gold">🎰 30 Free Spins</span>'
                   + '<span class="stat-chip gold">Ohne Einzahlung</span>'
                   + '<span class="stat-chip">Rakeback</span>'
@@ -728,7 +751,23 @@ function makeCard(c, i) {
 
     // Build detail section
     let detailHTML = '';
-    if(isFresh) {
+    if(isWinz) {
+        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
+                   + '<div>'
+                   +   '<p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">So sicherst du dir den Bonus</p>'
+                   +   '<p class="text-zinc-400 text-sm leading-relaxed mb-4">' + c.description + '</p>'
+                   +   '<div class="space-y-2.5">'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span><p class="text-zinc-400 text-sm">Auf <strong class="text-white">„Bonus holen"</strong> klicken und bei Winz registrieren.</p></div>'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span><p class="text-zinc-400 text-sm">Im Feld <strong class="text-white">„Gutscheincode (optional)"</strong> den Code <strong class="text-white font-mono">IDIOTEN</strong> eingeben.</p></div>'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">3</span><p class="text-zinc-400 text-sm">Währung wählen, AGB & 18+ bestätigen und Konto erstellen.</p></div>'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">4</span><p class="text-zinc-400 text-sm">Einzahlung tätigen — der Bonus aktiviert sich danach <strong class="text-white">automatisch</strong>.</p></div>'
+                   +   '</div>'
+                   + '</div>'
+                   + '<div>'
+                   +   '<div class="p-3 rounded-xl bg-amber-500/5 border border-amber-500/15"><p class="text-xs text-amber-300 font-bold">💡 Wichtig</p><p class="text-xs text-zinc-500 mt-1">Trage den Code <strong class="text-white font-mono">IDIOTEN</strong> beim Anmelden im Feld „Gutscheincode (optional)" ein – ohne Code wird der Bonus nicht gutgeschrieben.</p></div>'
+                   + '</div>'
+                   + '</div>';
+    } else if(isFresh) {
         const highlights = (c.highlights || []).map(h => '<span class="stat-chip">' + h + '</span>').join('');
         detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
                    + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">Angebot</p><p class="text-zinc-400 text-sm leading-relaxed">' + c.description + '</p></div>'
@@ -745,17 +784,17 @@ function makeCard(c, i) {
                    + '</div>';
     }
 
-    const cardClass = 'deal-card ' + (isFresh ? 'freshbet' : (c.id === 1 ? 'featured' : '')) + ' animate-in';
+    const cardClass = 'deal-card ' + (isWinz ? 'winz' : isFresh ? 'freshbet' : (rank === 1 ? 'featured' : '')) + ' animate-in';
     const delay = 'animation-delay:' + (i * 0.05) + 's;';
 
     const div = document.createElement('div');
     div.className = cardClass;
     div.setAttribute('style', delay);
     div.innerHTML =
-        (isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
+        (isWinz ? '<div class="winz-flag">👑 #1 Top Deal</div>' : isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
         + '<div class="card-main" onclick="toggleCard(' + c.id + ')">'
         +   '<div class="flex items-center gap-3 flex-shrink-0">'
-        +     '<div class="rank-badge ' + rankClass(c.id) + '">' + c.id + '</div>'
+        +     '<div class="rank-badge ' + rankClass(rank) + '">' + rank + '</div>'
         +     '<div class="w-28 h-16 md:w-36 md:h-20 bg-surface-2 rounded-2xl flex items-center justify-center border border-white/[0.04] shrink-0 overflow-hidden">'
         +       '<img src="' + c.logo + '" alt="' + c.name + '" class="w-full h-full object-contain p-3">'
         +     '</div>'
@@ -767,7 +806,7 @@ function makeCard(c, i) {
         +   '<div class="flex flex-col items-stretch gap-2 w-full md:w-56 flex-shrink-0">'
         +     '<div class="flex items-center gap-2 w-full">'
         +       codeBtnHTML
-        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
+        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isWinz ? 'cta-winz' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
         +     '</div>'
         +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
         +       '<span id="lbl-' + c.id + '">DETAILS</span>'
