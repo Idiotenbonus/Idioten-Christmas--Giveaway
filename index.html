@@ -53,6 +53,13 @@
         .cta-winz{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);}
         .cta-winz:hover{box-shadow:0 8px 32px rgba(245,158,11,0.45);}
         .deal-card.winz .card-details.open{max-height:1600px;}
+        .deal-card.shiny{background:linear-gradient(135deg,rgba(34,211,238,0.12),rgba(16,185,129,0.06) 45%,#0f0f12 78%);border-color:rgba(34,211,238,0.28);box-shadow:0 0 44px -14px rgba(34,211,238,0.22);}
+        .deal-card.shiny:hover{border-color:rgba(34,211,238,0.45);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 60px -8px rgba(34,211,238,0.26);}
+        .shiny-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#22d3ee,#10b981);color:#042f2e;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(34,211,238,0.35);z-index:5;}
+        .cta-shiny{background:linear-gradient(135deg,#06b6d4,#0d9488);box-shadow:0 4px 20px rgba(6,182,212,0.3);}
+        .cta-shiny:hover{box-shadow:0 8px 32px rgba(6,182,212,0.45);}
+        .deal-card.shiny .card-details.open{max-height:1600px;}
+        .stat-chip.cyan{background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.22);color:#67e8f9;}
 
         .card-main{padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;user-select:none;}
         @media(min-width:768px){.card-main{flex-direction:row;align-items:center;gap:4rem;padding:2.5rem;}}
@@ -525,6 +532,7 @@
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Casino (optional)</label>
                                 <select name="casino" id="supportCasinoSelect" class="ticket-input">
                                     <option value="">Kein bestimmtes Casino</option>
+                                    <option>ShinyWilds</option>
                                     <option>Winz</option>
                                     <option>Freshbet</option>
                                     <option>DudeSpin</option>
@@ -598,6 +606,14 @@
 
 <script>
 const casinos = [
+    // ✨ SHINYWILDS – Platz 1
+    {
+        id:102, name:"ShinyWilds", bonus:"100%", bonusVal:1000, max:"1000€", freespins:"250 FS",
+        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"ShinyWilds.png",
+        shiny:true,
+        description:"2× 100% Bonus bis je 500€ plus jeweils 125 Freispiele – auf deine ersten beiden Einzahlungen (insgesamt bis zu 1.000€ + 250 Freispiele). Non-Sticky – du spielst zuerst mit deinem Echtgeld, deine Gewinne sind jederzeit auszahlbar.",
+        url:"https://partners.shinywildpartners.com/v2/text/294/9/dc3b46a3-7066-11f1-8d87-cad21936ea85/1"
+    },
     // ⚠️ WINZ – bitte die echten Bonuswerte unten eintragen (bonus / max / freespins / wager)!
     {
         id:100, name:"Winz", bonus:"100%", bonusVal:200, max:"1000€", freespins:"",
@@ -612,7 +628,7 @@ const casinos = [
         description:"Bekannt für besonders schnelle Auszahlungen und ein starkes Live Casino Angebot.",
         url:"https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893"
     },
-    // ⚠️ GLORION – bitte echte Bonuswerte eintragen (bonus / max / freespins / wager / type)!
+    // ⚠️ GLORION
     {
         id:101, name:"Glorion", bonus:"100%", bonusVal:100, max:"750€", freespins:"200 FS",
         type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Glorion.png",
@@ -733,12 +749,19 @@ function toggleCard(id){
 
 function makeCard(c, i) {
     const isWinz = c.winz;
+    const isShiny = c.shiny;
     const isFresh = c.noDeposit;
     const rank = casinos.indexOf(c) + 1;
 
     // Build chips
     let chipsHTML = '';
-    if(isWinz) {
+    if(isShiny) {
+        chipsHTML = '<span class="stat-chip cyan">💰 2× 100% bis 500€</span>'
+                  + '<span class="stat-chip cyan">je 125 FS</span>'
+                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
+                  + '<span class="stat-chip gold">✨ 250 FS gesamt</span>'
+                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
+    } else if(isWinz) {
         chipsHTML = '<span class="stat-chip accent">' + c.bonus + ' bis ' + c.max + '</span>'
                   + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
                   + (c.freespins ? '<span class="stat-chip gold">✨ ' + c.freespins + '</span>' : '')
@@ -768,7 +791,21 @@ function makeCard(c, i) {
 
     // Build detail section
     let detailHTML = '';
-    if(isWinz) {
+    if(isShiny) {
+        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
+                   + '<div>'
+                   +   '<p class="text-[0.6rem] font-black uppercase tracking-widest text-cyan-400 mb-3">Über diesen Bonus</p>'
+                   +   '<p class="text-zinc-400 text-sm leading-relaxed mb-4">' + c.description + '</p>'
+                   +   '<div class="space-y-2.5">'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span><p class="text-zinc-400 text-sm"><strong class="text-white">1. Einzahlung:</strong> 100% bis 500€ + 125 Freispiele.</p></div>'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span><p class="text-zinc-400 text-sm"><strong class="text-white">2. Einzahlung:</strong> nochmal 100% bis 500€ + 125 Freispiele.</p></div>'
+                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">∑</span><p class="text-zinc-400 text-sm">Insgesamt bis zu <strong class="text-white">1.000€</strong> + <strong class="text-white">250 Freispiele</strong>.</p></div>'
+                   +   '</div>'
+                   + '</div>'
+                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">Non-Sticky Logik</p><p class="text-zinc-500 text-sm leading-relaxed mb-4">Du spielst zuerst mit deinem Echtgeld. Gewinne sind sofort auszahlbar, solange der Bonus unberührt bleibt.</p>'
+                   +   '<div class="p-3 rounded-xl bg-cyan-500/5 border border-cyan-500/15"><p class="text-xs text-cyan-300 font-bold">💡 Tipp</p><p class="text-xs text-zinc-500 mt-1">Tätige beide Einzahlungen, um den vollen Bonus von 1.000€ und alle 250 Freispiele mitzunehmen.</p></div></div>'
+                   + '</div>';
+    } else if(isWinz) {
         detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
                    + '<div>'
                    +   '<p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">So sicherst du dir den Bonus</p>'
@@ -801,14 +838,14 @@ function makeCard(c, i) {
                    + '</div>';
     }
 
-    const cardClass = 'deal-card ' + (isWinz ? 'winz' : isFresh ? 'freshbet' : (rank === 1 ? 'featured' : '')) + ' animate-in';
+    const cardClass = 'deal-card ' + (isShiny ? 'shiny' : isWinz ? 'winz' : isFresh ? 'freshbet' : (rank === 1 ? 'featured' : '')) + ' animate-in';
     const delay = 'animation-delay:' + (i * 0.05) + 's;';
 
     const div = document.createElement('div');
     div.className = cardClass;
     div.setAttribute('style', delay);
     div.innerHTML =
-        (isWinz ? '<div class="winz-flag">👑 #1 Top Deal</div>' : isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
+        (isShiny ? '<div class="shiny-flag">✨ #1 Top Deal</div>' : isWinz ? '<div class="winz-flag">👑 Top Deal</div>' : isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
         + '<div class="card-main" onclick="toggleCard(' + c.id + ')">'
         +   '<div class="flex items-center gap-3 flex-shrink-0">'
         +     '<div class="rank-badge ' + rankClass(rank) + '">' + rank + '</div>'
@@ -823,7 +860,7 @@ function makeCard(c, i) {
         +   '<div class="flex flex-col items-stretch gap-2 w-full md:w-56 flex-shrink-0">'
         +     '<div class="flex items-center gap-2 w-full">'
         +       codeBtnHTML
-        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isWinz ? 'cta-winz' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
+        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isShiny ? 'cta-shiny' : isWinz ? 'cta-winz' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
         +     '</div>'
         +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
         +       '<span id="lbl-' + c.id + '">DETAILS</span>'
