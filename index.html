@@ -42,30 +42,33 @@
         .hero-glow-2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.08) 0%,transparent 70%);top:100px;right:-100px;pointer-events:none;animation:pulseGlow 8s ease-in-out infinite alternate-reverse;}
         @keyframes pulseGlow{from{opacity:0.6;transform:translateX(-50%) scale(1);}to{opacity:1;transform:translateX(-50%) scale(1.1);}}
 
-        /* ── DEAL CARDS (BrutalerBonus-Stil) ── */
+        /* ── DEAL CARDS ── */
         .deal-card{background:#0f0f12;border:1px solid rgba(255,255,255,0.04);border-radius:20px;transition:border-color 0.3s,box-shadow 0.3s;position:relative;overflow:hidden;}
         .deal-card:hover{border-color:rgba(147,51,234,0.15);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 48px -8px rgba(147,51,234,0.06);}
         .deal-card.featured{background:linear-gradient(135deg,rgba(147,51,234,0.07),#0f0f12 45%);border-color:rgba(147,51,234,0.12);}
-        .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.05),#0f0f12 50%);border-color:rgba(251,191,36,0.15);}
-        .deal-card.winz{background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(168,85,247,0.05) 45%,#0f0f12 75%);border-color:rgba(251,191,36,0.25);box-shadow:0 0 40px -14px rgba(251,191,36,0.18);}
-        .deal-card.winz:hover{border-color:rgba(251,191,36,0.42);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 56px -8px rgba(251,191,36,0.2);}
-        .winz-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(251,191,36,0.3);z-index:5;}
-        .cta-winz{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);}
-        .cta-winz:hover{box-shadow:0 8px 32px rgba(245,158,11,0.45);}
-        .deal-card.winz .card-details.open{max-height:1600px;}
+
+        /* Top-Deal (Platz 1) – cyan */
         .deal-card.shiny{background:linear-gradient(135deg,rgba(34,211,238,0.12),rgba(16,185,129,0.06) 45%,#0f0f12 78%);border-color:rgba(34,211,238,0.28);box-shadow:0 0 44px -14px rgba(34,211,238,0.22);}
         .deal-card.shiny:hover{border-color:rgba(34,211,238,0.45);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 60px -8px rgba(34,211,238,0.26);}
         .shiny-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#22d3ee,#10b981);color:#042f2e;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(34,211,238,0.35);z-index:5;}
         .cta-shiny{background:linear-gradient(135deg,#06b6d4,#0d9488);box-shadow:0 4px 20px rgba(6,182,212,0.3);}
         .cta-shiny:hover{box-shadow:0 8px 32px rgba(6,182,212,0.45);}
-        .deal-card.shiny .card-details.open{max-height:1600px;}
+        .deal-card.shiny .card-details.open{max-height:1800px;}
         .stat-chip.cyan{background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.22);color:#67e8f9;}
+
+        /* Freshbet – gold, No-Deposit */
+        .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(168,85,247,0.04) 45%,#0f0f12 75%);border-color:rgba(251,191,36,0.25);box-shadow:0 0 40px -14px rgba(251,191,36,0.18);}
+        .deal-card.freshbet:hover{border-color:rgba(251,191,36,0.42);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 56px -8px rgba(251,191,36,0.2);}
+        .deal-card.freshbet .card-details.open{max-height:1800px;}
+        .no-deposit-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(251,191,36,0.3);z-index:5;}
+        .cta-freshbet{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 20px rgba(217,119,6,0.25);}
+        .cta-freshbet:hover{box-shadow:0 8px 32px rgba(217,119,6,0.4);}
 
         .card-main{padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;cursor:pointer;user-select:none;}
         @media(min-width:768px){.card-main{flex-direction:row;align-items:center;gap:4rem;padding:2.5rem;}}
 
         .card-details{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1);}
-        .card-details.open{max-height:600px;}
+        .card-details.open{max-height:1400px;}
         .card-details-inner{padding:1.5rem 1.25rem 2rem;border-top:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);}
         @media(min-width:768px){.card-details-inner{padding:2.5rem;}}
 
@@ -83,16 +86,29 @@
         .stat-chip.gold{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2);color:#fbbf24;}
         .stat-chip.red{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.15);color:#f87171;}
 
-        /* TAGS */
-        .tag{background:rgba(147,51,234,0.08);color:#c084fc;padding:2px 7px;border-radius:6px;font-size:0.58rem;font-weight:700;white-space:nowrap;}
-        .tag-gold{background:rgba(251,191,36,0.1);color:#fbbf24;padding:2px 7px;border-radius:6px;font-size:0.58rem;font-weight:700;white-space:nowrap;}
+        /* HIGHLIGHT-BOXEN IM DETAIL */
+        .hl{display:flex;align-items:flex-start;gap:10px;border-radius:12px;padding:12px 14px;margin-top:14px;}
+        .hl svg{flex-shrink:0;margin-top:2px;}
+        .hl p{font-size:0.8rem;line-height:1.5;color:#a1a1aa;}
+        .hl strong{font-weight:800;}
+        .hl-gold{background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.22);}
+        .hl-gold strong{color:#fbbf24;}
+        .hl-gold svg{color:#fbbf24;}
+        .hl-red{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);}
+        .hl-red strong{color:#f87171;}
+        .hl-red svg{color:#f87171;}
+        .hl-green{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.18);}
+        .hl-green strong{color:#34d399;}
+        .hl-green svg{color:#34d399;}
 
-        /* FLAGS */
-        .no-deposit-flag{position:absolute;top:0;right:0;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#451a03;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(251,191,36,0.3);z-index:5;}
+        /* CODE BOX IM DETAIL */
+        .code-inline{display:inline-flex;align-items:center;gap:8px;background:rgba(251,191,36,0.08);border:1px dashed rgba(251,191,36,0.4);border-radius:10px;padding:8px 14px;cursor:pointer;transition:all 0.2s;font-family:ui-monospace,monospace;font-weight:800;color:#fbbf24;letter-spacing:0.1em;font-size:0.95rem;}
+        .code-inline:hover{background:rgba(251,191,36,0.14);border-color:rgba(251,191,36,0.7);}
+        .code-inline.copied{background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.5);color:#34d399;}
 
-        /* CODE BTN */
+        /* CODE BTN (Karte) */
         .code-btn{position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 14px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:80px;}
-        .code-btn:hover{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2);}
+        .code-btn:hover{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.3);}
         .code-btn .code-label,.code-btn .code-value{transition:all 0.3s cubic-bezier(0.16,1,0.3,1);}
         .code-btn.copied .code-label,.code-btn.copied .code-value{opacity:0;transform:scale(0.8);}
         .code-btn .copy-confirm{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.5);transition:all 0.35s cubic-bezier(0.16,1,0.3,1);pointer-events:none;}
@@ -103,8 +119,6 @@
         .cta-primary{background:linear-gradient(135deg,#9333ea,#7c3aed);color:#fff;font-weight:800;border-radius:12px;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(147,51,234,0.2);}
         .cta-primary:hover{box-shadow:0 8px 32px rgba(147,51,234,0.35);transform:translateY(-1px);}
         .cta-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent 50%);border-radius:inherit;}
-        .cta-freshbet{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 20px rgba(217,119,6,0.25);}
-        .cta-freshbet:hover{box-shadow:0 8px 32px rgba(217,119,6,0.4);}
 
         /* CHEVRON */
         .chevron{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s ease,background 0.2s;}
@@ -159,14 +173,8 @@
         .text-gradient{background:linear-gradient(135deg,#c084fc 0%,#a855f7 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
         .text-gradient-gold{background:linear-gradient(135deg,#fbbf24 0%,#f59e0b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-        /* GIVEAWAY */
-        .giveaway-wrapper{position:relative;}
-        .giveaway-wrapper::before{content:'';position:absolute;inset:-1px;border-radius:21px;background:linear-gradient(135deg,rgba(147,51,234,0.15),transparent 50%,rgba(99,102,241,0.1));z-index:-1;}
-
         /* LIVE */
         .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);padding:4px 12px;border-radius:99px;color:#c084fc;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:0.05em;margin-top:1rem;animation:bounceIn 0.8s cubic-bezier(0.175,0.885,0.32,1.275) both;}
-        .live-dot{width:6px;height:6px;background:#a855f7;border-radius:50%;box-shadow:0 0 8px #a855f7;animation:pulse-dot 1.5s infinite;}
-        @keyframes pulse-dot{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:0.5;}100%{transform:scale(1);opacity:1;}}
         @keyframes bounceIn{from{opacity:0;transform:scale(0.3) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
 
         /* SUPPORT */
@@ -226,7 +234,6 @@
             <div class="mt-6 flex gap-5">
                 <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Instagram</a>
                 <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">Discord</a>
-                <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="text-brand-400 font-bold text-sm hover:text-brand-300 transition">YouTube</a>
             </div>
         </div>
     </div>
@@ -276,22 +283,6 @@
                 </div>
             </div>
 
-            <!-- LIVE EVENT PROMO BANNER ON DEALS SECTION -->
-            <div class="relative z-10 max-w-xl mx-auto mb-10 animate-in" style="animation-delay:0.25s;">
-                <div onclick="switchTab('giveaway')" class="cursor-pointer bg-gradient-to-r from-purple-950/40 via-surface-1 to-amber-950/20 border border-amber-500/20 hover:border-amber-500/40 rounded-2xl p-4 flex items-center justify-between gap-4 transition duration-300 group">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl animate-bounce">🏆</span>
-                        <div class="text-left">
-                            <span class="text-[10px] text-amber-400 font-extrabold uppercase tracking-widest block">AKTIVES GEWINNSPIEL 2026</span>
-                            <span class="text-sm font-black text-white group-hover:text-amber-300 transition">10.000€ WM CHALLENGE IST LIVE!</span>
-                        </div>
-                    </div>
-                    <div class="bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-[10px] tracking-widest uppercase px-4 py-2.5 rounded-xl transition duration-200">
-                        ANSEHEN ➔
-                    </div>
-                </div>
-            </div>
-
             <div class="flex flex-wrap gap-2.5 items-center justify-center mb-10 reveal-item" id="filters">
                 <div class="relative">
                     <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 pointer-events-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -307,161 +298,56 @@
             <div class="space-y-3" id="casinoList"></div>
         </div>
 
-        <!-- GIVEAWAY TAB (AKTIVE WM-CHALLENGE) -->
-        <div id="giveaway-section" class="tab-content max-w-4xl mx-auto hidden pt-4">
+        <!-- GIVEAWAY TAB – aktuell kein aktives Gewinnspiel -->
+        <div id="giveaway-section" class="tab-content max-w-3xl mx-auto hidden pt-4">
             <div class="bg-surface-1 rounded-[22px] p-6 md:p-12 border border-white/[0.04] relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-                <!-- Banner Header (Bildschirmfoto 2026-06-14 um 16.29.33.jpg) -->
-                <div class="text-center max-w-2xl mx-auto mb-10 relative z-10">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[0.65rem] font-bold uppercase tracking-widest mb-6">
-                        ⚽ ACTIVE CHALLENGE 2026
+                <div class="text-center max-w-xl mx-auto relative z-10">
+                    <div class="w-20 h-20 mx-auto mb-7 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center">
+                        <svg class="w-9 h-9 text-zinc-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
                     </div>
-                    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-4">
-                        🏆 WM CHALLENGE
+
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] text-zinc-500 text-[0.65rem] font-bold uppercase tracking-widest mb-6">
+                        <span class="w-1.5 h-1.5 rounded-full bg-zinc-600"></span>
+                        Kein aktives Gewinnspiel
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white mb-4">
+                        Gerade läuft<br><span class="text-gradient">kein Gewinnspiel.</span>
                     </h2>
-                    <p class="text-gradient-gold text-2xl md:text-4xl font-extrabold mb-2 tracking-tight">
-                        10.000€ PRIZEPOOL
+                    <p class="text-zinc-500 text-sm leading-relaxed mb-10">
+                        Das nächste Event ist aber schon in Planung. Trag dich mit deiner E-Mail ein und du bekommst eine Nachricht, sobald das nächste Gewinnspiel startet – ohne Spam, nur bei echten Aktionen.
                     </p>
-                    <p class="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-6">
-                        Auszahlung auf <span class="text-white border-b border-amber-500 pb-0.5">25 PLÄTZE</span>
-                    </p>
-                    <div class="text-zinc-400 text-xs md:text-sm leading-relaxed bg-white/[0.02] border border-white/[0.04] p-4 rounded-xl text-left">
-                        <span class="text-emerald-400 font-bold block mb-1">✅ NICHT NUR EIN EINZELNER JACKPOT!</span>
-                        Deine besten Gewinne aus <span class="text-white font-bold underline">ALLEN</span> teilnehmenden Brands werden addiert! Wer die WM ohnehin spielt, sollte die Extra-Preisgelder mitnehmen!
-                    </div>
                 </div>
 
-                <!-- Custom styled Side-By-Side Buttons according to user mock (Bildschirmfoto 2026-06-14 um 16.16.38.jpg) -->
-                <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12 relative z-10">
-                    <!-- Left Button: Purple gradient "LIVE LEADERBOARD" -->
-                    <a href="https://www.worldcup-jackpot.live" target="_blank" class="flex items-center justify-center p-5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-95 transition-all text-center select-none cursor-pointer">
-                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
-                            📊 LIVE LEADERBOARD
-                        </span>
-                    </a>
-
-                    <!-- Right Button: Blue/Sky "WETTSCHEINE EINREICHEN" -->
-                    <a href="https://t.me/wcjackpotbot" target="_blank" class="flex items-center justify-center p-5 rounded-2xl bg-gradient-to-r from-sky-600 to-blue-600 hover:opacity-95 transition-all text-center select-none cursor-pointer">
-                        <span class="text-xs md:text-sm font-black uppercase tracking-widest text-white flex items-center gap-2">
-                            🤖 WETTSCHEINE EINREICHEN
-                        </span>
-                    </a>
-                </div>
-
-                <!-- The 4 Participating Casino Brands -->
-                <div class="bg-surface-0/60 rounded-2xl p-6 border border-white/[0.02] mb-12 relative z-10">
-                    <h3 class="text-center text-[10px] font-black tracking-widest text-zinc-500 uppercase mb-6">5 Brands – 1 Challenge</h3>
-                    
-                    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
-                        <!-- Brand 1: BANKONBET -->
-                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-sky-500/30 transition-all">
-                            <div>
-                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">1) BANKONBET</span>
-                                <h4 class="text-sky-400 font-black text-sm tracking-wider uppercase">BANKONBET</h4>
-                            </div>
-                            <a href="https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
+                <!-- Benachrichtigungs-Formular -->
+                <div id="notify-container" class="max-w-md mx-auto relative z-10">
+                    <form id="notify-form" action="https://formspree.io/f/mykdjjzb" method="POST">
+                        <input type="hidden" name="_subject" value="🔔 Neue Gewinnspiel-Anmeldung – Idiotenbonus">
+                        <input type="hidden" name="anfrage" value="Benachrichtigung bei neuem Gewinnspiel">
+                        <div class="flex flex-col sm:flex-row gap-2.5">
+                            <input type="email" name="email" required placeholder="deine@email.de"
+                                   class="ticket-input flex-1" aria-label="Deine E-Mail-Adresse">
+                            <button type="submit" id="notify-btn"
+                                    class="cta-primary px-6 py-4 text-xs tracking-widest uppercase whitespace-nowrap">
+                                Benachrichtigen
+                            </button>
                         </div>
-
-                        <!-- Brand 2: GLORION -->
-                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-brand-500/40 transition-all">
-                            <div>
-                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">2) GLORION</span>
-                                <h4 class="text-brand-400 font-black text-sm tracking-wider uppercase">GLORION</h4>
-                            </div>
-                            <a href="https://glrn.lynmonkel.com/?mid=377264_2185984&clickid=merkuridioten-SB7767" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
-                        </div>
-
-                        <!-- Brand 3: DUDESPIN -->
-                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-emerald-500/30 transition-all">
-                            <div>
-                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">3) DUDESPIN</span>
-                                <h4 class="text-emerald-400 font-black text-sm tracking-wider uppercase">DUDESPIN</h4>
-                            </div>
-                            <a href="https://ddspn.lynmonkel.com/?mid=95901_2171798&clickid=merkuridioten-SB7126" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
-                        </div>
-
-                        <!-- Brand 4: GOLISIMO -->
-                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-amber-500/30 transition-all">
-                            <div>
-                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">4) GOLISIMO</span>
-                                <h4 class="text-amber-400 font-black text-sm tracking-wider uppercase">GOLISIMO</h4>
-                            </div>
-                            <a href="https://gls.lynnar.com/?mid=315090_2163347&clickid=merkuridioten-SB7023" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
-                        </div>
-
-                        <!-- Brand 5: BETSCORE -->
-                        <div class="bg-surface-2/60 border border-white/[0.04] p-4 rounded-xl text-center flex flex-col justify-between hover:border-red-500/30 transition-all">
-                            <div>
-                                <span class="text-[9px] text-zinc-500 font-bold block uppercase mb-1">5) BETSCORE</span>
-                                <h4 class="text-red-500 font-black text-sm tracking-wider uppercase">BETSCORE</h4>
-                            </div>
-                            <a href="https://bsr.lynmonkel.com/?mid=51585_2181508&clickid=merkuridioten-SB7390" target="_blank" class="mt-4 bg-white/[0.04] hover:bg-brand-600 text-white font-bold text-[10px] tracking-wide uppercase py-2 rounded-lg block transition-all">Registrieren ➔</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Explanatory Rules & Info sections -->
-                <div class="grid md:grid-cols-2 gap-6 text-left relative z-10 border-t border-white/[0.04] pt-8">
-                    <!-- Spalte 1: Wie funktioniert die Wertung -->
-                    <div>
-                        <h4 class="text-white font-bold text-sm uppercase mb-2 flex items-center gap-1.5">
-                            <span class="text-brand-400">📈</span> Wie funktioniert die Wertung?
-                        </h4>
-                        <p class="text-zinc-500 text-xs leading-relaxed mb-3">
-                            Pro teilnehmender Brand zählt jeweils dein <strong>höchster eingereichter Gewinn</strong>. Du kannst auch mehrere der 5 Brands nutzen (dadurch haben aktive Nutzer einen erheblichen Vorteil!).
+                        <p class="text-[0.65rem] text-zinc-600 text-center mt-4 leading-relaxed">
+                            Wir nutzen deine Adresse ausschließlich für die Benachrichtigung zum nächsten Gewinnspiel.
+                            Abmeldung jederzeit per Antwort auf die E-Mail.
                         </p>
-                        <div class="p-3 bg-black/40 border border-white/[0.04] rounded-lg text-[10px] text-zinc-500 space-y-1">
-                            <strong class="text-zinc-400">Beispiel:</strong><br>
-                            Brand A → 1.000€ Gewinn | Brand B → 1.500€ Gewinn<br>
-                            Brand C → 800€ Gewinn | Brand D → 700€ Gewinn<br>
-                            <span class="text-brand-400 font-bold">Gesamtwertung = 4.000 Punkte</span>
-                        </div>
-                    </div>
-
-                    <!-- Spalte 2: Voraussetzungen & Fairness -->
-                    <div>
-                        <h4 class="text-white font-bold text-sm uppercase mb-2 flex items-center gap-1.5">
-                            <span class="text-emerald-400">✅</span> Voraussetzungen
-                        </h4>
-                        <ul class="text-zinc-500 text-xs space-y-1.5 list-disc pl-4 mb-4">
-                            <li>Mindestquote <strong class="text-zinc-300">5,0</strong> pro Schein</li>
-                            <li>Wettschein muss gewonnen sein</li>
-                            <li>Gewinnbetrag & Wettschein-ID vollständig sichtbar</li>
-                            <li>Nur ein Gewinn pro Brand wird gewertet</li>
-                        </ul>
-
-                        <h4 class="text-white font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
-                            🔍 Verifizierung & Fairness
-                        </h4>
-                        <p class="text-zinc-500 text-[11px] leading-relaxed">
-                            Fake-Screenshots führen zum sofortigen Ausschluss. Wettscheine werden täglich direkt bei den Brands gegengeprüft (Dauer ca. 1-2 Tage).
-                        </p>
-                    </div>
+                    </form>
                 </div>
 
-                <!-- Laufzeit und Telegramgruppe -->
-                <div class="mt-8 pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
-                    <div class="text-left">
-                        <span class="text-zinc-500 text-[10px] font-bold block uppercase">📅 Laufzeit des Events</span>
-                        <span class="text-white text-xs font-bold">Bis einschließlich 19.07.2026 (Komplette WM)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        
-                    </div>
-                </div>
-
-                <!-- Support Redirect Banner (As requested instead of @WCJackpotAdmin buttons) -->
-                <div class="mt-6 p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 text-center relative z-10">
-                    <p class="text-xs text-zinc-500 leading-relaxed">
-                        🔧 Hast du technische Fragen oder benötigst Hilfe beim Gewinnspiel?
-                    </p>
-                    <button onclick="switchTab('support')" class="text-xs font-bold text-amber-400 hover:text-amber-300 underline mt-1">
-                        Hier geht's direkt zu unserem Support Center →
+                <!-- Verweis auf Deals -->
+                <div class="mt-10 pt-8 border-t border-white/[0.04] text-center relative z-10">
+                    <p class="text-xs text-zinc-600 mb-3">In der Zwischenzeit:</p>
+                    <button onclick="switchTab('deals')" class="text-sm font-bold text-brand-400 hover:text-brand-300 transition">
+                        Zu den aktuellen Casino Deals →
                     </button>
                 </div>
-
             </div>
         </div>
 
@@ -491,7 +377,7 @@
                     </div>
                     <p class="text-xs font-black uppercase tracking-widest text-brand-400 mb-1">Unser Team</p>
                     <p class="text-white font-bold text-sm mb-2">Ticket schreiben</p>
-                    <p class="text-zinc-600 text-xs leading-relaxed">Fragen zu Deals, Codes & Gewinnspiel – Antwort innerhalb 24h.</p>
+                    <p class="text-zinc-600 text-xs leading-relaxed">Fragen zu Deals & Codes – Antwort innerhalb 24h.</p>
                 </div>
                 <div class="support-card animate-in" style="animation-delay:0.2s;">
                     <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
@@ -530,34 +416,15 @@
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Casino (optional)</label>
+                                <!-- Wird automatisch aus der Casino-Liste befüllt -->
                                 <select name="casino" id="supportCasinoSelect" class="ticket-input">
                                     <option value="">Kein bestimmtes Casino</option>
-                                    <option>ShinyWilds</option>
-                                    <option>Lanista</option>
-                                    <option>Freshbet</option>
-                                    <option>DudeSpin</option>
-                                    <option>Golisimo</option>
-                                    <option>Slotsgem</option>
-                                    <option>Allyspin</option>
-                                    <option>Westace</option>
-                                    <option>Legiano</option>
-                                    <option>Bankonbet</option>
-                                    <option>Glorion</option>
-                                    <option>Betscore</option>
-                                    <option>Vegashero</option>
-                                    <option>N1Bet</option>
-                                    <option>Sportaza</option>
-                                    <option>Mystake</option>
-                                    <option>Rabona</option>
-                                    <option>Zoccer</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-[0.6rem] font-black uppercase tracking-widest text-zinc-600 mb-2">Kategorie *</label>
                                 <select name="kategorie" required class="ticket-input">
                                     <option value="" disabled selected>Bitte wählen …</option>
-                                    <!-- Added "Gewinnspiel / WM Challenge" for streamlined help categories -->
-                                    <option>Gewinnspiel / WM Challenge</option>
                                     <option>Bonusfrage</option>
                                     <option>Auszahlung</option>
                                     <option>Technisches Problem</option>
@@ -593,7 +460,6 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="https://www.instagram.com/Idiotenbonus/" target="_blank" class="social-btn" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-                    <a href="https://www.youtube.com/@IdiotenBonus" target="_blank" class="social-btn" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 2-2h15a2 2 0 0 1 2 2 24.12 24.12 0 0 1 0 10 2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2Z"/><path d="m10 15 5-3-5-3z"/></svg></a>
                     <a href="https://discord.gg/Tu6cXpFs62" target="_blank" class="social-btn" aria-label="Discord"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z"/></svg></a>
                     <div class="w-px h-6 bg-white/[0.06] mx-1"></div>
                     <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="social-btn" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg></button>
@@ -605,129 +471,113 @@
 </div>
 
 <script>
+/* ============================================================
+   CASINOS PFLEGEN
+   Reihenfolge im Array = Reihenfolge auf der Seite (Platz 1 oben).
+   logo   : Dateiname im selben Ordner, immer <Name>.png
+   bonus  : Prozentwert für den Chip, ODER bonusLabel für Sonderfälle
+   fs     : Text der goldenen Freispiel-Box im Detail
+   maxbet : optional – zeigt eine rote Warnbox im Detail
+   code   : optional – zeigt Code-Button + Anleitung (codeSteps)
+   steps  : optional – nummerierte Schritte im Detail
+   ============================================================ */
 const casinos = [
-    // ✨ SHINYWILDS – Platz 1
     {
-        id:102, name:"ShinyWilds", bonus:"100%", bonusVal:1000, max:"1000€", freespins:"250 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"ShinyWilds.png",
-        shiny:true,
-        description:"2× 100% Bonus bis je 500€ plus jeweils 125 Freispiele – auf deine ersten beiden Einzahlungen (insgesamt bis zu 1.000€ + 250 Freispiele). Non-Sticky – du spielst zuerst mit deinem Echtgeld, deine Gewinne sind jederzeit auszahlbar.",
-        url:"https://partners.shinywildpartners.com/v2/text/294/9/dc3b46a3-7066-11f1-8d87-cad21936ea85/1"
+        id:1, name:"Godz", logo:"Godz.png",
+        type:"Non-Sticky", wager:"35x",
+        bonusLabel:"500% Paket", freespins:"300 FS",
+        url:"https://gdz.lunostra.com/?mid=380999_2210072",
+        about:"Das Willkommenspaket verteilt sich auf deine ersten drei Einzahlungen und ergibt zusammen 500% Bonus.",
+        steps:[
+            ["1","1. Einzahlung","+150% Bonus."],
+            ["2","2. Einzahlung","+50% Bonus."],
+            ["3","3. Einzahlung","+300% Bonus."]
+        ],
+        fs:"300 Freispiele in Gates of Olympus, 0,20€ pro Spin."
     },
     {
-        id:103, name:"Lanista", bonus:"125%", bonusVal:777, max:"777€", freespins:"250 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Lanista.png",
-        description:"125% Bonus bis zu 777€ plus 250 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar.",
-        url:"https://lntsa.pclira.com/?mid=377935_2193806"
+        id:2, name:"Vipluck", logo:"Vipluck.png",
+        type:"Non-Sticky", wager:"35x",
+        bonus:"300%", max:"2.000€", freespins:"300 FS",
+        url:"https://vplk.lunostra.com/?mid=380999_2210070",
+        about:"300% Bonus auf deine Einzahlung bis zu 2.000€. Non-Sticky – du spielst zuerst mit deinem Echtgeld, deine Gewinne bleiben jederzeit auszahlbar.",
+        fs:"300 Freispiele in Gates of Olympus, 0,20€ pro Spin."
     },
     {
-        id:9, name:"Bankonbet", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Bankonbet.png",
-        description:"Bekannt für besonders schnelle Auszahlungen und ein starkes Live Casino Angebot.",
-        url:"https://bnkw.monalvor.com/?mid=103181_1878610&clickid=merkuridioten-SB2893"
-    },
-    // ⚠️ GLORION
-    {
-        id:101, name:"Glorion", bonus:"100%", bonusVal:100, max:"750€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Glorion.png",
-        description:"100% Bonus bis zu 750€ plus 200 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar.",
-        url:"https://glrn.lynmonkel.com/?mid=377264_2185984&clickid=merkuridioten-SB7767"
-    },
-    {
-        id:2, name:"DudeSpin", bonus:"300%", bonusVal:2000, max:"2000€", freespins:"150 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"DudeSpin.png",
-        description:"300% Bonus bis zu 2000€ plus 150 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 300% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
-        url:"https://ddspn.lynmonkel.com/?mid=95901_2171798&clickid=merkuridioten-SB7126"
+        id:3, name:"Golazzo", logo:"Golazzo.png",
+        type:"Non-Sticky", wager:"35x",
+        bonusLabel:"3× 100%", max:"2.000€", freespins:"200 FS",
+        url:"https://glzz.myloric.com/?mid=384995_2225554",
+        about:"3× 100% Bonus auf deine ersten drei Einzahlungen, insgesamt bis zu 2.000€. Non-Sticky – dein Echtgeld läuft zuerst, Gewinne bleiben auszahlbar.",
+        steps:[
+            ["1","1. Einzahlung","100% Bonus."],
+            ["2","2. Einzahlung","100% Bonus."],
+            ["3","3. Einzahlung","100% Bonus."]
+        ],
+        fs:"200 Freispiele."
     },
     {
-        id:3, name:"Golisimo", bonus:"300%", bonusVal:2500, max:"2500€", freespins:"300 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Golisimo.png",
-        description:"300% Bonus bis zu 2500€ plus 300 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 300% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
-        url:"https://gls.lynnar.com/?mid=315090_2163347&clickid=merkuridioten-SB7023"
+        id:4, name:"Freshbet", logo:"Freshbet.png",
+        type:"Non-Sticky", wager:"35x",
+        bonus:"150%", freespins:"100 FS",
+        code:"FB100", noDeposit:true,
+        url:"https://go.freshaffs.com/visit/?bta=49169&nci=6119&afp=idiotenbonus_6119&utm_campaign=idiotenbonus",
+        about:"150% Non-Sticky Bonus auf deine Einzahlung – und obendrauf 100 Freispiele komplett ohne Einzahlung mit dem Code FB100. Die Gewinne aus den Freispielen sind auszahlbar.",
+        codeSteps:[
+            ["1","Registrieren","Über den Button oben das Anmeldeformular öffnen und deine Daten eintragen."],
+            ["2","„Werbe Code“ anklicken","Im Formular unten auf <strong class=\"text-white\">Werbe Code</strong> klicken – erst dann erscheint das Eingabefeld."],
+            ["3","Code eintragen","<strong class=\"text-white font-mono\">FB100</strong> eingeben, bevor du auf „Registrieren“ klickst."],
+            ["4","E-Mail bestätigen","Ohne verifizierte E-Mail-Adresse werden die Freispiele nicht gutgeschrieben."]
+        ],
+        fs:"100 Freispiele ohne Einzahlung – die Gewinne daraus sind auszahlbar."
     },
     {
-        id:1, name:"Betscore", bonus:"350%%", bonusVal:17000, max:"17000€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Betscore.png",
-        description:"350% Bonus bis zu 17000 plus 150 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar. 350% Non-Sticky sind aufgeteilt in 3 einzahlungen, du bekommst also für alle 3 Einzahlungen einen 100% Bonus",
-        url:"https://bsr.lynmonkel.com/?mid=51585_2181508&clickid=merkuridioten-SB7390"
+        id:5, name:"SpinBoss", logo:"SpinBoss.png",
+        type:"Non-Sticky", wager:"35x",
+        bonus:"400%", max:"15.000€", freespins:"400 FS",
+        maxbet:"100€",
+        url:"https://spbs.lynmonkel.com/?mid=335011_2203648&clickid=merkuridioten-SB8387",
+        about:"Willkommenspaket mit 400% Bonus bis zu 15.000€ plus 400 Freispiele. Non-Sticky – dein Echtgeld wird zuerst gespielt.",
+        fs:"400 Freispiele."
     },
     {
-        id:4, name:"Slotsgem", bonus:"120%", bonusVal:600, max:"600€", freespins:"125 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"SlotsGemNeu.png",
-        description:"120% Bonus bis zu 600€ plus 125 Freispiele. Non-Sticky – du spielst zuerst mit deinem Echtgeld, Gewinne sind jederzeit auszahlbar.",
-        url:"https://top.aglobally.com/redirect.aspx?pid=95117&bid=1487&lpid=601"
+        id:6, name:"DudeSpin", logo:"DudeSpin.png",
+        type:"Non-Sticky", wager:"35x",
+        bonus:"300%", max:"2.000€", freespins:"150 FS",
+        maxbet:"100€",
+        url:"https://ddspn.lynmonkel.com/?mid=95901_2171798&clickid=merkuridioten-SB7126",
+        about:"300% Bonus bis zu 2.000€ plus 150 Freispiele. Non-Sticky – deine Gewinne aus dem Echtgeld-Guthaben bleiben auszahlbar.",
+        fs:"150 Freispiele."
     },
     {
-        id:5, name:"Freshbet", type:"Rakeback/VIP", wagerVal:0,
-        logo:"Freshbet.png", code:"IDB11", noDeposit:true,
-        description:"30 gratis Free Spins ohne Einzahlung mit Code IDB11. Kein klassischer Willkommensbonus, dafür Rakeback-Programm und VIP-Club mit langfristigen Vorteilen für aktive Spieler.",
-        highlights:["Rakeback", "VIP Club", "Live Casino", "Sportwetten"],
-        url:"https://go.affision.com/visit/?bta=48591&nci=5389&afp=Idiobonus"
-    },
-    {
-        id:6, name:"Allyspin", bonus:"250%", bonusVal:1000, max:"1000€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"allyspin.jpg",
-        description:"Massiver 250% Boost bis zu 1000€ plus 200 Freispiele. Non-Sticky – Gewinne bleiben sofort verfügbar solange der Bonus unberührt ist.",
-        url:"https://all.monalvor.com/?mid=103181_2056662&clickid=idiotenbonus-SB4489"
-    },
-    {
-        id:7, name:"Westace", bonus:"400%", bonusVal:15000, max:"15.000€", freespins:"400 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Westace.png",
-        description:"Unglaublicher 400% Bonus bis zu 15.000€ plus 400 Freispiele. Non-Sticky – maximale Flexibilität beim Spielen.",
-        url:"https://wstc.lynmonkel.com/?mid=335011_2148019&clickid=merkuridioten-SB6019"
-    },
-    {
-        id:8, name:"Legiano", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Legiano.png",
-        description:"Einer der beliebtesten Non-Sticky Anbieter mit großartigen Turnieren und regelmäßigen Aktionen für Bestandskunden.",
-        url:"https://lgno.monalvor.com/?mid=103181_2147649&clickid=merkuridioten-SB6002"
-    },
-    {
-        id:10, name:"Vegashero", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Vegashero.png",
-        description:"Toller Allrounder mit Sportwetten, Live Casino und schnellen Auszahlungen.",
-        url:"https://vgr.lynmonkel.com/?mid=346920_2133311&clickid=merkuridioten-SB5748"
-    },
-    {
-        id:11, name:"N1Bet", bonus:"100%", bonusVal:500, max:"500€", freespins:"150 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"N1Bet.png",
-        description:"Starkes Sportwetten-Angebot kombiniert mit einem soliden Casino-Bereich und schnellen Zahlungen.",
-        url:"https://n1betpartners.com/n1f2mi9qlc"
-    },
-    {
-        id:12, name:"Sportaza", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Sportasa.png",
-        description:"Idal für Sportwetten-Fans mit einem breiten Casino-Angebot als Ergänzung.",
-        url:"https://stzns.lynmonkel.com/?mid=278079_2052094"
-    },
-    {
-        id:13, name:"Mystake", bonus:"150%", bonusVal:500, max:"500€", freespins:null,
-        type:"Sticky", wager:"35x", wagerVal:35, logo:"Mystake.png",
-        description:"150% Bonus – Achtung: Sticky-Variante. Bonus und Einzahlung werden gemeinsam umgesetzt.",
-        url:"https://go.affiliatemystake.com/visit/?bta=3132393&nci=5664&utm_campaign=merkuridioten&afp=merkuridioten-SB2897"
-    },
-    {
-        id:14, name:"Rabona", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Rabona.png",
-        description:"Beliebter Anbieter mit einer guten Turnierstruktur und fairen Non-Sticky Konditionen.",
-        url:"https://rbn.lynmonkel.com/?mid=51585_1878614&clickid=merkuridioten-SB2894"
-    },
-    {
-        id:15, name:"Zoccer", bonus:"100%", bonusVal:500, max:"500€", freespins:"200 FS",
-        type:"Non-Sticky", wager:"35x", wagerVal:35, logo:"Zoccer.png",
-        description:"Neuer Anbieter mit spannendem Konzept – kombiniert Sportwetten-Feeling mit Casino-Deals.",
-        url:"https://socr.virelon.com/?mid=361838_2133314&clickid=merkuridioten-SB5749"
-    },
+        id:7, name:"Golisimo", logo:"Golisimo.png",
+        type:"Non-Sticky", wager:"35x",
+        bonus:"300%", max:"2.500€", freespins:"300 FS",
+        maxbet:"100€",
+        url:"https://gls.lynnar.com/?mid=315090_2163347&clickid=merkuridioten-SB7023",
+        about:"300% Bonus bis zu 2.500€ plus 300 Freispiele. Non-Sticky – dein Echtgeld läuft zuerst, Gewinne bleiben verfügbar.",
+        fs:"300 Freispiele."
+    }
 ];
 
-function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');document.getElementById('burger-btn').classList.toggle('burger-open');}
+/* ---------- Icons ---------- */
+const ICON_STAR  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.6L21 9.6l-4.8 4.4 1.3 6.6L12 17.4 6.5 20.6l1.3-6.6L3 9.6l6.4-1z"/></svg>';
+const ICON_WARN  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
+const ICON_CHECK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+
+function toggleMenu(){
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.getElementById('burger-btn').classList.toggle('burger-open');
+}
 
 function filterCasinos(){
     const search = document.getElementById('searchInput').value.toLowerCase();
     const type = document.getElementById('typeFilter').value;
     const filtered = casinos.filter(c => {
-        const matchSearch = c.name.toLowerCase().includes(search) || (c.bonus||'').toLowerCase().includes(search);
-        const matchType = type === 'all' || c.type === type || c.noDeposit;
+        const haystack = [c.name, c.bonus, c.bonusLabel, c.max, c.freespins, c.type, c.code]
+            .filter(Boolean).join(' ').toLowerCase();
+        const matchSearch = haystack.includes(search);
+        const matchType = type === 'all' || c.type === type;
         return matchSearch && matchType;
     });
     renderCasinos(filtered);
@@ -746,109 +596,112 @@ function toggleCard(id){
 }
 
 function makeCard(c, i) {
-    const isWinz = c.winz;
-    const isShiny = c.shiny;
-    const isFresh = c.noDeposit;
-    const rank = casinos.indexOf(c) + 1;
+    const rank    = casinos.indexOf(c) + 1;
+    const isTop   = rank === 1;
+    const isFresh = !!c.noDeposit;
 
-    // Build chips
-    let chipsHTML = '';
-    if(isShiny) {
-        chipsHTML = '<span class="stat-chip cyan">💰 2× 100% bis 500€</span>'
-                  + '<span class="stat-chip cyan">je 125 FS</span>'
-                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
-                  + '<span class="stat-chip gold">✨ 250 FS gesamt</span>'
-                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
-    } else if(isWinz) {
-        chipsHTML = '<span class="stat-chip accent">' + c.bonus + ' bis ' + c.max + '</span>'
-                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
-                  + (c.freespins ? '<span class="stat-chip gold">✨ ' + c.freespins + '</span>' : '')
-                  + '<span class="stat-chip gold">🎁 Promo: IDIOTEN</span>'
-                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
-    } else if(isFresh) {
-        chipsHTML = '<span class="stat-chip gold">🎰 30 Free Spins</span>'
-                  + '<span class="stat-chip gold">Ohne Einzahlung</span>'
-                  + '<span class="stat-chip">Rakeback</span>'
-                  + '<span class="stat-chip">VIP Club</span>';
-    } else {
-        chipsHTML = '<span class="stat-chip accent">' + c.bonus + ' bis ' + c.max + '</span>'
-                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>'
-                  + (c.freespins ? '<span class="stat-chip gold">✨ ' + c.freespins + '</span>' : '')
-                  + '<span class="stat-chip">Wager ' + c.wager + '</span>';
-    }
+    /* ---------- Chips ---------- */
+    const bonusText = c.bonusLabel
+        ? c.bonusLabel + (c.max ? ' bis ' + c.max : '')
+        : c.bonus + (c.max ? ' bis ' + c.max : '');
 
-    // Build code button
+    let chipsHTML = '<span class="stat-chip ' + (isTop ? 'cyan' : isFresh ? 'gold' : 'accent') + '">' + bonusText + '</span>'
+                  + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>';
+    if(isFresh) chipsHTML += '<span class="stat-chip gold">🎰 ' + c.freespins + ' ohne Einzahlung</span>';
+    else if(c.freespins) chipsHTML += '<span class="stat-chip gold">✨ ' + c.freespins + '</span>';
+    if(c.maxbet) chipsHTML += '<span class="stat-chip red">Max Bet ' + c.maxbet + '</span>';
+    chipsHTML += '<span class="stat-chip">Wager ' + c.wager + '</span>';
+
+    /* ---------- Code-Button auf der Karte ---------- */
     let codeBtnHTML = '';
     if(c.code) {
-        codeBtnHTML = '<button data-code="' + c.code + '" class="code-btn" onclick="event.stopPropagation();handleCopy(this)">'
+        codeBtnHTML = '<button data-code="' + c.code + '" class="code-btn" onclick="event.stopPropagation();handleCopy(this)" title="Code kopieren">'
                     + '<span class="code-label text-[0.5rem] uppercase font-bold text-zinc-600">Code</span>'
                     + '<span class="code-value text-xs font-extrabold tracking-wider">' + c.code + '</span>'
                     + '<span class="copy-confirm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="text-[0.5rem] font-bold text-emerald-400">Kopiert!</span></span>'
                     + '</button>';
     }
 
-    // Build detail section
-    let detailHTML = '';
-    if(isShiny) {
-        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
-                   + '<div>'
-                   +   '<p class="text-[0.6rem] font-black uppercase tracking-widest text-cyan-400 mb-3">Über diesen Bonus</p>'
-                   +   '<p class="text-zinc-400 text-sm leading-relaxed mb-4">' + c.description + '</p>'
-                   +   '<div class="space-y-2.5">'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span><p class="text-zinc-400 text-sm"><strong class="text-white">1. Einzahlung:</strong> 100% bis 500€ + 125 Freispiele.</p></div>'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span><p class="text-zinc-400 text-sm"><strong class="text-white">2. Einzahlung:</strong> nochmal 100% bis 500€ + 125 Freispiele.</p></div>'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-cyan-500/15 text-cyan-300 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">∑</span><p class="text-zinc-400 text-sm">Insgesamt bis zu <strong class="text-white">1.000€</strong> + <strong class="text-white">250 Freispiele</strong>.</p></div>'
-                   +   '</div>'
-                   + '</div>'
-                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">Non-Sticky Logik</p><p class="text-zinc-500 text-sm leading-relaxed mb-4">Du spielst zuerst mit deinem Echtgeld. Gewinne sind sofort auszahlbar, solange der Bonus unberührt bleibt.</p>'
-                   +   '<div class="p-3 rounded-xl bg-cyan-500/5 border border-cyan-500/15"><p class="text-xs text-cyan-300 font-bold">💡 Tipp</p><p class="text-xs text-zinc-500 mt-1">Tätige beide Einzahlungen, um den vollen Bonus von 1.000€ und alle 250 Freispiele mitzunehmen.</p></div></div>'
-                   + '</div>';
-    } else if(isWinz) {
-        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
-                   + '<div>'
-                   +   '<p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">So sicherst du dir den Bonus</p>'
-                   +   '<p class="text-zinc-400 text-sm leading-relaxed mb-4">' + c.description + '</p>'
-                   +   '<div class="space-y-2.5">'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">1</span><p class="text-zinc-400 text-sm">Auf <strong class="text-white">„Bonus holen"</strong> klicken und bei Winz registrieren.</p></div>'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">2</span><p class="text-zinc-400 text-sm">Im Feld <strong class="text-white">„Gutscheincode (optional)"</strong> den Code <strong class="text-white font-mono">IDIOTEN</strong> eingeben.</p></div>'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">3</span><p class="text-zinc-400 text-sm">Währung wählen, AGB & 18+ bestätigen und Konto erstellen.</p></div>'
-                   +     '<div class="flex items-start gap-3"><span class="w-5 h-5 rounded-md bg-amber-500/15 text-amber-400 text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">4</span><p class="text-zinc-400 text-sm">Einzahlung tätigen — der Bonus aktiviert sich danach <strong class="text-white">automatisch</strong>.</p></div>'
-                   +   '</div>'
-                   + '</div>'
-                   + '<div>'
-                   +   '<div class="p-3 rounded-xl bg-amber-500/5 border border-amber-500/15"><p class="text-xs text-amber-300 font-bold">💡 Wichtig</p><p class="text-xs text-zinc-500 mt-1">Trage den Code <strong class="text-white font-mono">IDIOTEN</strong> beim Anmelden im Feld „Gutscheincode (optional)" ein – ohne Code wird der Bonus nicht gutgeschrieben.</p></div>'
-                   + '</div>'
-                   + '</div>';
-    } else if(isFresh) {
-        const highlights = (c.highlights || []).map(h => '<span class="stat-chip">' + h + '</span>').join('');
-        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
-                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-amber-400 mb-3">Angebot</p><p class="text-zinc-400 text-sm leading-relaxed">' + c.description + '</p></div>'
-                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">Features</p><div class="flex flex-wrap gap-2 mb-4">' + highlights + '</div>'
-                   + '<div class="p-3 rounded-xl bg-amber-500/5 border border-amber-500/15"><p class="text-xs text-amber-300 font-bold">💡 Tipp</p><p class="text-xs text-zinc-500 mt-1">Code <strong class="text-white font-mono">IDB11</strong> bei der Registrierung eingeben.</p></div></div>'
-                   + '</div>';
-    } else {
-        const logik = c.type === 'Non-Sticky'
-            ? 'Du spielst zuerst mit deinem Echtgeld. Gewinne sind sofort auszahlbar, solange der Bonus unberührt bleibt.'
-            : 'Einzahlung und Bonus werden gemeinsam umgesetzt. Auszahlungen erst nach Erfüllung aller Bedingungen möglich.';
-        detailHTML = '<div class="grid md:grid-cols-2 gap-6">'
-                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-brand-400 mb-3">Über dieses Casino</p><p class="text-zinc-400 text-sm leading-relaxed">' + c.description + '</p></div>'
-                   + '<div><p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">' + (c.type === 'Non-Sticky' ? 'Non-Sticky Logik' : 'Sticky Logik') + '</p><p class="text-zinc-500 text-sm leading-relaxed">' + logik + '</p></div>'
-                   + '</div>';
+    /* ---------- Detailbereich ---------- */
+    const accent = isTop ? 'text-cyan-400' : isFresh ? 'text-amber-400' : 'text-brand-400';
+    const dotBg  = isTop ? 'bg-cyan-500/15 text-cyan-300' : isFresh ? 'bg-amber-500/15 text-amber-400' : 'bg-brand-500/15 text-brand-300';
+
+    // Linke Spalte
+    let leftCol = '<p class="text-[0.6rem] font-black uppercase tracking-widest ' + accent + ' mb-3">Über diesen Bonus</p>'
+                + '<p class="text-zinc-400 text-sm leading-relaxed">' + c.about + '</p>';
+
+    const stepList = c.codeSteps || c.steps;
+    if(stepList) {
+        leftCol += '<div class="space-y-2.5 mt-4">'
+                 + stepList.map(([n, title, rest]) =>
+                     '<div class="flex items-start gap-3">'
+                   + '<span class="min-w-[20px] h-5 px-1 rounded-md ' + dotBg + ' text-[0.65rem] font-black flex items-center justify-center flex-shrink-0 mt-0.5">' + n + '</span>'
+                   + '<p class="text-zinc-400 text-sm"><strong class="text-white">' + title + ':</strong> ' + rest + '</p>'
+                   + '</div>').join('')
+                 + '</div>';
     }
 
-    const cardClass = 'deal-card ' + (isShiny ? 'shiny' : isWinz ? 'winz' : isFresh ? 'freshbet' : (rank === 1 ? 'featured' : '')) + ' animate-in';
-    const delay = 'animation-delay:' + (i * 0.05) + 's;';
+    // Code-Kopierfeld im Detail
+    if(c.code) {
+        leftCol += '<div class="mt-5">'
+                 + '<p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-2">Dein Code – zum Kopieren anklicken</p>'
+                 + '<button class="code-inline" data-code="' + c.code + '" onclick="event.stopPropagation();handleCopy(this)">'
+                 +   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
+                 +   '<span>' + c.code + '</span>'
+                 + '</button>'
+                 + '</div>';
+    }
+
+    // Freispiel-Box
+    if(c.fs) {
+        leftCol += '<div class="hl hl-gold">' + ICON_STAR
+                 + '<p><strong>' + (isFresh ? 'Freispiele ohne Einzahlung.' : 'Plus Freispiele.') + '</strong> ' + c.fs + '</p></div>';
+    }
+
+    // Rechte Spalte
+    const logik = c.type === 'Non-Sticky'
+        ? 'Du spielst zuerst mit deinem Echtgeld. Gewinne sind sofort auszahlbar, solange der Bonus unberührt bleibt.'
+        : 'Einzahlung und Bonus werden gemeinsam umgesetzt. Auszahlungen erst nach Erfüllung aller Bedingungen möglich.';
+
+    let rightCol = '<p class="text-[0.6rem] font-black uppercase tracking-widest text-zinc-500 mb-3">'
+                 + (c.type === 'Non-Sticky' ? 'Non-Sticky Logik' : 'Sticky Logik') + '</p>'
+                 + '<p class="text-zinc-500 text-sm leading-relaxed">' + logik + '</p>';
+
+    if(c.maxbet) {
+        rightCol += '<div class="hl hl-red">' + ICON_WARN
+                  + '<p><strong>Max Bet ' + c.maxbet + '.</strong> Solange der Bonus aktiv ist, darfst du pro Spin nicht mehr als '
+                  + c.maxbet + ' setzen. Höhere Einsätze können zum Verlust des Bonus führen.</p></div>';
+    }
+
+    if(isFresh) {
+        rightCol += '<div class="hl hl-green">' + ICON_CHECK
+                  + '<p><strong>Wichtig.</strong> Der Code muss <u>vor</u> dem Absenden der Registrierung eingetragen sein. '
+                  + 'Nachträglich lässt er sich nicht mehr hinzufügen.</p></div>';
+    } else {
+        rightCol += '<div class="hl hl-green">' + ICON_CHECK
+                  + '<p><strong>Tipp.</strong> Solange du den Bonus nicht aktivierst, gehören dir deine Gewinne sofort. '
+                  + 'Erst wenn dein Echtgeld aufgebraucht ist, greift der Bonus.</p></div>';
+    }
+
+    const detailHTML = '<div class="grid md:grid-cols-2 gap-6"><div>' + leftCol + '</div><div>' + rightCol + '</div></div>';
+
+    /* ---------- Karte zusammenbauen ---------- */
+    const cardClass = 'deal-card ' + (isTop ? 'shiny' : isFresh ? 'freshbet' : '') + ' animate-in';
+    const flag = isTop  ? '<div class="shiny-flag">✨ #1 Top Deal</div>'
+              : isFresh ? '<div class="no-deposit-flag">' + c.freespins + ' · Ohne Einzahlung!</div>'
+              : '';
 
     const div = document.createElement('div');
     div.className = cardClass;
-    div.setAttribute('style', delay);
+    div.setAttribute('style', 'animation-delay:' + (i * 0.05) + 's;');
     div.innerHTML =
-        (isShiny ? '<div class="shiny-flag">✨ #1 Top Deal</div>' : isWinz ? '<div class="winz-flag">👑 Top Deal</div>' : isFresh ? '<div class="no-deposit-flag">30 FS · Kein Einzahlen!</div>' : '')
+        flag
         + '<div class="card-main" onclick="toggleCard(' + c.id + ')">'
         +   '<div class="flex items-center gap-3 flex-shrink-0">'
         +     '<div class="rank-badge ' + rankClass(rank) + '">' + rank + '</div>'
         +     '<div class="w-28 h-16 md:w-36 md:h-20 bg-surface-2 rounded-2xl flex items-center justify-center border border-white/[0.04] shrink-0 overflow-hidden">'
-        +       '<img src="' + c.logo + '" alt="' + c.name + '" class="w-full h-full object-contain p-3">'
+        +       '<img src="' + c.logo + '" alt="' + c.name + '" class="w-full h-full object-contain p-3" '
+        +            'onerror="this.outerHTML=\'<span class=&quot;text-xl font-black text-zinc-600&quot;>' + c.name.charAt(0) + '</span>\'">'
         +     '</div>'
         +   '</div>'
         +   '<div class="flex-grow text-center md:text-left min-w-0">'
@@ -858,7 +711,9 @@ function makeCard(c, i) {
         +   '<div class="flex flex-col items-stretch gap-2 w-full md:w-56 flex-shrink-0">'
         +     '<div class="flex items-center gap-2 w-full">'
         +       codeBtnHTML
-        +       '<a href="' + c.url + '" target="_blank" onclick="event.stopPropagation()" class="cta-primary ' + (isShiny ? 'cta-shiny' : isWinz ? 'cta-winz' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">' + (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
+        +       '<a href="' + c.url + '" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()" '
+        +          'class="cta-primary ' + (isTop ? 'cta-shiny' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">'
+        +          (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
         +     '</div>'
         +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
         +       '<span id="lbl-' + c.id + '">DETAILS</span>'
@@ -881,6 +736,17 @@ function renderCasinos(data) {
     data.forEach((c, i) => list.appendChild(makeCard(c, i)));
 }
 
+/* Casino-Auswahl im Support-Formular automatisch füllen */
+function fillSupportSelect() {
+    const sel = document.getElementById('supportCasinoSelect');
+    if(!sel) return;
+    casinos.forEach(c => {
+        const opt = document.createElement('option');
+        opt.textContent = c.name;
+        sel.appendChild(opt);
+    });
+}
+
 const ALL_TABS = ['deals', 'giveaway', 'support'];
 function switchTab(tab) {
     ALL_TABS.forEach(t => {
@@ -900,8 +766,7 @@ function switchTab(tab) {
 }
 
 function handleCopy(btnEl) {
-    const code = btnEl.getAttribute('data-code');
-    copyCode(code, btnEl);
+    copyCode(btnEl.getAttribute('data-code'), btnEl);
 }
 
 function copyCode(code, btnEl) {
@@ -926,7 +791,7 @@ function acceptAge() {
 
 function leaveSite() { window.location.href = 'https://www.google.com'; }
 
-// Ticket form
+/* ---------- Support-Ticket ---------- */
 const ticketForm = document.getElementById('ticket-form');
 if(ticketForm) {
     ticketForm.addEventListener('submit', async (e) => {
@@ -944,6 +809,28 @@ if(ticketForm) {
     });
 }
 
+/* ---------- Gewinnspiel-Benachrichtigung ---------- */
+const notifyForm = document.getElementById('notify-form');
+if(notifyForm) {
+    notifyForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('notify-btn');
+        const container = document.getElementById('notify-container');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<span style="opacity:0.6">Sendet…</span>';
+        btn.disabled = true;
+        try {
+            const res = await fetch(e.target.action, {method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}});
+            if(res.ok) {
+                container.innerHTML = '<div class="p-8 rounded-2xl text-center" style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.18)">'
+                    + '<div class="text-3xl mb-3">🔔</div>'
+                    + '<p class="text-white font-black text-lg mb-1">Du bist eingetragen!</p>'
+                    + '<p class="text-zinc-500 text-sm leading-relaxed">Sobald das nächste Gewinnspiel startet, bekommst du eine E-Mail von uns.</p></div>';
+            } else { btn.innerHTML = 'Fehler – nochmal'; btn.disabled = false; setTimeout(()=>{btn.innerHTML=original;},2500); }
+        } catch { btn.innerHTML = 'Verbindungsfehler'; btn.disabled = false; setTimeout(()=>{btn.innerHTML=original;},2500); }
+    });
+}
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
@@ -954,6 +841,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById('main-wrapper').style.display = 'block';
     }
     renderCasinos();
+    fillSupportSelect();
     document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
 });
 </script>
