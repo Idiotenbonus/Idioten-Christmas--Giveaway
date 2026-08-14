@@ -498,41 +498,7 @@ const FORMSPREE_GEWINNSPIEL = "https://formspree.io/f/mykdjjzb";
    steps  : optional – nummerierte Schritte im Detail
    ============================================================ */
 const casinos = [
-    {
-        id:1, name:"Godz", logo:"Godz.png",
-        type:"Non-Sticky", wager:"35x",
-        bonusLabel:"500% Paket", freespins:"300 FS",
-        url:"https://gdz.lunostra.com/?mid=380999_2210072",
-        about:"Das Willkommenspaket verteilt sich auf deine ersten drei Einzahlungen und ergibt zusammen 500% Bonus.",
-        steps:[
-            ["1","1. Einzahlung","+150% Bonus."],
-            ["2","2. Einzahlung","+50% Bonus."],
-            ["3","3. Einzahlung","+300% Bonus."]
-        ],
-        fs:"300 Freispiele in Gates of Olympus, 0,20€ pro Spin."
-    },
-    {
-        id:2, name:"Vipluck", logo:"Vipluck.png",
-        type:"Non-Sticky", wager:"35x",
-        bonus:"300%", max:"2.000€", freespins:"300 FS",
-        url:"https://vplk.lunostra.com/?mid=380999_2210070",
-        about:"300% Bonus auf deine Einzahlung bis zu 2.000€. Non-Sticky – du spielst zuerst mit deinem Echtgeld, deine Gewinne bleiben jederzeit auszahlbar.",
-        fs:"300 Freispiele in Gates of Olympus, 0,20€ pro Spin."
-    },
-    {
-        id:3, name:"Golazzo", logo:"Golazzo.png",
-        type:"Non-Sticky", wager:"35x",
-        bonusLabel:"3× 100%", max:"2.000€", freespins:"200 FS",
-        url:"https://glzz.myloric.com/?mid=384995_2225554",
-        about:"3× 100% Bonus auf deine ersten drei Einzahlungen, insgesamt bis zu 2.000€. Non-Sticky – dein Echtgeld läuft zuerst, Gewinne bleiben auszahlbar.",
-        steps:[
-            ["1","1. Einzahlung","100% Bonus."],
-            ["2","2. Einzahlung","100% Bonus."],
-            ["3","3. Einzahlung","100% Bonus."]
-        ],
-        fs:"200 Freispiele."
-    },
-    {
+{
         id:4, name:"Freshbet", logo:"Freshbet.png",
         type:"Non-Sticky", wager:"35x",
         bonus:"150%", freespins:"100 FS",
@@ -621,7 +587,7 @@ function makeCard(c, i) {
         ? c.bonusLabel + (c.max ? ' bis ' + c.max : '')
         : c.bonus + (c.max ? ' bis ' + c.max : '');
 
-    let chipsHTML = '<span class="stat-chip ' + (isTop ? 'cyan' : isFresh ? 'gold' : 'accent') + '">' + bonusText + '</span>'
+    let chipsHTML = '<span class="stat-chip ' + (isFresh ? 'gold' : isTop ? 'cyan' : 'accent') + '">' + bonusText + '</span>'
                   + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>';
     if(isFresh) chipsHTML += '<span class="stat-chip gold">🎰 ' + c.freespins + ' ohne Einzahlung</span>';
     else if(c.freespins) chipsHTML += '<span class="stat-chip gold">✨ ' + c.freespins + '</span>';
@@ -639,8 +605,8 @@ function makeCard(c, i) {
     }
 
     /* ---------- Detailbereich ---------- */
-    const accent = isTop ? 'text-cyan-400' : isFresh ? 'text-amber-400' : 'text-brand-400';
-    const dotBg  = isTop ? 'bg-cyan-500/15 text-cyan-300' : isFresh ? 'bg-amber-500/15 text-amber-400' : 'bg-brand-500/15 text-brand-300';
+    const accent = isFresh ? 'text-amber-400' : isTop ? 'text-cyan-400' : 'text-brand-400';
+    const dotBg  = isFresh ? 'bg-amber-500/15 text-amber-400' : isTop ? 'bg-cyan-500/15 text-cyan-300' : 'bg-brand-500/15 text-brand-300';
 
     // Linke Spalte
     let leftCol = '<p class="text-[0.6rem] font-black uppercase tracking-widest ' + accent + ' mb-3">Über diesen Bonus</p>'
@@ -702,9 +668,9 @@ function makeCard(c, i) {
     const detailHTML = '<div class="grid md:grid-cols-2 gap-6"><div>' + leftCol + '</div><div>' + rightCol + '</div></div>';
 
     /* ---------- Karte zusammenbauen ---------- */
-    const cardClass = 'deal-card ' + (isTop ? 'shiny' : isFresh ? 'freshbet' : '') + ' animate-in';
-    const flag = isTop  ? '<div class="shiny-flag">✨ #1 Top Deal</div>'
-              : isFresh ? '<div class="no-deposit-flag">' + c.freespins + ' · Ohne Einzahlung!</div>'
+    const cardClass = 'deal-card ' + (isFresh ? 'freshbet' : isTop ? 'shiny' : '') + ' animate-in';
+    const flag = isFresh ? '<div class="no-deposit-flag">' + c.freespins + ' · Ohne Einzahlung!</div>'
+              : isTop   ? '<div class="shiny-flag">✨ #1 Top Deal</div>'
               : '';
 
     const div = document.createElement('div');
@@ -728,7 +694,7 @@ function makeCard(c, i) {
         +     '<div class="flex items-center gap-2 w-full">'
         +       codeBtnHTML
         +       '<a href="' + c.url + '" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()" '
-        +          'class="cta-primary ' + (isTop ? 'cta-shiny' : isFresh ? 'cta-freshbet' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">'
+        +          'class="cta-primary ' + (isFresh ? 'cta-freshbet' : isTop ? 'cta-shiny' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">'
         +          (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
         +     '</div>'
         +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
