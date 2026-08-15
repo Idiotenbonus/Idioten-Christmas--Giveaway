@@ -56,7 +56,26 @@
         .deal-card.shiny .card-details.open{max-height:1800px;}
         .stat-chip.cyan{background:rgba(34,211,238,0.08);border-color:rgba(34,211,238,0.22);color:#67e8f9;}
 
-        /* Freshbet – gold, No-Deposit */
+        /* Merkur-Casino – warmes Rot/Gold */
+        .deal-card.merkur{background:linear-gradient(135deg,rgba(239,68,68,0.10),rgba(251,191,36,0.06) 45%,#0f0f12 78%);border-color:rgba(251,146,60,0.28);box-shadow:0 0 44px -14px rgba(251,146,60,0.22);}
+        .deal-card.merkur:hover{border-color:rgba(251,146,60,0.48);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 60px -8px rgba(251,146,60,0.28);}
+        .deal-card.merkur .card-details.open{max-height:2000px;}
+        .merkur-flag{position:absolute;top:0;right:0;display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#f97316,#dc2626);color:#fff7ed;font-size:0.52rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;padding:5px 12px;border-radius:0 0 0 12px;box-shadow:0 4px 12px rgba(249,115,22,0.35);z-index:5;}
+        .cta-merkur{background:linear-gradient(135deg,#f97316,#dc2626);box-shadow:0 4px 20px rgba(249,115,22,0.3);}
+        .cta-merkur:hover{box-shadow:0 8px 32px rgba(249,115,22,0.45);}
+        .stat-chip.sun{background:rgba(249,115,22,0.10);border-color:rgba(249,115,22,0.28);color:#fdba74;}
+        .hl-sun{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.24);}
+        .hl-sun strong{color:#fdba74;}
+        .hl-sun svg{color:#fb923c;}
+        /* kleines Sonnen-Abzeichen neben dem Casinonamen */
+        .sun-badge{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;margin-left:8px;
+            background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.3);color:#fdba74;
+            font-size:0.55rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;
+            padding:3px 8px;border-radius:99px;}
+        .sun-badge svg{animation:sunSpin 14s linear infinite;transform-origin:center;}
+        @keyframes sunSpin{to{transform:rotate(360deg);}}
+
+        /* No-Deposit-Casino (noDeposit:true) – gold */
         .deal-card.freshbet{background:linear-gradient(135deg,rgba(251,191,36,0.10),rgba(168,85,247,0.04) 45%,#0f0f12 75%);border-color:rgba(251,191,36,0.25);box-shadow:0 0 40px -14px rgba(251,191,36,0.18);}
         .deal-card.freshbet:hover{border-color:rgba(251,191,36,0.42);box-shadow:0 24px 64px -16px rgba(0,0,0,0.6),0 0 56px -8px rgba(251,191,36,0.2);}
         .deal-card.freshbet .card-details.open{max-height:1800px;}
@@ -499,21 +518,22 @@ const FORMSPREE_GEWINNSPIEL = "https://formspree.io/f/mykdjjzb";
    ============================================================ */
 const casinos = [
 {
-        id:4, name:"Freshbet", logo:"Freshbet.png",
+        id:8, name:"Lollyspins", logo:"Lollyspins.png",
         type:"Non-Sticky", wager:"35x",
-        bonus:"150%", freespins:"100 FS",
-        code:"FB100", noDeposit:true,
-        url:"https://go.freshaffs.com/visit/?bta=49169&nci=6119&afp=idiotenbonus_6119&utm_campaign=idiotenbonus",
-        about:"150% Non-Sticky Bonus auf deine Einzahlung – und obendrauf 100 Freispiele komplett ohne Einzahlung mit dem Code FB100. Die Gewinne aus den Freispielen sind auszahlbar.",
-        codeSteps:[
-            ["1","Registrieren","Über den Button oben das Anmeldeformular öffnen und deine Daten eintragen."],
-            ["2","„Werbe Code“ anklicken","Im Formular unten auf <strong class=\"text-white\">Werbe Code</strong> klicken – erst dann erscheint das Eingabefeld."],
-            ["3","Code eintragen","<strong class=\"text-white font-mono\">FB100</strong> eingeben, bevor du auf „Registrieren“ klickst."],
-            ["4","E-Mail bestätigen","Ohne verifizierte E-Mail-Adresse werden die Freispiele nicht gutgeschrieben."]
+        bonus:"400%", max:"2.200€", freespins:"350 FS",
+        merkur:true,
+        url:"https://t.bonus-offers.com/bridge.php?f=merkuridioten&c=lollyspins_aff7",
+        about:"400% Bonus bis zu 2.200€ plus 350 Freispiele. Das Besondere: Hier findest du die kompletten Merkur-Spiele – du musst nur wissen, wie du sie freischaltest.",
+        merkurSteps:[
+            ["1","Registrieren","Über den Button oben anmelden und dein Konto anlegen."],
+            ["2","VPN öffnen","Nach der Registrierung dein VPN starten und auf <strong class=\"text-white\">Bangkok</strong> stellen."],
+            ["3","Spiel suchen","Den Namen des Spiels direkt in die Suche eingeben – <strong class=\"text-white\">nicht</strong> nach dem Provider suchen."],
+            ["4","Oder: Provider wählen","Alternativ runterscrollen und den Provider <strong class=\"text-white\">Edict</strong> anklicken."]
         ],
-        fs:"100 Freispiele ohne Einzahlung – die Gewinne daraus sind auszahlbar."
+        merkurTipp:"Edict ist der Studioname hinter Merkur. Sobald du diesen Provider öffnest, liegen dort alle Merkur-Spiele.",
+        fs:"350 Freispiele."
     },
-    {
+{
         id:5, name:"SpinBoss", logo:"SpinBoss.png",
         type:"Non-Sticky", wager:"35x",
         bonus:"400%", max:"15.000€", freespins:"400 FS",
@@ -546,6 +566,8 @@ const casinos = [
 const ICON_STAR  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.6L21 9.6l-4.8 4.4 1.3 6.6L12 17.4 6.5 20.6l1.3-6.6L3 9.6l6.4-1z"/></svg>';
 const ICON_WARN  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
 const ICON_CHECK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+const ICON_SUN   = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 1.8v2.6M12 19.6v2.6M4.2 12H1.6M22.4 12h-2.6M6.5 6.5L4.6 4.6M19.4 19.4l-1.9-1.9M17.5 6.5l1.9-1.9M4.6 19.4l1.9-1.9"/></svg>';
+const ICON_SUN_SM= '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display:inline;vertical-align:-1px"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"/><path d="M12 1.8v2.6M12 19.6v2.6M4.2 12H1.6M22.4 12h-2.6M6.5 6.5L4.6 4.6M19.4 19.4l-1.9-1.9M17.5 6.5l1.9-1.9M4.6 19.4l1.9-1.9"/></svg>';
 
 function toggleMenu(){
     document.getElementById('mobile-menu').classList.toggle('open');
@@ -556,7 +578,7 @@ function filterCasinos(){
     const search = document.getElementById('searchInput').value.toLowerCase();
     const type = document.getElementById('typeFilter').value;
     const filtered = casinos.filter(c => {
-        const haystack = [c.name, c.bonus, c.bonusLabel, c.max, c.freespins, c.type, c.code]
+        const haystack = [c.name, c.bonus, c.bonusLabel, c.max, c.freespins, c.type, c.code, c.merkur ? 'merkur edict' : '']
             .filter(Boolean).join(' ').toLowerCase();
         const matchSearch = haystack.includes(search);
         const matchType = type === 'all' || c.type === type;
@@ -581,16 +603,18 @@ function makeCard(c, i) {
     const rank    = casinos.indexOf(c) + 1;
     const isTop   = rank === 1;
     const isFresh = !!c.noDeposit;
+    const isMerkur= !!c.merkur;
 
     /* ---------- Chips ---------- */
     const bonusText = c.bonusLabel
         ? c.bonusLabel + (c.max ? ' bis ' + c.max : '')
         : c.bonus + (c.max ? ' bis ' + c.max : '');
 
-    let chipsHTML = '<span class="stat-chip ' + (isFresh ? 'gold' : isTop ? 'cyan' : 'accent') + '">' + bonusText + '</span>'
+    let chipsHTML = '<span class="stat-chip ' + (isMerkur ? 'sun' : isFresh ? 'gold' : isTop ? 'cyan' : 'accent') + '">' + bonusText + '</span>'
                   + '<span class="stat-chip ' + (c.type === 'Non-Sticky' ? 'green' : 'red') + '">' + c.type + '</span>';
     if(isFresh) chipsHTML += '<span class="stat-chip gold">🎰 ' + c.freespins + ' ohne Einzahlung</span>';
     else if(c.freespins) chipsHTML += '<span class="stat-chip gold">✨ ' + c.freespins + '</span>';
+    if(isMerkur) chipsHTML += '<span class="stat-chip sun">' + ICON_SUN_SM + ' Merkur Spiele</span>';
     if(c.maxbet) chipsHTML += '<span class="stat-chip red">Max Bet ' + c.maxbet + '</span>';
     chipsHTML += '<span class="stat-chip">Wager ' + c.wager + '</span>';
 
@@ -605,14 +629,14 @@ function makeCard(c, i) {
     }
 
     /* ---------- Detailbereich ---------- */
-    const accent = isFresh ? 'text-amber-400' : isTop ? 'text-cyan-400' : 'text-brand-400';
-    const dotBg  = isFresh ? 'bg-amber-500/15 text-amber-400' : isTop ? 'bg-cyan-500/15 text-cyan-300' : 'bg-brand-500/15 text-brand-300';
+    const accent = isMerkur ? 'text-orange-400' : isFresh ? 'text-amber-400' : isTop ? 'text-cyan-400' : 'text-brand-400';
+    const dotBg  = isMerkur ? 'bg-orange-500/15 text-orange-300' : isFresh ? 'bg-amber-500/15 text-amber-400' : isTop ? 'bg-cyan-500/15 text-cyan-300' : 'bg-brand-500/15 text-brand-300';
 
     // Linke Spalte
     let leftCol = '<p class="text-[0.6rem] font-black uppercase tracking-widest ' + accent + ' mb-3">Über diesen Bonus</p>'
                 + '<p class="text-zinc-400 text-sm leading-relaxed">' + c.about + '</p>';
 
-    const stepList = c.codeSteps || c.steps;
+    const stepList = c.merkurSteps || c.codeSteps || c.steps;
     if(stepList) {
         leftCol += '<div class="space-y-2.5 mt-4">'
                  + stepList.map(([n, title, rest]) =>
@@ -655,6 +679,14 @@ function makeCard(c, i) {
                   + c.maxbet + ' setzen. Höhere Einsätze können zum Verlust des Bonus führen.</p></div>';
     }
 
+    if(isMerkur && c.merkurTipp) {
+        rightCol += '<div class="hl hl-sun">' + ICON_SUN
+                  + '<p><strong>Edict = Merkur.</strong> ' + c.merkurTipp + '</p></div>';
+        rightCol += '<div class="hl hl-red">' + ICON_WARN
+                  + '<p><strong>VPN nicht vergessen.</strong> Ohne aktives VPN auf Bangkok tauchen die Merkur-Spiele '
+                  + 'in der Lobby nicht auf. Erst registrieren, dann VPN einschalten.</p></div>';
+    }
+
     if(isFresh) {
         rightCol += '<div class="hl hl-green">' + ICON_CHECK
                   + '<p><strong>Wichtig.</strong> Der Code muss <u>vor</u> dem Absenden der Registrierung eingetragen sein. '
@@ -668,9 +700,10 @@ function makeCard(c, i) {
     const detailHTML = '<div class="grid md:grid-cols-2 gap-6"><div>' + leftCol + '</div><div>' + rightCol + '</div></div>';
 
     /* ---------- Karte zusammenbauen ---------- */
-    const cardClass = 'deal-card ' + (isFresh ? 'freshbet' : isTop ? 'shiny' : '') + ' animate-in';
-    const flag = isFresh ? '<div class="no-deposit-flag">' + c.freespins + ' · Ohne Einzahlung!</div>'
-              : isTop   ? '<div class="shiny-flag">✨ #1 Top Deal</div>'
+    const cardClass = 'deal-card ' + (isMerkur ? 'merkur' : isFresh ? 'freshbet' : isTop ? 'shiny' : '') + ' animate-in';
+    const flag = isMerkur ? '<div class="merkur-flag">' + ICON_SUN_SM + ' Merkur Spiele</div>'
+              : isFresh  ? '<div class="no-deposit-flag">' + c.freespins + ' · Ohne Einzahlung!</div>'
+              : isTop    ? '<div class="shiny-flag">✨ #1 Top Deal</div>'
               : '';
 
     const div = document.createElement('div');
@@ -687,14 +720,15 @@ function makeCard(c, i) {
         +     '</div>'
         +   '</div>'
         +   '<div class="flex-grow text-center md:text-left min-w-0">'
-        +     '<h3 class="font-extrabold text-lg md:text-xl tracking-tight mb-3">' + c.name + '</h3>'
+        +     '<h3 class="font-extrabold text-lg md:text-xl tracking-tight mb-3">' + c.name
+        +      (isMerkur ? '<span class="sun-badge">' + ICON_SUN + ' Merkur</span>' : '') + '</h3>'
         +     '<div class="flex flex-wrap justify-center md:justify-start gap-2">' + chipsHTML + '</div>'
         +   '</div>'
         +   '<div class="flex flex-col items-stretch gap-2 w-full md:w-56 flex-shrink-0">'
         +     '<div class="flex items-center gap-2 w-full">'
         +       codeBtnHTML
         +       '<a href="' + c.url + '" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()" '
-        +          'class="cta-primary ' + (isFresh ? 'cta-freshbet' : isTop ? 'cta-shiny' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">'
+        +          'class="cta-primary ' + (isMerkur ? 'cta-merkur' : isFresh ? 'cta-freshbet' : isTop ? 'cta-shiny' : '') + ' flex-1 py-3 md:py-4 px-3 text-xs tracking-widest uppercase text-center whitespace-nowrap">'
         +          (isFresh ? 'Spins holen →' : 'Bonus holen →') + '</a>'
         +     '</div>'
         +     '<button onclick="event.stopPropagation();toggleCard(' + c.id + ')" class="flex items-center justify-center gap-2 text-[9px] font-black text-zinc-600 hover:text-white transition-colors tracking-[0.3em] whitespace-nowrap">'
